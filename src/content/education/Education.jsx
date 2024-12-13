@@ -50,6 +50,12 @@ const educations = [
     type: "a-levels",
   },
   {
+    id: 5,
+    title: "Level 3 Diploma in Networking and Cyber Security",
+    graduation: "Issued Sept 2024",
+    link: "https://authentiqual.com/v/?aq=2ff5aeb4-5eb0-4dda-9530-689ff676b285",
+  },
+  {
     id: 4,
     title: "Neo4j // Neo4j Certified Professional",
     graduation: "Issued Sept 2024",
@@ -116,7 +122,6 @@ export default function EducationCard() {
             )}
           </li>
         ))}
-        ==
       </ul>
     </div>
   );
