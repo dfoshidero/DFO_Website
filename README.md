@@ -5,7 +5,7 @@ This repository contains the code for my personal resume website, hosted at [www
 ## Technology Stack
 
 - **Frontend**: JavaScript with React, SCSS for styling.
-- **Hosting**: GitHub Pages.
+- **Hosting**: Netlify.
 - **Backend Services**: AWS Lambda and AWS API Gateway for functionalities requiring private keys.
 
 ## Key Dependencies

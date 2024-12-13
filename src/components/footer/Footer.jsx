@@ -7,7 +7,7 @@ const Footer = ({ onRandomizeClick }) => {
         <div className="name-title">
           <div>
             <span className="design-info">
-              As of: September 26, 2024
+              As of: October 18, 2024
             </span>
           </div>
         </div>

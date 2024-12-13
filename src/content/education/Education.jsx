@@ -5,10 +5,19 @@ import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 
 const educations = [
   {
-    id: 1002,
+    id: 1003,
     title: "Master of Science (M.Sc) // Applied Data Science",
     location: "Buckingham, UK",
     school: "University of Buckingham",
+    graduation: "Expected Grad 2026",
+    achieved: "",
+    type: "degree",
+  },
+  {
+    id: 1002,
+    title: "Level 7 Certificate // Digital & Technology Solutions Specialist",
+    location: "",
+    school: "ESFA",
     graduation: "Expected Grad 2026",
     achieved: "",
     type: "degree",
@@ -38,7 +47,7 @@ const educations = [
     school: "Harlington School",
     graduation: "Graduated 2019",
     achieved: "A*, A, A",
-	type: "a-levels"
+    type: "a-levels",
   },
   {
     id: 4,
@@ -80,6 +89,9 @@ export default function EducationCard() {
             <div className="education-title">{ed.title}</div>
             <div className="graduation-and-button">
               <div className="education-grad">
+                {ed.school && !ed.location && (
+                  <span className="education-location">{ed.school} | </span>
+                )}
                 {ed.graduation}
                 {ed.achieved && <span>, {ed.achieved}</span>}.
               </div>
@@ -104,6 +116,7 @@ export default function EducationCard() {
             )}
           </li>
         ))}
+        ==
       </ul>
     </div>
   );
