@@ -5,7 +5,6 @@ import "./App.scss";
 import { ModalProvider } from "./utils/modalContext"
 import Modal from "./components/modal/Modal";
 
-import Enter from "./content/entry/Enter";
 import Home from "./home/Home";
 
 function App() {
@@ -13,8 +12,7 @@ function App() {
     <ModalProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<Enter />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Router>
