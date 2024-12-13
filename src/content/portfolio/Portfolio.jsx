@@ -23,6 +23,7 @@ function PortfolioCard() {
         console.log(imagesData);
 
         if (!Array.isArray(imagesData)) {
+          console.log(imagesData)
           setError("API connected; token expired or response format invalid.");
           setLoading(false);
           return;

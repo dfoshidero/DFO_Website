@@ -41,7 +41,6 @@ const cardTypes = {
   ],
   "TECHNICAL SKILLS": [
     { columns: 1, rows: 2 },
-    { columns: 1, rows: 1 },
   ], // Will include skills and certifications. CERTIFIED SKILLS go first.
 };
 

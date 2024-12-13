@@ -32,7 +32,7 @@ function Card({ title, extra, children, onClick, className, style, scroll }) {
     lastFrameTime.current = now;
 
     if (contentRef.current && scroll && !isHovering) {
-      const speed = maxSpeed * deltaTime / (1000 / 60);
+      const speed = maxSpeed * deltaTime / (600 / 60);
       scrollAmount.current += speed;
 
       if (scrollAmount.current >= 1 || scrollAmount.current <= -1) {
