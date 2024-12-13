@@ -1,9 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.5d80f6e8.css",
-    "main.js": "/static/js/main.ce75b66c.js",
-    "static/js/787.c3e81271.chunk.js": "/static/js/787.c3e81271.chunk.js",
-    "static/media/pool.png": "/static/media/pool.ca7c0d12d599b82561b1.png",
+    "main.css": "/static/css/main.900df29f.css",
+    "main.js": "/static/js/main.f1d6d3e5.js",
     "static/media/bloom.png": "/static/media/bloom.edd94c3d3d3804c5a5bc.png",
     "static/media/personal-website.png": "/static/media/personal-website.414b12c8ae73a94cdfec.png",
     "static/media/chip-8.png": "/static/media/chip-8.9cb390b1afe5c49bc8aa.png",
@@ -17,14 +15,14 @@
     "static/media/icon.jpeg": "/static/media/icon.afa96f2654ac3982b388.jpeg",
     "static/media/university_of_bath_acs.png": "/static/media/university_of_bath_acs.201b09a4356a0d2e0e18.png",
     "static/media/ahmm.png": "/static/media/ahmm.d6e30edbb34153d6cd46.png",
+    "static/media/etas.png": "/static/media/etas.c7f19b1028965028928a.png",
     "static/media/rs_architects_logo.png": "/static/media/rs_architects_logo.4226e9faae208a39e13e.png",
     "index.html": "/index.html",
-    "main.5d80f6e8.css.map": "/static/css/main.5d80f6e8.css.map",
-    "main.ce75b66c.js.map": "/static/js/main.ce75b66c.js.map",
-    "787.c3e81271.chunk.js.map": "/static/js/787.c3e81271.chunk.js.map"
+    "main.900df29f.css.map": "/static/css/main.900df29f.css.map",
+    "main.f1d6d3e5.js.map": "/static/js/main.f1d6d3e5.js.map"
   },
   "entrypoints": [
-    "static/css/main.5d80f6e8.css",
-    "static/js/main.ce75b66c.js"
+    "static/css/main.900df29f.css",
+    "static/js/main.f1d6d3e5.js"
   ]
 }
