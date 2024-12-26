@@ -37,9 +37,11 @@ const cardTypes = {
   RECOMMENDATIONS: [{ columns: 2, rows: 1 }],
   STATUS: [
     { columns: 2, rows: 1 },
+    { columns: 1, rows: 1 },
   ],
   "TECHNICAL SKILLS": [
     { columns: 1, rows: 2 },
+    { columns: 1, rows: 1 },
   ], // Will include skills and certifications. CERTIFIED SKILLS go first.
 };
 
