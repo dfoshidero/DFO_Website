@@ -42,7 +42,7 @@ const cardTypes = {
   "TECHNICAL SKILLS": [
     { columns: 1, rows: 2 },
     { columns: 1, rows: 1 },
-  ], // Will include skills and certifications. CERTIFIED SKILLS go first.
+  ],
 };
 
 // Function to check if the layout has at least two cards from [TIMEZONE, STATUS, CONNECT] in the first three rows for mobile layout
