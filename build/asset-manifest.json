@@ -1,10 +1,11 @@
 {
   "files": {
     "main.css": "/static/css/main.96dc0279.css",
-    "main.js": "/static/js/main.96e6cf1e.js",
+    "main.js": "/static/js/main.64e667a8.js",
     "static/media/bloom.png": "/static/media/bloom.edd94c3d3d3804c5a5bc.png",
     "static/media/personal-website.png": "/static/media/personal-website.414b12c8ae73a94cdfec.png",
     "static/media/chip-8.png": "/static/media/chip-8.9cb390b1afe5c49bc8aa.png",
+    "static/media/eco.svg": "/static/media/eco.754cbda68b7cfdef52340963ac84ab21.svg",
     "static/media/university_of_bath.png": "/static/media/university_of_bath.8741eac41f08a0bf7edc.png",
     "static/media/Quicksand-Medium.ttf": "/static/media/Quicksand-Medium.9fd398f86ce80d968762.ttf",
     "static/media/Quicksand-Regular.ttf": "/static/media/Quicksand-Regular.67e7ce07307c681fb49d.ttf",
@@ -19,10 +20,10 @@
     "static/media/rs_architects_logo.png": "/static/media/rs_architects_logo.4226e9faae208a39e13e.png",
     "index.html": "/index.html",
     "main.96dc0279.css.map": "/static/css/main.96dc0279.css.map",
-    "main.96e6cf1e.js.map": "/static/js/main.96e6cf1e.js.map"
+    "main.64e667a8.js.map": "/static/js/main.64e667a8.js.map"
   },
   "entrypoints": [
     "static/css/main.96dc0279.css",
-    "static/js/main.96e6cf1e.js"
+    "static/js/main.64e667a8.js"
   ]
 }
