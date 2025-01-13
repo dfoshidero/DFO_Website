@@ -4,6 +4,7 @@ import './Projects.scss';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 
 import bloomImage from '../../assets/images/project-icons/bloom.png';
+import ecoImage from "../../assets/images/project-icons/eco.svg";
 import chip8Image from '../../assets/images/project-icons/chip-8.png';
 import personalWebsite from '../../assets/images/project-icons/personal-website.png';
 
@@ -19,6 +20,17 @@ const projects = [
   },
   {
     id: 4,
+    title: "ECO (Early-stage Carbon Observer)",
+    description:
+      "ECO is an ML-based tool which predicts embodied carbon from textual descriptions of architectural designs, integrating sustainability into early design processes.",
+    stack:
+      "Python (Scikit-learn, spaCy, NLTK), Flask, Docker, React.js",
+    imageUrl: ecoImage,
+    projectUrl: "https://github.com/dfoshidero/ECO",
+    videoUrl: "https://www.youtube.com/watch?v=3kOdSKeSc2k",
+  },
+  {
+    id: 3,
     title: "Bloom",
     description:
       "Bloom is an educational mobile app by Team Plum for University of Bath's CM50109 module. It teaches indoor plant care and offers interactive gameplay with rewards.",
