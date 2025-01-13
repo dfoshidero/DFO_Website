@@ -15,31 +15,42 @@ function PortfolioCard() {
       setLoading(true);
       setError(null);
 
-      try {
-        const response = await axios.get(
-          "https://z3mlw599i2.execute-api.eu-west-2.amazonaws.com/dev/fetchInstagramData"
-        );
-        const imagesData = JSON.parse(response.data.body); // Parse the JSON string into an array
-        console.log(imagesData);
+      let attempts = 0;
+      const maxAttempts = 3;
 
-        if (!Array.isArray(imagesData)) {
-          console.log(imagesData)
-          setError("API connected; token expired or response format invalid.");
+      while (attempts < maxAttempts) {
+        try {
+          attempts++;
+          const response = await axios.get(
+            "https://z3mlw599i2.execute-api.eu-west-2.amazonaws.com/dev/fetchInstagramData"
+          );
+          const imagesData = JSON.parse(response.data.body); // Parse the JSON string into an array
+
+          if (!Array.isArray(imagesData)) {
+            console.log(imagesData);
+            throw new Error(
+              "API connected; token expired or response format invalid."
+            );
+          }
+
+          setImages(imagesData);
           setLoading(false);
-          return;
+          return; // Exit the function if successful
+        } catch (error) {
+          console.error(`Attempt ${attempts} failed:`, error);
+          if (attempts === maxAttempts) {
+            setError(
+              "Failed to fetch Instagram images: Connection or API error."
+            );
+            setLoading(false);
+          }
         }
-
-        setImages(imagesData);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error:", error);
-        setError("Failed to fetch Instagram images: Connection or API error.");
-        setLoading(false);
       }
     };
 
     fetchData();
   }, []);
+
 
   
 

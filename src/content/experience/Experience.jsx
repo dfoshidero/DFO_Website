@@ -16,14 +16,19 @@ import logoAHMM from '../../assets/images/logos/ahmm.png';
 const experiences = [
   {
     id: 1,
-    title: "Software Engineer // ETAS (Bosch)",
+    title: "Software Engineer // ETAS (Bosch Automotive Service Solutions)",
     location: "Manchester, England, United Kingdom",
-    shortdesc:
-      "Recently joined team delivering intelligent diagnostics and data services through GradeX Insight updates and MLR (Most Likely Repair) software using sequential pattern mining for vehicle component breakdown predictions.",
-    longdesc: `
-    <p>ETAS, a subsidiary of Bosch, specializes in the development of software for the automotive industry, focused on diagnostics, performance, and efficiency.</p>
-    <p>Currently as a Software Engineer at ETAS, I work as part of team developing MLR (Most Likely Repair) software, leveraging sequential pattern mining for next-likely vehicle component breakdown predictions.</p>
-     `,
+    shortdesc:  
+      "Development of diagnostic insight tools leveraging machine learning for predictive maintenance, and optimization of data processing pipelines for enhanced system efficiency." , 
+    longdesc: `<p>ETAS, a subsidiary of Bosch, specializes in the development of software for the automotive industry, focused on diagnostics, performance, and efficiency.</p>  
+
+    <p>Currently as a Software Engineer at ETAS, I have contributed to key projects and initiatives aimed at enhancing automotive diagnostic and data processing capabilities. My responsibilities and achievements include:</p>  
+
+    <ul>  
+        <li>Collaborated on diagnostic insight tools, utilizing sequential pattern mining ML techniques to predict the next-likely vehicle component breakdowns, achieving ~50% accuracy against actual data.</li>  
+        <li>Centralized knowledge for an ongoing, undocumented software project into a unified repository, enhancing maintainability and streamlining team onboarding through improved documentation, cross-team collaboration, and functionality updates.</li>  
+        <li>Optimized data processing pipelines by upgrading AWS Lambda Python triggers to deploy a restructured XML-to-JSON file parser, seamlessly integrating it into OpenSearch, resulting in significantly improved system efficiency.</li>  
+    </ul>`,
     skills:
       "Software Design · Software Development · Python · Neo4j · AWS · Angular",
     logo: logoETAS,
