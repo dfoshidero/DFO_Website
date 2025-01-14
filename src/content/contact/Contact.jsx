@@ -6,7 +6,7 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 
 export default function ContactCard() {
-  const pdfUrl = "Oshidero_Daniel_Favour_CV.pdf";
+  const pdfUrl = "Oshidero_Daniel Favour_CV.pdf";
 
   return (
     <div className="contact-container">
@@ -19,7 +19,7 @@ export default function ContactCard() {
 
       <a
         href={pdfUrl}
-        download="Oshidero_Daniel_Favour_CV.pdf"
+        download="Oshidero_Daniel Favour_CV.pdf"
         className="connect-button download-cv">
         Download CV
         <ArrowDownwardIcon fontSize="inherit" className="button-icon" />
