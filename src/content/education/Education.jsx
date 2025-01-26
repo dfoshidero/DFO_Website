@@ -18,7 +18,7 @@ const educations = [
     title: "Master of Science (M.Sc) // Computer Science",
     location: "Bath, UK",
     school: "University of Bath",
-    graduation: "(Completed) Expected Grad 2024",
+    graduation: " Graduated 2025, Distinction",
     achieved: "",
     type: "degree",
   },
@@ -43,7 +43,7 @@ const educations = [
   {
     id: 500,
     title: "Advanced-Level Qualifications // Art, Physics, Maths",
-    location: "London, United Kingdom",
+    location: "London, UK",
     school: "Harlington School",
     graduation: "Graduated 2019",
     achieved: "A*, A, A",
