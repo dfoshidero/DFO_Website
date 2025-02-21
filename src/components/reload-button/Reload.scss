@@ -12,8 +12,8 @@
     cursor: pointer;
     transition: transform 0.3s, opacity 0.3s;
     opacity: 0.6;
-    text-wrap: nowrap;
     width: 110%;
+    white-space: nowrap;
 
     display: flex;
     align-items: center; // Align items in the center vertically
