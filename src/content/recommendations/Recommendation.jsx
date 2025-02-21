@@ -28,7 +28,7 @@ export default function RecommendationCard() {
   const [randomIndex, setRandomIndex] = React.useState(-1);
   const [animationKey, setAnimationKey] = React.useState(0);
 
-  const refreshRecommendation = React.useCallback(() => {
+  const refreshRecommendation = () => {
     // Get the previously used index from localStorage (or -1 if none stored)
     const lastIndex = parseInt(
       localStorage.getItem("lastRecommendationIndex") || "-1",
@@ -46,7 +46,7 @@ export default function RecommendationCard() {
     // Save it so next time we don't pick the same one
     localStorage.setItem("lastRecommendationIndex", newIndex);
     setAnimationKey((prev) => prev + 1);
-  }, [randomIndex]);
+  };
 
   React.useEffect(() => {
     refreshRecommendationGlobal = refreshRecommendation;
