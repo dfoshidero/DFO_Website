@@ -18,16 +18,16 @@ const experiences = [
     id: 1,
     title: "Software Engineer // ETAS (Bosch Automotive Service Solutions)",
     location: "Manchester, England, United Kingdom",
-    shortdesc:  
-      "Development of diagnostic insight tools leveraging machine learning for predictive maintenance, and optimization of data processing pipelines for enhanced system efficiency." , 
+    shortdesc:
+      "Development of diagnostic insight tools leveraging machine learning for predictive maintenance, and optimization of data processing pipelines for enhanced system efficiency.",
     longdesc: `<p>ETAS, a subsidiary of Bosch, specializes in the development of software for the automotive industry, focused on diagnostics, performance, and efficiency.</p>  
 
     <p>Currently as a Software Engineer at ETAS, I have contributed to key projects and initiatives aimed at enhancing automotive diagnostic and data processing capabilities. My responsibilities and achievements include:</p>  
 
     <ul>  
-        <li>Collaborated on diagnostic insight tools, utilizing sequential pattern mining ML techniques to predict the next-likely vehicle component breakdowns, achieving ~50% accuracy against actual data.</li>  
-        <li>Centralized knowledge for an ongoing, undocumented software project into a unified repository, enhancing maintainability and streamlining team onboarding through improved documentation, cross-team collaboration, and functionality updates.</li>  
-        <li>Optimized data processing pipelines by upgrading AWS Lambda Python triggers to deploy a restructured XML-to-JSON file parser, seamlessly integrating it into OpenSearch, resulting in significantly improved system efficiency.</li>  
+        <li>Contributed as member of AI & Data team developing diagnostic insight tools, leveraging a sequential pattern mining ML approach for next-likely vehicle component breakdown predictions, achieving roughly 60% accuracy compared to actual data.</li>  
+        <li>Centralised knowledge of a large, undocumented Azure-based analytics software tool, documenting the full project scope to ARC42 standard, and benefiting 10+ stakeholders through updated maintainability and functionality where required.</li>  
+        <li>Optimised AWS Lambda triggers through deployment of Python-based XML-to-JSON parser to replace legacy pipeline, capable of processing 130 million+ objects in under a day, for higher efficiency integration into OpenSearch.</li>  
     </ul>`,
     skills:
       "Software Design · Software Development · Python · Neo4j · AWS · Angular",

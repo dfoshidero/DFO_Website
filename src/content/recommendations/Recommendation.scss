@@ -7,21 +7,33 @@
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
-    margin-bottom: 20px; // Spacing between cards
     padding: 10px; // Padding inside the card
+    padding-top: 5px;
     background-color: $secondary-background-color; // Adjust color as needed
     border-radius: 5px; // Rounded corners
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Subtle shadow for depth
+    animation: cardFadeIn 0.5s ease-out;
 }
 
 .recommendation-text {
     font-size: $standard-font-size;
     color: $important-font-colour;
-    margin-bottom: 10px; // Spacing between text and recommender's name
+    margin-bottom: 5px; // Spacing between text and recommender's name
 }
 
 .recommendation-recommender {
     font-size: $standard-font-size;
     color: $important-font-colour;
     font-style: italic; // Styling for the recommender's name
+}
+
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

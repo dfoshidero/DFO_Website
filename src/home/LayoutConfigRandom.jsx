@@ -13,6 +13,7 @@ import SkillsCard from "../content/expertise/Skills";
 
 import StatusCircle from "../content/status/StatusCircle";
 import SeeMore from "../components/seemore-button/SeeMore";
+import Reload from "../components/reload-button/Reload";
 
 // Define the possible sizes for each card type
 const cardTypes = {
@@ -256,11 +257,15 @@ export const generateLayoutComponents = (gridColumns, gridRows) => {
 				break;
 			case "RECOMMENDATIONS":
 				extraContent = (
-					<SeeMore
-						url="https://www.linkedin.com/in/favourdo/details/recommendations/?detailScreenTabIndex=0"
-						text="READ MORE"
-					/>
-				);
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <Reload />
+            |
+            <SeeMore
+              url="https://www.linkedin.com/in/favourdo/details/recommendations/?detailScreenTabIndex=0"
+              text="READ MORE"
+            />
+          </div>
+        );
 				break;
 			case "PROJECTS":
 				extraContent = (
@@ -315,3 +320,4 @@ export const generateLayoutComponents = (gridColumns, gridRows) => {
 		);
 	});
 };
+
