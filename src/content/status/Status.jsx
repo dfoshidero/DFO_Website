@@ -11,7 +11,7 @@ const StatusCard = () => {
       </div>
       <div className="text-container">
         <div className="status-text">
-          Pursuing MSc at the University of Buckingham.
+          Pursuing MSc in Applied Data Science.
         </div>
       </div>
     </div>
