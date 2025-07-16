@@ -232,7 +232,7 @@ const selectRandomElement = (array) => {
 	return array[Math.floor(Math.random() * array.length)];
 };
 
-const allowAutoScroll = ["MY WORK(S)", "TECHNICAL SKILLS"];
+const allowAutoScroll = [];
 
 // Function to generate layout components based on the random layout
 export const generateLayoutComponents = (gridColumns, gridRows) => {
