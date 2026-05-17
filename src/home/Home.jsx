@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Header from "../components/header/Header";
-import { generateLayoutComponents } from './LayoutConfigRandom';
+import { generateLayout, LayoutCard } from './LayoutConfigRandom';
 import './Home.scss';
 import { useMediaQuery } from 'react-responsive';
 import ScrollIndicator from '../components/scrollIndicator/scrollIndicator';
 import Footer from '../components/footer/Footer';
 
 const MIN_CARD_WIDTH = 200;
+
+let sessionInitialLayout = null;
 
 function Home() {
   const containerRef = useRef(null);
@@ -15,8 +17,8 @@ function Home() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowScrollIndicator(false); // This will cause ScrollIndicator to unmount
-    }, 3000); // Set the timeout to 3 seconds
+      setShowScrollIndicator(false);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -33,25 +35,51 @@ function Home() {
       gridRows = 6;
   }
 
-  const [layoutComponents, setLayoutComponents] = useState(generateLayoutComponents(gridColumns, gridRows));
+  const [layout, setLayout] = useState(() => {
+    if (!sessionInitialLayout) {
+      sessionInitialLayout = generateLayout(gridColumns, gridRows);
+    }
+    return sessionInitialLayout;
+  });
 
-  const refreshLayouts = useCallback(() => {
-    setLayoutComponents(generateLayoutComponents(gridColumns, gridRows));
-  }, [gridColumns, gridRows]);
+  const [animateEntrance, setAnimateEntrance] = useState(true);
+  const [shuffleEpoch, setShuffleEpoch] = useState(0);
+
+  const prevGridRef = useRef({ gridColumns, gridRows });
 
   useEffect(() => {
-    refreshLayouts();
-  }, [refreshLayouts]);
+    const prev = prevGridRef.current;
+    if (prev.gridColumns === gridColumns && prev.gridRows === gridRows) return;
+
+    prevGridRef.current = { gridColumns, gridRows };
+    setAnimateEntrance(false);
+    setLayout(generateLayout(gridColumns, gridRows));
+  }, [gridColumns, gridRows]);
+
+  const handleRandomize = useCallback(() => {
+    setAnimateEntrance(true);
+    setShuffleEpoch((epoch) => epoch + 1);
+    setLayout(generateLayout(gridColumns, gridRows));
+  }, [gridColumns, gridRows]);
 
   return (
     <div>
-      <div className="page-framer" key={layoutComponents}>
+      <div className="page-framer">
         <div className="page-centering">
           {showScrollIndicator && <ScrollIndicator />}
-          <Header onRandomizeClick={refreshLayouts} />
+          <Header onRandomizeClick={handleRandomize} />
           <div className="main-content-framer" ref={containerRef}>
-            {layoutComponents.map((LayoutComponent, index) => (
-              <LayoutComponent key={index} />
+            {layout.map((config, index) => (
+              <LayoutCard
+                key={
+                  animateEntrance && shuffleEpoch > 0
+                    ? `${config.cardType}-${shuffleEpoch}`
+                    : config.cardType
+                }
+                config={config}
+                animationDelay={index * 0.1}
+                animateEntrance={animateEntrance}
+              />
             ))}
           </div>
           <Footer />

@@ -48,7 +48,7 @@ const skills = [
     skill: "MongoDB",
   },
   {
-    id: 12,
+    id: 10,
     skill: "Neo4J",
     certified: true,
     link: "https://graphacademy.neo4j.com/c/a313beac-9014-4ed2-ab76-ca43d0cb8bb6/",
@@ -58,7 +58,7 @@ const skills = [
     skill: "Microsoft Power BI",
   },
   {
-    id: 10,
+    id: 12,
     skill: "Autodesk Revit  ",
     certified: true,
     link: "https://www.linkedin.com/in/favourdo/details/certifications/1707000019275/single-media-viewer/?profileId=ACoAACmhpvMB9MywAsViJ_T-Bq76dnz12-1Zx6c",
@@ -158,7 +158,7 @@ export default function SkillsCard() {
     <div className="skills-container">
       <ul className="skills-list">
         {visibleSkills.map((item) => (
-          <li key={item.id} className="skills-item">
+          <li key={item.skill} className="skills-item">
             <span className="skills-title">{item.skill}</span>
             {item.certified && item.link && (
               <a

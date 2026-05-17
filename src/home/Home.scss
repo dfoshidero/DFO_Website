@@ -91,6 +91,10 @@
             max-height: 100%; // Ensures it doesn't grow beyond the cell
             // Apply any other common styles here
 
+            &.card--no-entrance {
+                animation: none;
+            }
+
             animation-name: dropIn;
             animation-duration: 1.2s; // Slightly longer duration for a more natural feel
             animation-timing-function: ease-in-out; // Smoother transitions

@@ -235,92 +235,106 @@ const selectRandomElement = (array) => {
 	return array[Math.floor(Math.random() * array.length)];
 };
 
-// Function to generate layout components based on the random layout
-export const generateLayoutComponents = (gridColumns, gridRows) => {
-	let layoutConfigurations = generateRandomLayout(gridColumns, gridRows);
+export const generateLayout = (gridColumns, gridRows) =>
+	generateRandomLayout(gridColumns, gridRows);
 
-	return layoutConfigurations.map((config, index) => {
-		const cardClasses = `card ${config.size.columns}-columns ${config.size.rows}-rows`;
-		// Define a delay based on the card's index
-		const animationDelay = index * 0.1; // Adjust the multiplier to control the speed
-
-		let extraContent;
-
-		switch (config.cardType) {
-			case "TIMEZONE":
-				extraContent = "London, UK";
-				break;
-			case "STATUS":
-				//lightgreen
-				//orange
-				//red
-				extraContent = <StatusCircle color="var(--status-busy)" />;
-				break;
-			case "RECOMMENDATIONS":
-				extraContent = (
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <Reload />
-            |
-            <SeeMore
-              url="https://www.linkedin.com/in/favourdo/details/recommendations/?detailScreenTabIndex=0"
-              text="READ MORE"
-            />
-          </div>
-        );
-				break;
-			case "PROJECTS":
-				extraContent = (
+const getExtraContent = (cardType) => {
+	switch (cardType) {
+		case "TIMEZONE":
+			return "London, UK";
+		case "STATUS":
+			return <StatusCircle color="var(--status-busy)" />;
+		case "RECOMMENDATIONS":
+			return (
+				<div style={{ display: "flex", flexDirection: "row" }}>
+					<Reload />
+					|
 					<SeeMore
-						url="https://github.com/dfoshidero?tab=repositories"
-						text="VIEW REPOSITORIES"
+						url="https://www.linkedin.com/in/favourdo/details/recommendations/?detailScreenTabIndex=0"
+						text="READ MORE"
 					/>
-				);
-				break;
-			case "MY WORK(S)":
-				extraContent = (
-					<div style={{ display: "flex", flexDirection: "row" }}>
-						<SeeMore
-							url="https://www.instagram.com/untitled.fvr/"
-							text="PORTFOLIO"
-							style={{ marginRight: "10px" }} // Optional margin between components
-						/>{" "}
-					</div>
-				);
-				break;
-			case "SKILLS":
-				extraContent = <SkillsFilterControls />;
-				break;
-			default:
-				extraContent = null;
-		}
-
-		return () => (
-			<SkillsFilterProvider>
-				<Card
-					key={index} // Add a unique key for each card
-					title={config.cardType.toUpperCase()}
-					extra={extraContent}
-					className={cardClasses}
-					style={{
-						gridColumn: `span ${config.size.columns}`,
-						gridRow: `span ${config.size.rows}`,
-						// Apply the animation delay
-						animationDelay: `${animationDelay}s`,
-					}}
-				>
-					{/* Render card content based on cardType */}
-					{config.cardType === "EXPERIENCE" && <ExperienceCard />}
-					{config.cardType === "EDUCATION & CERTIFICATIONS" && <EducationCard />}
-					{config.cardType === "TIMEZONE" && <AnalogClock />}
-					{config.cardType === "PROJECTS" && <ProjectCard />}
-					{config.cardType === "STATUS" && <StatusCard />}
-					{config.cardType === "MY WORK(S)" && <PortfolioCard />}
-					{config.cardType === "CONNECT" && <ContactCard />}
-					{config.cardType === "RECOMMENDATIONS" && <RecommendationCard />}
-					{config.cardType === "SKILLS" && <SkillsCard />}
-				</Card>
-			</SkillsFilterProvider>
-		);
-	});
+				</div>
+			);
+		case "PROJECTS":
+			return (
+				<SeeMore
+					url="https://github.com/dfoshidero?tab=repositories"
+					text="VIEW REPOSITORIES"
+				/>
+			);
+		case "MY WORK(S)":
+			return (
+				<div style={{ display: "flex", flexDirection: "row" }}>
+					<SeeMore
+						url="https://www.instagram.com/untitled.fvr/"
+						text="PORTFOLIO"
+						style={{ marginRight: "10px" }}
+					/>{" "}
+				</div>
+			);
+		case "SKILLS":
+			return <SkillsFilterControls />;
+		default:
+			return null;
+	}
 };
 
+const renderCardContent = (cardType) => {
+	switch (cardType) {
+		case "EXPERIENCE":
+			return <ExperienceCard />;
+		case "EDUCATION & CERTIFICATIONS":
+			return <EducationCard />;
+		case "TIMEZONE":
+			return <AnalogClock />;
+		case "PROJECTS":
+			return <ProjectCard />;
+		case "STATUS":
+			return <StatusCard />;
+		case "MY WORK(S)":
+			return <PortfolioCard />;
+		case "CONNECT":
+			return <ContactCard />;
+		case "RECOMMENDATIONS":
+			return <RecommendationCard />;
+		case "SKILLS":
+			return <SkillsCard />;
+		default:
+			return null;
+	}
+};
+
+export function LayoutCard({ config, animationDelay = 0, animateEntrance = true }) {
+	const { cardType, size } = config;
+	const cardClasses = [
+		"card",
+		`${size.columns}-columns`,
+		`${size.rows}-rows`,
+		!animateEntrance && "card--no-entrance",
+	]
+		.filter(Boolean)
+		.join(" ");
+
+	const cardStyle = {
+		gridColumn: `span ${size.columns}`,
+		gridRow: `span ${size.rows}`,
+		...(animateEntrance && { animationDelay: `${animationDelay}s` }),
+	};
+
+	const card = (
+		<Card
+			title={cardType.toUpperCase()}
+			extra={getExtraContent(cardType)}
+			className={cardClasses}
+			style={cardStyle}
+		>
+			{renderCardContent(cardType)}
+		</Card>
+	);
+
+	if (cardType === "SKILLS") {
+		return <SkillsFilterProvider>{card}</SkillsFilterProvider>;
+	}
+
+	return card;
+}
