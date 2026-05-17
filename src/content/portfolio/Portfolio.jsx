@@ -98,7 +98,7 @@ function PortfolioCard() {
             onOpen={() =>
               openModal(
                 <div className="portfolio-modal-content">
-                  <img src={image.media_url} alt={image.caption} style={{ opacity: 1 }} />
+                  <img src={image.media_url} alt={image.caption} />
                   <p>{image.caption}</p>
                   {image.media_type === 'CAROUSEL_ALBUM' && (
                     <p>{image.children[0].caption}</p>

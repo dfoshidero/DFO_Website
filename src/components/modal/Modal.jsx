@@ -121,15 +121,17 @@ function Modal() {
         <h2 id="modal-dialog-title" className="modal__title--sr-only">
           {modalTitle || 'Dialog'}
         </h2>
-        <button
-          ref={closeButtonRef}
-          type="button"
-          className="modal__close"
-          onClick={closeModal}
-          aria-label="Close dialog"
-        >
-          ×
-        </button>
+        <div className="modal__header">
+          <button
+            ref={closeButtonRef}
+            type="button"
+            className="modal__close"
+            onClick={closeModal}
+            aria-label="Close dialog"
+          >
+            ×
+          </button>
+        </div>
         <div className="modal-content">
           {modalContent}
         </div>

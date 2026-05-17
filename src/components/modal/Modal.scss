@@ -13,18 +13,35 @@
   z-index: 1000;
   opacity: 0;
   overscroll-behavior: contain;
+  padding: var(--modal-padding, 1rem);
   transition: background-color 0.3s ease, opacity 0.3s ease;
+
+  @media (max-width: calc(4 * $min-card-width)) {
+    padding: 0.75rem;
+  }
 }
 
 .modal {
+  --modal-padding: 1rem;
+  --modal-gap: 0.75rem;
+  --modal-radius: 10px;
+  --modal-close-size: 2rem;
+  --modal-header-height: 2.5rem;
+
   position: relative;
-  padding: 20px;
-  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
   z-index: 1001;
   opacity: 0;
-  transition: opacity 0.3s ease;
   max-height: 90vh;
-  overflow: auto;
+  width: max-content;
+  max-width: 100%;
+  background-color: var(--bg-surface);
+  border: $line-width solid var(--border-subtle);
+  border-radius: var(--modal-radius);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  transition: opacity 0.3s ease;
 }
 
 .modal-backdrop[data-open='true'] {
@@ -49,32 +66,77 @@
   border: 0;
 }
 
-.modal__close {
-  position: absolute;
-  top: 8px;
-  right: 8px;
+.modal__header {
+  position: relative;
   z-index: 2;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: var(--modal-header-height);
+  padding: 0.375rem 0.5rem 0;
+}
+
+.modal__close {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
+  flex-shrink: 0;
+  width: var(--modal-close-size);
+  height: var(--modal-close-size);
   padding: 0;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   background: transparent;
   color: var(--text-primary);
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   line-height: 1;
   cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
 
   &:hover {
-    background-color: var(--bg-surface-elevated);
+    background-color: var(--accent-soft);
+    color: var(--accent);
   }
 
   &:focus-visible {
-    outline: 2px solid var(--focus-ring);
-    outline-offset: 2px;
+    outline: none;
+    box-shadow: inset 0 0 0 2px var(--focus-ring);
+  }
+}
+
+.modal-content {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 0 var(--modal-padding) var(--modal-padding);
+}
+
+// Experience layout: sidebar full-height on the left, close bar only over the detail pane
+.modal:has(.experience-modal-content) {
+  .modal__header {
+    margin-left: 30%;
+    border-left: $line-width solid var(--border-subtle);
+    background-color: var(--bg-surface);
+  }
+
+  .modal-content {
+    margin-top: calc(-1 * var(--modal-header-height));
+    padding: 0;
+    overflow: hidden;
+  }
+
+  @media (max-width: calc(4 * $min-card-width)) {
+    .modal__header {
+      margin-left: 0;
+      border-left: none;
+    }
+
+    .modal-content {
+      margin-top: 0;
+    }
   }
 }
 

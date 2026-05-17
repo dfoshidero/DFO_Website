@@ -1,5 +1,12 @@
 import React from 'react';
 import './Footer.scss';
+import buildInfo from '../../buildInfo.json';
+
+const formattedLastUpdated = new Date(buildInfo.lastUpdated).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
 
 const Footer = ({ onRandomizeClick }) => {
     return (
@@ -7,7 +14,7 @@ const Footer = ({ onRandomizeClick }) => {
         <div className="name-title">
           <div>
             <span className="design-info">
-              As of: January 13, 2025
+              Last updated: {formattedLastUpdated}
             </span>
           </div>
         </div>

@@ -4,27 +4,30 @@
   display: flex;
   flex-direction: row;
   width: 800px;
-  height: 60vh;
-  box-shadow: var(--shadow-lg);
-  border: $line-width solid var(--border-subtle);
-  border-radius: 10px;
+  max-width: 100%;
+  height: calc(60vh + var(--modal-header-height, 2.5rem));
+  min-height: 0;
+  overflow: hidden;
   color: var(--text-primary);
-  background-color: var(--bg-surface);
 
   @media (max-width: calc(4 * $min-card-width)) {
     flex-direction: column;
-    width: 350px;
+    width: 100%;
+    height: auto;
+    max-height: calc(90vh - var(--modal-header-height, 2.5rem) - 1rem);
   }
 
   .experience-list-modal {
-    flex-basis: 30%;
+    flex: 0 0 30%;
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
     border-right: 1px solid var(--border-subtle);
     overflow-y: auto;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
     background-color: var(--bg-surface-elevated);
-    max-height: 60vh;
-    padding: 20px 0px;
+    padding: calc(var(--modal-header-height, 2.5rem) + 0.5rem) 0.5rem 0.5rem;
 
     @media (max-width: calc(4 * $min-card-width)) {
       display: none;
@@ -33,15 +36,16 @@
     .experience-item-modal {
       display: block;
       width: 100%;
-      padding: 10px;
+      padding: 0.5rem 0.625rem;
       border: none;
+      border-radius: 6px;
       background: transparent;
       font: inherit;
       text-align: left;
       cursor: pointer;
-      transition: background-color 0.2s, color 0.2s;
+      transition: background-color 0.2s ease, color 0.2s ease;
       font-size: $standard-font-size;
-      line-height: 1.5;
+      line-height: 1.4;
       color: var(--text-secondary);
 
       &:hover {
@@ -52,32 +56,33 @@
       &.active {
         background-color: var(--accent);
         color: var(--text-on-accent);
+        font-weight: $bigger-font-weight;
       }
     }
-
-    .experience-item-modal:not(:last-child) {
-    border-bottom: 1px solid var(--border-subtle);
-}
   }
 
   .experience-detail-modal {
-    flex-grow: 1;
-    padding: 20px;
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    background-color: var(--bg-surface);
-    width: 70%;
+    align-items: stretch;
+    gap: var(--modal-gap, 0.75rem);
+    padding: calc(var(--modal-header-height, 2.5rem) + 0.5rem) var(--modal-padding, 1rem);
     overflow-y: auto;
 
-    @media (max-width: calc(4 * $min-card-width)) {
-      flex-direction: column;
-      align-items: center;
-      border-top-left-radius: 10px;
-      border-bottom-left-radius: 10px;
+    > * {
       width: 100%;
+      max-width: 100%;
+    }
+
+    @media (max-width: calc(4 * $min-card-width)) {
+      align-items: center;
+
+      > * {
+        width: 100%;
+      }
     }
 
     a {
@@ -94,6 +99,7 @@
       display: flex;
       align-items: center;
       width: 100%;
+      box-sizing: border-box;
 
       @media (max-width: calc(4 * $min-card-width)) {
         flex-direction: column;
@@ -158,8 +164,6 @@
     }
 
     .skills {
-      padding-top: 10px;
-      padding-bottom: 10px;
       font-size: $standard-font-size;
       font-weight: bold;
       color: var(--text-secondary);
