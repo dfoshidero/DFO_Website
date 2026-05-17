@@ -4,6 +4,7 @@ import { ModalContext } from '../../utils/modalContext';
 
 import './Experience.scss';
 
+import logoIntropic from '../../assets/images/logos/intropic.webp';
 import logoETAS from "../../assets/images/logos/etas.png"; 
 import logoKTC from '../../assets/images/logos/ktc.png'; 
 import logoDATERN from '../../assets/images/logos/datern.png'; 
@@ -15,33 +16,53 @@ import logoAHMM from '../../assets/images/logos/ahmm.png';
 
 const experiences = [
   {
-    id: 1,
-    title: "Software Engineer // ETAS (Bosch Automotive Service Solutions)",
-    location: "Manchester, England, United Kingdom",
+    id: 0,
+    title: "Software Engineer (Full-Stack, AI/ML) // Intropic",
+    location: "London, England, United Kingdom",
     shortdesc:
-      "Development of diagnostic insight tools leveraging machine learning for predictive maintenance, and optimization of data processing pipelines for enhanced system efficiency.",
-    longdesc: `<p>ETAS, a subsidiary of Bosch, specializes in the development of software for the automotive industry, focused on diagnostics, performance, and efficiency.</p>  
+      "Contributing to the platform team at an AI-driven finance and investment analytics SaaS provider serving institutional capital markets clients.",
+    longdesc: `<p>Intropic is an independent equity research and information company combining agentic AI systems with elastic cloud infrastructure to deliver financial analytics products to hedge funds, asset managers, investment banks, and other institutional clients.</p>
 
-    <p>Currently as a Software Engineer at ETAS, I have contributed to key projects and initiatives aimed at enhancing automotive diagnostic and data processing capabilities. My responsibilities and achievements include:</p>  
+    <p>As a Software Engineer on the platform team, I contribute to building and maintaining the core systems that power Intropic's product suite. My responsibilities include:</p>
 
-    <ul>  
-        <li>Contributed as member of AI & Data team developing diagnostic insight tools, leveraging a sequential pattern mining ML approach for next-likely vehicle component breakdown predictions, achieving roughly 60% accuracy compared to actual data.</li>  
-        <li>Centralised knowledge of a large, undocumented Azure-based analytics software tool, documenting the full project scope to ARC42 standard, and benefiting 10+ stakeholders through updated maintainability and functionality where required.</li>  
-        <li>Optimised AWS Lambda triggers through deployment of Python-based XML-to-JSON parser to replace legacy pipeline, capable of processing 130 million+ objects in under a day, for higher efficiency integration into OpenSearch.</li>  
+    <ul>
+        <li>Contributing as a member of the platform team across full-stack and AI/ML initiatives.</li>
     </ul>`,
     skills:
-      "Software Design · Software Development · Python · Neo4j · AWS · Angular",
+      "Software Development · Full-Stack Development · Python · JavaScript · React · AI/ML · AWS",
+    logo: logoIntropic,
+  },
+  {
+    id: 1,
+    title: "Software Engineer (Data Systems & Infrastructure) // Robert Bosch GmbH & ETAS Ltd.",
+    location: "Manchester, England, United Kingdom | Remote",
+    shortdesc:
+      "Data systems and infrastructure for automotive embedded diagnostics — cost-optimised analytics platforms, ML-driven fault prediction, production NLP interfaces, and compliance-ready AWS security.",
+    longdesc: `<p>ETAS, a subsidiary of Robert Bosch GmbH, develops embedded software for the automotive industry, focused on diagnostics, performance, and efficiency.</p>
+
+    <p>As a Software Engineer on data systems and infrastructure, I delivered production-scale pipelines, observability, and ML tooling for diagnostic analytics. Key responsibilities and achievements include:</p>
+
+    <ul>
+        <li>Cut analytics platform costs by ~88% (from $5.5k to $675/month) by replacing managed AWS OpenSearch/OSIS with a self-managed EC2 OpenSearch cluster using Python-based ingesters and parsers, maintaining horizontal scalability with Kubernetes orchestration.</li>
+        <li>Designed pattern mining algorithms for sequence-based machine learning models to analyse temporal diagnostic logs and predict next-likely vehicle faults, with approximately 60% accuracy.</li>
+        <li>Architected a production-ready, RESTful NLP interface for Neo4j using transformer intent models and LoRA fine-tuning, enabling non-technical users to query the graph database with above 90% success.</li>
+        <li>Designed and automated system observability for infrastructure operations with Java, Terraform, and Jenkins, managing Linux-based servers (Amazon Linux, Ubuntu) across production and staging environments at scale by monitoring DNS resolution, host connectivity, and service health metrics to generate diagnostic reports for 25+ stakeholders.</li>
+        <li>Implemented AWS security controls and audit-ready logging for compliance under ISO and NIST frameworks, and GDPR requirements (least-privilege IAM, KMS encryption at rest, TLS in transit, and centralised logging via CloudTrail/CloudWatch).</li>
+        <li>Re-architected legacy ingestion into a scalable Python XML-to-JSON AWS Lambda pipeline processing 130M+ records/day, handling high-volume document intake via SFTP/SSH, enabling over 70% latency reduction in the pipeline end-to-end.</li>
+    </ul>`,
+    skills:
+      "Software Design · Software Development · Python · Java · Neo4j · AWS · Terraform · Jenkins · Kubernetes · Angular",
     logo: logoETAS,
   },
   {
     id: 2,
-    title: "Graduate Data Analyst // KTC",
+    title: "Data Engineer & Analyst (BI Infrastructure) // KTC Edibles Ltd.",
     location: "Wolverhampton, England, United Kingdom",
     shortdesc:
-      "Migration of BI data from CSV to an automated SQL database, and automation of Sales Reporting Dashboard for reducion of manual errors and improved reporting efficiency.",
-    longdesc: `<p>KTC (Edibles) is one of the UK's largest providers of edible oils, canned groceries, and condiments.</p>
+      "Engineered automated SQL ETL pipelines and enhanced BI dashboards — eliminating 16+ hours of weekly manual work and achieving a 93% improvement in reporting efficiency for 80+ employees.",
+    longdesc: `<p>KTC Edibles Ltd. is one of the UK's largest suppliers and manufacturers of edible oils, canned groceries, and condiments.</p>
 
-    <p>In my role as a Data Analyst at KTC, I conducted the migration of the company's Business Insight data from a local CSV environment to an automated SQL database, as well as simultaneously enhancing their overall Sales Reporting Dashboard. The aim was to eliminate manual processes to minimise human errors, and ensure daily automatic data updates for accurate reporting. Further changes were implemented as needed to improve dashboard usability and flexibility, introducing features such as financial rebate adjustments or contract management. My responsibilities here included:</p>
+    <p>As a Data Engineer & Analyst, I engineered automated database infrastructure by replacing manual CSV workflows with SQL-based ETL pipelines, CRM ingestion scripts, agent scheduling, and validation processes — eliminating 16+ hours of weekly manual work and enabling real-time reporting for 80+ employees. I also enhanced BI capabilities across dashboards and data models. My responsibilities included:</p>
     
     <ul>
         <li>Participating in Master Data meetings to discuss database status and requirements.</li>
@@ -58,6 +79,7 @@ const experiences = [
         <li>Development and implementation of Excel VBA scripts for end-user data input to SQL database.</li>
         <li>Implementation of change auditing for end-user input forms.</li>
         <li>Implementing Row Level Security features to control dashboard access based on individual role/responsibilities.</li>
+        <li>Delivered a 93% improvement in reported user satisfaction and reporting efficiency through the combined infrastructure and BI enhancements.</li>
     </ul>
      `,
     skills:
@@ -193,17 +215,47 @@ const experiences = [
   },
 ];
 
+const TITLE_SEPARATOR = ' // ';
+
+function parseExperienceTitle(title) {
+  const idx = title.indexOf(TITLE_SEPARATOR);
+  if (idx === -1) {
+    return { role: title, company: null };
+  }
+  return {
+    role: title.slice(0, idx).trim(),
+    company: title.slice(idx + TITLE_SEPARATOR.length).trim(),
+  };
+}
+
+function ExperienceHeading({ role, company, location, className = '' }) {
+  return (
+    <div className={`experience-heading ${className}`.trim()}>
+      <p className="experience-heading__role">{role}</p>
+      {company && <p className="experience-heading__company">{company}</p>}
+      {location && <p className="experience-heading__location">{location}</p>}
+    </div>
+  );
+}
+
 export default function ExperienceCard() {
   const { openModal } = useContext(ModalContext);
 
   const handleExperienceClick = (experience) => {
-    openModal(<ExperienceModalContent experience={experience} />, { title: experience.title });
+    const { role, company } = parseExperienceTitle(experience.title);
+    const modalTitle = company ? `${role} at ${company}` : role;
+    openModal(<ExperienceModalContent experience={experience} />, { title: modalTitle });
   };
 
-  const ExperienceModalContent = ({ experience }) => (
+  const ExperienceModalContent = ({ experience }) => {
+    const { role, company } = parseExperienceTitle(experience.title);
+
+    return (
     <div className="experience-modal-content">
       <div className="experience-list-modal">
-        {experiences.map((exp) => (
+        {experiences.map((exp) => {
+          const parsed = parseExperienceTitle(exp.title);
+          return (
           <button
             key={exp.id}
             type="button"
@@ -211,43 +263,66 @@ export default function ExperienceCard() {
             onClick={() => handleExperienceClick(exp)}
             aria-current={exp.id === experience.id ? 'true' : undefined}
           >
-            {exp.title}
+            <span className="experience-item-modal__role">{parsed.role}</span>
+            {parsed.company && (
+              <span className="experience-item-modal__company">{parsed.company}</span>
+            )}
           </button>
-        ))}
+          );
+        })}
       </div>
       <div className="experience-detail-modal">
-        <div className="modal-header">
-          <img src={experience.logo} alt={`${experience.title} logo`} className="company-logo" />
-          <div className="modal-text">
-            <h2>{experience.title}</h2>
-            <h3>{experience.location}</h3>
-          </div>
-        </div>
-        <div className="skills" dangerouslySetInnerHTML={{ __html: experience.skills }} />
+        <header className="modal-header">
+          <img
+            src={experience.logo}
+            alt=""
+            className="company-logo"
+            aria-hidden="true"
+          />
+          <ExperienceHeading role={role} company={company} location={experience.location} />
+        </header>
+        {experience.skills && (
+          <section className="experience-skills" aria-label="Skills">
+            <span className="experience-section-label">Skills</span>
+            <p className="experience-skills__list">{experience.skills}</p>
+          </section>
+        )}
 
-        <div dangerouslySetInnerHTML={{ __html: experience.longdesc }} />
+        <section
+          className="experience-body"
+          dangerouslySetInnerHTML={{ __html: experience.longdesc }}
+        />
 
       </div>
     </div>
-  );
+    );
+  };
 
   return (
     <div className="experience-container">
       <ul className="experience-list">
-        {experiences.map((exp) => (
+        {experiences.map((exp) => {
+          const { role, company } = parseExperienceTitle(exp.title);
+          const ariaLabel = company ? `${role} at ${company}` : role;
+
+          return (
           <li key={exp.id} className="experience-item">
             <button
               type="button"
               className="experience-item-button"
               onClick={() => handleExperienceClick(exp)}
-              aria-label={`View details for ${exp.title}`}
+              aria-label={`View details for ${ariaLabel}`}
             >
-            <div className="experience-title">{exp.title}</div>
+            <div className="experience-title">
+              <span className="experience-title__role">{role}</span>
+              {company && <span className="experience-title__company">{company}</span>}
+            </div>
             <div className="experience-shortdesc">{exp.shortdesc}</div>
             <div className="experience-location">{exp.location}</div>
             </button>
           </li>
-        ))}
+          );
+        })}
       </ul>
     </div>
   );
