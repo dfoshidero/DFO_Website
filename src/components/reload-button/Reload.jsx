@@ -1,11 +1,9 @@
-// SeeMore.jsx
-
-import React from 'react';
+import React, { useContext } from 'react';
 import './Reload.scss';
-import { refreshRecommendation } from '../../content/recommendations/Recommendation';
+import { RecommendationsContext } from '../../utils/recommendationsContext';
 
-const Reload = ({ url, text }) => {
-
+const Reload = () => {
+  const { refreshRecommendation } = useContext(RecommendationsContext);
 
   return (
     <button onClick={() => refreshRecommendation()} className="reload-button">
