@@ -3,18 +3,12 @@
 .card {
   display: flex;
   flex-direction: column;
-  background-color: $secondary-background-color;
-  /* Slightly lighter or darker for a subtle modern effect */
+  background-color: $card-background-color;
   border-radius: 8px;
   border: $line-width solid $border-color;
-  /* Ensure the border is subtle */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  /* Softer shadow for a sleeker look */
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.35);
   transition: transform 0.3s, box-shadow 0.3s;
   margin: 9px;
-  opacity: 0.8;
-
-  box-shadow: 3px 3px 3px rgba(0, 0, 0);
 
   max-height: 100%;
   max-width: 100%;
@@ -28,9 +22,7 @@
 
   &:hover {
     transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
-    /* Softer shadow on hover */
-    opacity: 0.9;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.45);
   }
 
   .card-header {

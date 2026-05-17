@@ -17,7 +17,6 @@ $hand-dims: calc($mark-dims/2);
     position: absolute;
     width:60%; // Clock takes full width of the container
     height: 60%; // Padding bottom equal to full width for a square aspect ratio
-    background-color: $secondary-background-color;
     display: flex;
     align-items: center;  
     justify-content: center;
