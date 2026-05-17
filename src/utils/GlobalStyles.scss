@@ -80,6 +80,11 @@ $bigger-font-weight: 300;
   background-color: var(--scrollbar-thumb-hover);
 }
 
+::-webkit-scrollbar-track {
+  border-left: none;
+  background-color: transparent;
+}
+
 ::-webkit-scrollbar-track-piece {
   background-color: transparent;
 }
