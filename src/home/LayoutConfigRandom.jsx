@@ -247,7 +247,7 @@ export const generateLayoutComponents = (gridColumns, gridRows) => {
 
 		switch (config.cardType) {
 			case "TIMEZONE":
-				extraContent = "Midlands, UK";
+				extraContent = "London, UK";
 				break;
 			case "STATUS":
 				//lightgreen

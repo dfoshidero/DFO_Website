@@ -6,7 +6,7 @@ const StatusCard = () => {
     <div className="status-card">
       <div className="text-container">
         <div className="status-text">
-          Software Engineer at ETAS (Bosch).
+          Full-Stack SWE at Intropic.io
         </div>
       </div>
       <div className="text-container">
