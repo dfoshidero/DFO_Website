@@ -1,8 +1,9 @@
 // theme.js
 //
 // Runtime theme controller. Reads/writes the user's preferred theme from
-// localStorage, falls back to light by default, and applies the result by
-// setting `document.documentElement.dataset.theme`.
+// localStorage, falls back to the device color scheme when unset, and applies
+// the result by setting `document.documentElement.dataset.theme`.
+// Keep resolution order aligned with the inline script in public/index.html.
 // All visual tokens live as CSS custom properties in theme.scss keyed off
 // that data attribute.
 
@@ -29,8 +30,15 @@ function readStoredTheme() {
   return null;
 }
 
+export function getSystemTheme() {
+  if (typeof window === "undefined") return DEFAULT_THEME;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? THEMES.DARK
+    : THEMES.LIGHT;
+}
+
 export function getInitialTheme() {
-  return readStoredTheme() ?? DEFAULT_THEME;
+  return readStoredTheme() ?? getSystemTheme();
 }
 
 export function applyTheme(theme, { persist = true } = {}) {
@@ -77,8 +85,9 @@ export function markThemeIntroSeen() {
 }
 
 /**
- * First-visit demo: crossfade to dark briefly, then settle on light.
- * Does not persist the intermediate dark theme.
+ * First-visit demo: briefly flash the opposite theme, then settle on the
+ * theme already applied at intro start (system or stored). Does not persist
+ * the intermediate flash.
  */
 export function runThemeIntro() {
   if (introRunning || !shouldRunThemeIntro()) {
@@ -87,15 +96,18 @@ export function runThemeIntro() {
 
   introRunning = true;
   const html = document.documentElement;
+  const initialTheme = getCurrentTheme();
+  const flashTheme =
+    initialTheme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
   html.classList.add("theme-transitioning");
 
   return new Promise((resolve) => {
     window.setTimeout(() => {
-      applyTheme(THEMES.DARK, { persist: false });
+      applyTheme(flashTheme, { persist: false });
     }, 700);
 
     window.setTimeout(() => {
-      applyTheme(THEMES.LIGHT, { persist: true });
+      applyTheme(initialTheme, { persist: true });
       html.classList.remove("theme-transitioning");
       markThemeIntroSeen();
       introRunning = false;

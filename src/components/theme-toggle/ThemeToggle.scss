@@ -1,49 +1,101 @@
 @import '../../utils/GlobalStyles.scss';
 
-.theme-toggle-button {
+$toggle-width: 52px;
+$toggle-height: 28px;
+$thumb-size: 22px;
+$thumb-offset: 2px;
+$thumb-travel: $toggle-width - $thumb-size - ($thumb-offset * 2);
+
+.theme-toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
-  background-color: var(--bg-surface-elevated);
-  color: var(--text-primary);
-  border: $line-width solid var(--border-subtle);
-  border-radius: 14px;
   padding: 0;
   margin-right: 8px;
-  width: 28px;
-  height: 28px;
-  line-height: 1;
-
-  font-size: $standard-font-size * 1.1;
+  border: none;
+  background: transparent;
   cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s, background-color 0.3s, color 0.3s, border-color 0.3s;
-  box-shadow: var(--shadow-sm);
-  opacity: 0.85;
+  line-height: 1;
+  opacity: 0.9;
+  transition: opacity 0.3s, transform 0.3s;
 
   &:hover {
-    background-color: var(--accent-soft);
-    border-color: var(--accent);
-    color: var(--accent);
-    box-shadow: var(--shadow-md);
     opacity: 1;
     transform: translateY(-2px);
   }
 
-  .button-icon {
+  &:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+    border-radius: 999px;
+  }
+
+  &__track {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    width: $toggle-width;
+    height: $toggle-height;
+    border-radius: 999px;
+    background-color: var(--bg-surface-elevated);
+    border: $line-width solid var(--border-subtle);
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+  }
+
+  &:hover &__track {
+    border-color: var(--accent);
+    box-shadow: var(--shadow-md);
+  }
+
+  &__thumb {
+    position: absolute;
+    top: $thumb-offset;
+    left: $thumb-offset;
+    width: $thumb-size;
+    height: $thumb-size;
+    border-radius: 50%;
+    background-color: var(--bg-surface);
+    border: $line-width solid var(--border-subtle);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s ease, background-color 0.3s, border-color 0.3s;
+    pointer-events: none;
+  }
+
+  &--dark &__thumb {
+    transform: translateX($thumb-travel);
+  }
+
+  &__icon {
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0;
-    line-height: 1;
+    font-size: $standard-font-size * 1.15;
+    color: var(--text-muted);
+    transition: color 0.3s;
+    pointer-events: none;
   }
 
-  &--intro {
+  &__icon--sun {
+    color: var(--accent);
+  }
+
+  &--dark &__icon--sun {
+    color: var(--text-muted);
+  }
+
+  &--dark &__icon--moon {
+    color: var(--accent);
+  }
+
+  &--intro &__track {
     animation: themeToggleIntroPulse 0.9s ease-in-out infinite;
     border-color: var(--accent);
-    color: var(--accent);
     box-shadow: var(--shadow-accent);
-    opacity: 1;
   }
 }
 
@@ -55,7 +107,7 @@
   }
 
   50% {
-    transform: scale(1.08);
+    transform: scale(1.05);
     box-shadow: 0 0 18px var(--accent-glow);
   }
 }

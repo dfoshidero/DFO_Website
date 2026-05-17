@@ -23,9 +23,9 @@ const ThemeToggle = () => {
     if (!shouldRunThemeIntro()) return undefined;
 
     const startTimer = window.setTimeout(() => {
-      buttonRef.current?.classList.add('theme-toggle-button--intro');
+      buttonRef.current?.classList.add('theme-toggle--intro');
       runThemeIntro().finally(() => {
-        buttonRef.current?.classList.remove('theme-toggle-button--intro');
+        buttonRef.current?.classList.remove('theme-toggle--intro');
         setTheme(getCurrentTheme());
       });
     }, 900);
@@ -38,23 +38,31 @@ const ThemeToggle = () => {
     setTheme(next);
   };
 
-  const isLight = theme === THEMES.LIGHT;
-  const label = isLight ? 'Switch to dark theme' : 'Switch to light theme';
+  const isDark = theme === THEMES.DARK;
+  const label = isDark ? 'Switch to light theme' : 'Switch to dark theme';
 
   return (
     <button
       ref={buttonRef}
       type="button"
-      className="theme-toggle-button"
+      role="switch"
+      aria-checked={isDark}
+      className={`theme-toggle${isDark ? ' theme-toggle--dark' : ''}`}
       onClick={handleClick}
       aria-label={label}
       title={label}
     >
-      {isLight ? (
-        <DarkModeOutlinedIcon fontSize="inherit" className="button-icon" />
-      ) : (
-        <LightModeOutlinedIcon fontSize="inherit" className="button-icon" />
-      )}
+      <span className="theme-toggle__track" aria-hidden="true">
+        <span className="theme-toggle__thumb" />
+        <LightModeOutlinedIcon
+          fontSize="inherit"
+          className="theme-toggle__icon theme-toggle__icon--sun"
+        />
+        <DarkModeOutlinedIcon
+          fontSize="inherit"
+          className="theme-toggle__icon theme-toggle__icon--moon"
+        />
+      </span>
     </button>
   );
 };

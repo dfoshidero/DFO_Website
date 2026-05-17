@@ -103,11 +103,13 @@
 }
 
 .shuffle-layout-button {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   align-content: center;
   justify-content: center;
   justify-items: center;
+  flex-shrink: 0;
+  white-space: nowrap;
 
   background-color: var(--accent);
   color: var(--text-on-accent);
@@ -165,11 +167,18 @@
   .button-icon {
     display: inline-block;
     margin-left: 4px;
+    flex-shrink: 0;
   }
+}
+
+.shuffle-layout-button .button-text {
+  white-space: nowrap;
 }
 
 // Other styles remain unchanged...
 
 .right-container {
   display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
 }
