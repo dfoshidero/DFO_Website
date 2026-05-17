@@ -1,17 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import "./AnalogClock.scss";
 
 const AnalogClock = () => {
-  const [, setTime] = useState(new Date());
+  const [, tick] = useReducer((n) => n + 1, 0);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTime(new Date());
-    }, 1000);
-
-    return () => {
-      clearInterval(timer);
-    };
+    const timer = setInterval(tick, 1000);
+    return () => clearInterval(timer);
   }, []);
 
   const getLondonTime = () => {
