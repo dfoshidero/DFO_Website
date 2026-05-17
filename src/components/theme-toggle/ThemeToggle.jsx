@@ -1,15 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 
-import { THEMES, getCurrentTheme, toggleTheme } from '../../utils/theme';
+import {
+  THEMES,
+  getCurrentTheme,
+  runThemeIntro,
+  shouldRunThemeIntro,
+  toggleTheme,
+} from '../../utils/theme';
 import './ThemeToggle.scss';
 
 const ThemeToggle = () => {
+  const buttonRef = useRef(null);
   const [theme, setTheme] = useState(() => getCurrentTheme());
 
   useEffect(() => {
     setTheme(getCurrentTheme());
+  }, []);
+
+  useEffect(() => {
+    if (!shouldRunThemeIntro()) return undefined;
+
+    const startTimer = window.setTimeout(() => {
+      buttonRef.current?.classList.add('theme-toggle-button--intro');
+      runThemeIntro().finally(() => {
+        buttonRef.current?.classList.remove('theme-toggle-button--intro');
+        setTheme(getCurrentTheme());
+      });
+    }, 900);
+
+    return () => window.clearTimeout(startTimer);
   }, []);
 
   const handleClick = () => {
@@ -22,6 +43,7 @@ const ThemeToggle = () => {
 
   return (
     <button
+      ref={buttonRef}
       type="button"
       className="theme-toggle-button"
       onClick={handleClick}

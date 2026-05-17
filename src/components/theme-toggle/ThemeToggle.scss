@@ -37,4 +37,25 @@
     margin: 0;
     line-height: 1;
   }
+
+  &--intro {
+    animation: themeToggleIntroPulse 0.9s ease-in-out infinite;
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: var(--shadow-accent);
+    opacity: 1;
+  }
+}
+
+@keyframes themeToggleIntroPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 8px var(--accent-glow);
+  }
+
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 18px var(--accent-glow);
+  }
 }
