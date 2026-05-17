@@ -14,7 +14,7 @@ import SkillsCard, {
   SkillsFilterProvider,
 } from "../content/expertise/Skills";
 
-import StatusCircle from "../content/status/StatusCircle";
+import StatusIndicator from "../content/status/StatusIndicator";
 import SeeMore from "../components/seemore-button/SeeMore";
 import Reload from "../components/reload-button/Reload";
 
@@ -243,7 +243,7 @@ const getExtraContent = (cardType) => {
 		case "TIMEZONE":
 			return "London, UK";
 		case "STATUS":
-			return <StatusCircle color="var(--status-busy)" />;
+			return <StatusIndicator />;
 		case "RECOMMENDATIONS":
 			return (
 				<div style={{ display: "flex", flexDirection: "row" }}>

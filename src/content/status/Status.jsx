@@ -1,19 +1,15 @@
 import React from 'react';
 import './Status.scss';
+import { statusConfig } from './statusConfig';
 
 const StatusCard = () => {
   return (
     <div className="status-card">
-      <div className="text-container">
-        <div className="status-text">
-          Full-Stack SWE at Intropic.io
+      {statusConfig.lines.map((line, index) => (
+        <div className="text-container" key={index}>
+          <div className="status-text">{line.message}</div>
         </div>
-      </div>
-      <div className="text-container">
-        <div className="status-text">
-          Pursuing MSc in Applied Data Science.
-        </div>
-      </div>
+      ))}
     </div>
   );
 };
