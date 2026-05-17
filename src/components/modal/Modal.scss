@@ -35,6 +35,7 @@
   opacity: 0;
   max-height: 90vh;
   width: max-content;
+  min-width: 0;
   max-width: 100%;
   background-color: var(--bg-surface);
   border: $line-width solid var(--border-subtle);
@@ -109,13 +110,26 @@
   position: relative;
   z-index: 1;
   flex: 1;
+  min-width: 0;
   min-height: 0;
   overflow: auto;
   padding: 0 var(--modal-padding) var(--modal-padding);
 }
 
+.modal:has(.portfolio-modal-content) {
+  width: $modal-portfolio-width;
+  max-width: 100%;
+
+  @media (max-width: calc(4 * $min-card-width)) {
+    width: 100%;
+  }
+}
+
 // Experience layout: sidebar full-height on the left, close bar only over the detail pane
 .modal:has(.experience-modal-content) {
+  width: $modal-experience-width;
+  max-width: 100%;
+
   .modal__header {
     margin-left: 30%;
     border-left: $line-width solid var(--border-subtle);
@@ -129,6 +143,8 @@
   }
 
   @media (max-width: calc(4 * $min-card-width)) {
+    width: 100%;
+
     .modal__header {
       margin-left: 0;
       border-left: none;

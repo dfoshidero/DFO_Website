@@ -10,6 +10,10 @@
 $line-width: 1px;
 $min-card-width: 200px;
 
+// Modal widths (viewport-relative, capped on very large screens)
+$modal-experience-width: min(85vw, 50rem);
+$modal-portfolio-width: min(55vw, 31.25rem);
+
 // Typography scale
 $smaller-font-size: 0.79rem;
 

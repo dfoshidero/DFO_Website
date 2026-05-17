@@ -3,8 +3,7 @@
 .experience-modal-content {
   display: flex;
   flex-direction: row;
-  width: 800px;
-  max-width: 100%;
+  width: 100%;
   height: calc(60vh + var(--modal-header-height, 2.5rem));
   min-height: 0;
   overflow: hidden;
@@ -12,7 +11,6 @@
 
   @media (max-width: calc(4 * $min-card-width)) {
     flex-direction: column;
-    width: 100%;
     height: auto;
     max-height: calc(90vh - var(--modal-header-height, 2.5rem) - 1rem);
   }

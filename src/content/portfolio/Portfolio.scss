@@ -79,12 +79,7 @@
     flex-direction: column;
     align-items: stretch;
     gap: var(--modal-gap, 1rem);
-    width: 500px;
-    max-width: 100%;
-
-    @media (max-width: calc(4 * $min-card-width)) {
-        width: 100%;
-    }
+    width: 100%;
 
     img {
         width: 100%;
