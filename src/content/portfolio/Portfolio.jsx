@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { ModalContext } from '../../utils/modalContext';
 
+import PortfolioItem from './PortfolioItem';
 import './Portfolio.scss';
 
 function PortfolioCard() {
@@ -22,7 +23,7 @@ function PortfolioCard() {
         try {
           attempts++;
           const response = await axios.get(
-            "https://z3mlw599i2.execute-api.eu-west-2.amazonaws.com/dev/fetchInstagramData"
+            "https://z3mlw599i2.execute-api.eu-west-2.amazonaws.com/test/fetchInstagramData"
           );
           const imagesData = JSON.parse(response.data.body); // Parse the JSON string into an array
 
@@ -90,26 +91,22 @@ function PortfolioCard() {
       </div>
 
       <div className="portfolio-grid">
-        {images.map((image, index) => (
-          <div
+        {images.map((image) => (
+          <PortfolioItem
             key={image.id}
-            className={`portfolio-item ${index % 3 === 0 ? 'left' : index % 3 === 2 ? 'right' : ''}`}
-            onClick={() => openModal(
-              <div className="portfolio-modal-content">
-                <img src={image.media_url} alt={image.caption} style={{ opacity: 1 }}/>
-                <p>{image.caption}</p>
-                {image.media_type === 'CAROUSEL_ALBUM' && (
-                  <p>{image.children[0].caption}</p> // Display the carousel caption if available
-                )}
-              </div>
-            )}
-          >
-            <img
-              src={image.media_url}
-              alt={image.caption}
-              style={{ maxWidth: '100%', maxHeight: '100%' }}
-            />
-          </div>
+            image={image}
+            onOpen={() =>
+              openModal(
+                <div className="portfolio-modal-content">
+                  <img src={image.media_url} alt={image.caption} style={{ opacity: 1 }} />
+                  <p>{image.caption}</p>
+                  {image.media_type === 'CAROUSEL_ALBUM' && (
+                    <p>{image.children[0].caption}</p>
+                  )}
+                </div>
+              )
+            }
+          />
         ))}
       </div>
     </div>
