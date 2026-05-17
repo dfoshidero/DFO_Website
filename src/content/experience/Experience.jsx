@@ -204,13 +204,15 @@ export default function ExperienceCard() {
     <div className="experience-modal-content">
       <div className="experience-list-modal">
         {experiences.map((exp) => (
-          <div
+          <button
             key={exp.id}
+            type="button"
             className={`experience-item-modal ${exp.id === experience.id ? 'active' : ''}`}
             onClick={() => handleExperienceClick(exp)}
+            aria-current={exp.id === experience.id ? 'true' : undefined}
           >
             {exp.title}
-          </div>
+          </button>
         ))}
       </div>
       <div className="experience-detail-modal">
@@ -233,14 +235,17 @@ export default function ExperienceCard() {
     <div className="experience-container">
       <ul className="experience-list">
         {experiences.map((exp) => (
-          <li
-            key={exp.id}
-            className="experience-item"
-            onClick={() => handleExperienceClick(exp)}
-          >
+          <li key={exp.id} className="experience-item">
+            <button
+              type="button"
+              className="experience-item-button"
+              onClick={() => handleExperienceClick(exp)}
+              aria-label={`View details for ${exp.title}`}
+            >
             <div className="experience-title">{exp.title}</div>
             <div className="experience-shortdesc">{exp.shortdesc}</div>
             <div className="experience-location">{exp.location}</div>
+            </button>
           </li>
         ))}
       </ul>

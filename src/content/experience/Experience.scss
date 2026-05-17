@@ -30,12 +30,18 @@
     }
 
     .experience-item-modal {
-      cursor: pointer;
+      display: block;
+      width: 100%;
       padding: 10px;
+      border: none;
+      background: transparent;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
       transition: background-color 0.2s;
-
       font-size: $standard-font-size;
       line-height: 1.5;
+      color: inherit;
 
       &:hover {
         background-color: lighten(
@@ -180,23 +186,32 @@
 }
 
 .experience-item {
-  cursor: pointer;
-  padding-top: 4px;
-  padding-bottom: 10px;
   margin: 0px 10px;
   border-bottom: 1px solid $border-color;
-  transition: background-color 0.2s;
 
-  &:hover {
-    background-color: $tertiary-background-color;
-    margin: 0; /* Remove margins */
-    padding: 4px 10px 10px 10px; /* Adjust padding */
-    border-bottom: 0px solid $border-color;
+  .experience-item-button {
+    display: block;
+    width: 100%;
+    padding: 4px 0 10px;
+    border: none;
+    background: transparent;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    color: inherit;
 
-    .experience-title,
-    .experience-shortdesc,
-    .experience-location {
-      color: $important-font-colour; // Change font color on hover
+    &:hover {
+      background-color: $tertiary-background-color;
+      margin: 0 -10px;
+      padding: 4px 10px 10px;
+      border-bottom: 0px solid $border-color;
+
+      .experience-title,
+      .experience-shortdesc,
+      .experience-location {
+        color: $important-font-colour;
+      }
     }
   }
 

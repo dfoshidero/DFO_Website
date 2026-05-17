@@ -61,6 +61,11 @@ $min-card-width: 200px; // Adjust this value as needed
 
 // Common styles
 
+:focus-visible {
+  outline: 2px solid #80b3ff;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
 
 /* Add scrollbar styling */
 ::-webkit-scrollbar {

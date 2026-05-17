@@ -91,15 +91,17 @@ function PortfolioItem({ image, onOpen }) {
 
   return (
     <>
-      <div
+      <button
+        type="button"
         ref={itemRef}
         className="portfolio-item"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onClick={onOpen}
+        aria-label={`View post: ${image.caption || 'Instagram image'}`}
       >
         <img src={image.media_url} alt={image.caption || ''} />
-      </div>
+      </button>
 
       {preview &&
         createPortal(

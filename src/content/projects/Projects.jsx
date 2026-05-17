@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Projects.scss';
 
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
@@ -58,79 +58,64 @@ const projects = [
   },
 ];
 
+function ProjectCard({ project, asListItem = false }) {
+  const wrapperClass = asListItem ? 'project-item' : 'special-project-item';
+
+  const content = (
+    <>
+      <a
+        className="project-card-link"
+        href={project.projectUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Open ${project.title} on GitHub`}
+      >
+        {project.imageUrl && (
+          <div className="project-image-container">
+            <img src={project.imageUrl} alt="" className="project-image" />
+          </div>
+        )}
+        <div className="project-details">
+          <div className="project-title">{project.title}</div>
+          <div className="project-description">{project.description}</div>
+          <div className="project-stack">Stack: {project.stack}</div>
+        </div>
+      </a>
+      {project.videoUrl && (
+        <a
+          href={project.videoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="view-button"
+        >
+          Demo <PlayCircleOutlineIcon className="button-icon" />
+        </a>
+      )}
+    </>
+  );
+
+  if (asListItem) {
+    return <li className={wrapperClass}>{content}</li>;
+  }
+
+  return <div className={wrapperClass}>{content}</div>;
+}
+
 export default function ProjectsCard() {
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleProjectClick = (url, event) => {
-    event.stopPropagation();
-    window.open(url, '_blank');
-  };
-
-  // Extract the special project
   const specialProject = projects.find(project => project.id === 1000);
-  // Filter out the special project from the main list
   const otherProjects = projects.filter(project => project.id !== 1000);
 
   return (
     <div className="projects-container">
-      {/* Render the special project first, outside the projects list */}
-      {specialProject && (
-        <div className="special-project-item"
-             onClick={(event) => handleProjectClick(specialProject.projectUrl, event)}>
-          <div className="project-image-and-actions">
-            {specialProject.imageUrl && (
-              <div className="project-image-container">
-                <img src={specialProject.imageUrl} alt={specialProject.title} className="project-image" />
-              </div>
-            )}
-            {specialProject.videoUrl && (
-              <a href={specialProject.videoUrl} target="_blank" rel="noopener noreferrer" className="view-button" 
-                 onClick={(event) => { event.stopPropagation(); window.open(specialProject.videoUrl, '_blank'); }} 
-                 onMouseEnter={() => setIsHovered(true)}
-                 onMouseLeave={() => setIsHovered(false)}>
-                Demo <PlayCircleOutlineIcon className="button-icon" />
-              </a>
-            )}
-          </div>
-          <div className="project-details">
-            <div className="project-title">{specialProject.title}</div>
-            <div className="project-description">{specialProject.description}</div>
-            <div className="project-stack">Stack: {specialProject.stack}</div>
-          </div>
-        </div>
-      )}
+      {specialProject && <ProjectCard project={specialProject} />}
 
       <div className="more-info-text">
-        <span>Click items to see more...</span> 
+        <span>Click items to see more...</span>
       </div>
 
       <ul className="projects-list">
-        {/* Render the other projects */}
         {otherProjects.map(project => (
-          <li key={project.id} 
-              className={`project-item ${isHovered ? 'no-hover' : ''} ${!project.videoUrl ? 'no-action-button' : ''}`} 
-              onClick={(event) => handleProjectClick(project.projectUrl, event)}>
-            <div className="project-image-and-actions">
-              {project.imageUrl && (
-                <div className="project-image-container">
-                  <img src={project.imageUrl} alt={project.title} className="project-image" />
-                </div>
-              )}
-              {project.videoUrl && (
-                <a href={project.videoUrl} target="_blank" rel="noopener noreferrer" className="view-button" 
-                   onClick={(event) => { event.stopPropagation(); window.open(project.videoUrl, '_blank'); }} 
-                   onMouseEnter={() => setIsHovered(true)}
-                   onMouseLeave={() => setIsHovered(false)}>
-                  Demo <PlayCircleOutlineIcon className="button-icon" />
-                </a>
-              )}
-            </div>
-            <div className="project-details">
-              <div className="project-title">{project.title}</div>
-              <div className="project-description">{project.description}</div>
-              <div className="project-stack">Stack: {project.stack}</div>
-            </div>
-          </li>
+          <ProjectCard key={project.id} project={project} asListItem />
         ))}
       </ul>
     </div>
