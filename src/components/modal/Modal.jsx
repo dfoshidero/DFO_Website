@@ -1,37 +1,135 @@
-import React, { useContext, useEffect, useState, useCallback } from 'react';
+import React, { useContext, useEffect, useRef, useState, useCallback } from 'react';
 import { ModalContext } from '../../utils/modalContext';
+import { useFocusTrap } from '../../hooks/useFocusTrap';
 import './Modal.scss';
 
 function Modal() {
-  const { closeModal, modalContent, isModalOpen } = useContext(ModalContext);
-  const [modalOpen, setModalOpen] = useState(false);
+  const {
+    closeModal,
+    clearModal,
+    modalContent,
+    modalTitle,
+    isModalOpen,
+  } = useContext(ModalContext);
 
-  // Memoize the handleBackdropClick function
-  const handleBackdropClick = useCallback((e) => {
-    if (e.target.classList.contains('modal-backdrop')) {
-      closeModal();
-    }
-  }, [closeModal]);
+  const [isPresent, setIsPresent] = useState(false);
+  const [dataOpen, setDataOpen] = useState(false);
+
+  const backdropRef = useRef(null);
+  const dialogRef = useRef(null);
+  const closeButtonRef = useRef(null);
+  const hasAnimatedOpenRef = useRef(false);
+
+  const trapActive = isPresent && dataOpen;
+  useFocusTrap(dialogRef, trapActive, closeButtonRef);
 
   useEffect(() => {
     if (isModalOpen) {
-      document.addEventListener('click', handleBackdropClick);
-      setModalOpen(true);
-    } else {
-      document.removeEventListener('click', handleBackdropClick);
-      setModalOpen(false);
+      setIsPresent(true);
+      const frameId = requestAnimationFrame(() => {
+        setDataOpen(true);
+      });
+      return () => cancelAnimationFrame(frameId);
     }
 
-    return () => {
-      document.removeEventListener('click', handleBackdropClick);
-    };
-  }, [isModalOpen, handleBackdropClick]); // Now handleBackdropClick can be safely added as a dependency
+    setDataOpen(false);
+    return undefined;
+  }, [isModalOpen]);
 
-  if (!modalOpen) return null;
+  useEffect(() => {
+    if (dataOpen) {
+      hasAnimatedOpenRef.current = true;
+    }
+  }, [dataOpen]);
+
+  useEffect(() => {
+    if (!isModalOpen && isPresent && !dataOpen && !hasAnimatedOpenRef.current) {
+      setIsPresent(false);
+      clearModal();
+    }
+
+    if (!isPresent) {
+      hasAnimatedOpenRef.current = false;
+    }
+  }, [isModalOpen, isPresent, dataOpen, clearModal]);
+
+  useEffect(() => {
+    if (!isPresent) return undefined;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isPresent]);
+
+  useEffect(() => {
+    if (!trapActive) return undefined;
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeModal();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [trapActive, closeModal]);
+
+  const handleBackdropMouseDown = useCallback(
+    (event) => {
+      if (event.target === backdropRef.current) {
+        closeModal();
+      }
+    },
+    [closeModal]
+  );
+
+  const handleTransitionEnd = useCallback(
+    (event) => {
+      if (event.target !== backdropRef.current) return;
+      if (event.propertyName !== 'opacity' && event.propertyName !== 'background-color') return;
+      if (isModalOpen || dataOpen) return;
+
+      hasAnimatedOpenRef.current = false;
+      setIsPresent(false);
+      clearModal();
+    },
+    [isModalOpen, dataOpen, clearModal]
+  );
+
+  if (!isPresent) return null;
 
   return (
-    <div className={`modal-backdrop ${modalOpen ? 'open' : ''}`}>
-      <div className={`modal ${modalOpen ? 'open' : ''}`}>
+    <div
+      ref={backdropRef}
+      className="modal-backdrop"
+      data-open={dataOpen ? 'true' : 'false'}
+      onMouseDown={handleBackdropMouseDown}
+      onTransitionEnd={handleTransitionEnd}
+    >
+      <div
+        ref={dialogRef}
+        className="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-dialog-title"
+        onMouseDown={(event) => event.stopPropagation()}
+      >
+        <h2 id="modal-dialog-title" className="modal__title--sr-only">
+          {modalTitle || 'Dialog'}
+        </h2>
+        <button
+          ref={closeButtonRef}
+          type="button"
+          className="modal__close"
+          onClick={closeModal}
+          aria-label="Close dialog"
+        >
+          ×
+        </button>
         <div className="modal-content">
           {modalContent}
         </div>

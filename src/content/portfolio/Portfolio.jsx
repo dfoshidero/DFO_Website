@@ -103,7 +103,8 @@ function PortfolioCard() {
                   {image.media_type === 'CAROUSEL_ALBUM' && (
                     <p>{image.children[0].caption}</p>
                   )}
-                </div>
+                </div>,
+                { title: image.caption || 'Portfolio image' }
               )
             }
           />

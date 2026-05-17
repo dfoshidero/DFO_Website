@@ -189,10 +189,15 @@
   margin: 0px 10px;
   border-bottom: 1px solid $border-color;
 
+  &:has(.experience-item-button:hover) {
+    border-bottom-color: transparent;
+  }
+
   .experience-item-button {
     display: block;
     width: 100%;
-    padding: 4px 0 10px;
+    margin: 0;
+    padding: 4px 10px 10px;
     border: none;
     background: transparent;
     font: inherit;
@@ -203,9 +208,6 @@
 
     &:hover {
       background-color: $tertiary-background-color;
-      margin: 0 -10px;
-      padding: 4px 10px 10px;
-      border-bottom: 0px solid $border-color;
 
       .experience-title,
       .experience-shortdesc,

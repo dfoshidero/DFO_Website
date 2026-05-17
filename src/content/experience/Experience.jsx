@@ -197,7 +197,7 @@ export default function ExperienceCard() {
   const { openModal } = useContext(ModalContext);
 
   const handleExperienceClick = (experience) => {
-    openModal(<ExperienceModalContent experience={experience} />);
+    openModal(<ExperienceModalContent experience={experience} />, { title: experience.title });
   };
 
   const ExperienceModalContent = ({ experience }) => (
