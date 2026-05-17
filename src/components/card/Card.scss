@@ -6,7 +6,7 @@
   background-color: $card-background-color;
   border-radius: 8px;
   border: $line-width solid $border-color;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.35);
+  box-shadow: $shadow-card;
   transition: transform 0.3s, box-shadow 0.3s;
   margin: 9px;
 
@@ -15,14 +15,13 @@
 
   @media (max-width: calc(4 * $min-card-width)) {
     margin: 5px;
-    box-shadow: 2px 2px 3px rgba(0, 0, 0);
-}
+  }
 
   
 
   &:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.45);
+    box-shadow: $shadow-card-hover;
   }
 
   .card-header {
