@@ -10,15 +10,15 @@
   /* Vertically center items */
   justify-content: space-between;
   margin: 0 7px 7px 7px;
-  border-bottom: $line-width solid $border-color;
-  position: relative; // Add relative positioning to the parent
+  border-bottom: $line-width solid var(--border-subtle);
+  position: relative;
 
   @media (max-width: calc(4 * $min-card-width)) {
     flex-direction: column;
-    align-items: center; // Center items horizontally in column layout
-    justify-content: flex-start; // Start alignment in column layout
-    margin: 14px auto; // Adjust margin for smaller screens
-    padding-top: 10%; // Add some padding for better spacing
+    align-items: center;
+    justify-content: flex-start;
+    margin: 14px auto;
+    padding-top: 10%;
     padding-bottom: 5%;
     padding-left: 15%;
     padding-right: 15%;
@@ -60,7 +60,7 @@
 }
 
 .name {
-  color: $border-color;
+  color: var(--text-primary);
   width: 10%;
   font-size: $smaller-font-size;
   margin: 10px;
@@ -68,7 +68,7 @@
 
 .title {
   width: 10%;
-  color: $standard-font-colour;
+  color: var(--text-secondary);
   font-size: $smaller-font-size;
   margin: 10px;
 }
@@ -81,23 +81,23 @@
   justify-content: center;
   justify-items: center;
 
-  background-color: $secondary-background-color; // Same as card background
-  color: $primary-text-color; // Primary text color for contrast
-  border: $line-width solid $border-color; // Border similar to cards
+  background-color: var(--bg-surface-elevated);
+  color: var(--text-primary);
+  border: $line-width solid var(--border-subtle);
 
   border-radius: 14px;
   padding: 3px 12px;
   font-size: $standard-font-size;
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
   opacity: 0.6;
 
   &:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12); // Enhanced shadow on hover
-    opacity: 1; // Full opacity on hover
+    box-shadow: var(--shadow-md);
+    opacity: 1;
     text-decoration: none;
-    transform: translateY(-2px); // Slight lift on hover/focus
+    transform: translateY(-2px);
 
   }
 }
@@ -109,9 +109,9 @@
   justify-content: center;
   justify-items: center;
 
-  background-color: #2979ff; // Bright blue for visibility
-  color: $primary-text-color; // Keep the primary text color for contrast
-  border: $line-width solid $border-color; // Keep the border similar to cards
+  background-color: var(--accent);
+  color: var(--text-on-accent);
+  border: $line-width solid var(--accent);
   margin: 0px 10px;
 
   border-radius: 14px;
@@ -119,47 +119,34 @@
   font-size: $standard-font-size;
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s, border-color 0.3s;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  opacity: 0.6;
+  box-shadow: var(--shadow-sm);
+  opacity: 0.85;
 
   // Apply the pulse animation
   animation: pulse-glow 2s infinite;
 
   &:hover {
-    box-shadow: 0 0 8px rgba(41, 121, 255, 0.8); // Glowing shadow for hover/focus
-    opacity: 1; // Full opacity on hover/focus
-    border-color: #80d8ff; // Lighter border color on hover/focus for the glow effect
+    box-shadow: var(--shadow-accent);
+    opacity: 1;
+    border-color: var(--accent-hover);
     text-decoration: none;
-    transform: translateY(-2px); // Slight lift on hover/focus
+    transform: translateY(-2px);
   }
 
 }
 
 .MuiSvgIcon-root {
-  font-size: $standard-font-size * 1.1 !important; // The !important is to override MUI default styles if necessary
+  font-size: $standard-font-size * 1.1 !important;
 }
 
 @keyframes pulse-glow {
-
   0%,
   100% {
-    box-shadow: 0 0 8px rgba(41, 121, 255, 0.6);
+    box-shadow: 0 0 8px var(--accent-glow);
   }
 
   50% {
-    box-shadow: 0 0 16px rgba(41, 121, 255, 1);
-  }
-}
-
-@keyframes pulse-glow {
-
-  0%,
-  100% {
-    box-shadow: 0 0 8px rgba(41, 121, 255, 0.6);
-  }
-
-  50% {
-    box-shadow: 0 0 20px rgba(41, 121, 255, 0.9); // Increased glow for visibility
+    box-shadow: 0 0 20px var(--accent-glow);
   }
 }
 
@@ -168,17 +155,16 @@
 .shuffle-layout-button,
 .contact-button {
   display: flex;
-  align-items: center; // Align items in the center vertically
-  justify-content: center; // Center content horizontally 
+  align-items: center;
+  justify-content: center;
 
   .button-text {
     display: inline-block;
   }
 
   .button-icon {
-    // Align the icon with the text
     display: inline-block;
-    margin-left: 4px; // Adjust spacing between text and icon
+    margin-left: 4px;
   }
 }
 

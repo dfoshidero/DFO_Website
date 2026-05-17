@@ -9,13 +9,13 @@
 
 .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); // 3 columns
-    gap: 5px; // Space between items
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
     padding: 8px;
     margin: 0;
     width: 100%;
     height: 100%;
-    background-color: lighten($secondary-background-color, 20%);
+    background-color: var(--bg-surface-elevated);
     border-radius: 8px;
 
 }
@@ -43,7 +43,7 @@
         height: 100%;
         object-fit: cover;
         border-radius: 8px;
-        box-shadow: 0px 5px 3px rgba(0, 0, 0, 0.5);
+        box-shadow: var(--shadow-md);
     }
 }
 
@@ -53,8 +53,8 @@
     pointer-events: none;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
-    border: $line-width solid $border-color;
+    box-shadow: var(--shadow-lg);
+    border: $line-width solid var(--border-subtle);
 
     img {
         width: 100%;
@@ -78,8 +78,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: $line-width solid $border-color;
-    background-color: white;
+    border: $line-width solid var(--border-subtle);
+    background-color: var(--bg-surface);
     width: 500px;
     border-radius: 10px;
 
@@ -90,16 +90,16 @@
     img {
         width: 100%;
         height: 100%;
-        object-fit: contain; // Ensures images cover the area properly
+        object-fit: contain;
         border-radius: 10px 10px 0 0;
     }
 
     p {
         padding: 10px;
         margin: 20px 10px;
-        color: $border-color;
+        color: var(--text-secondary);
         border-radius: 8px;
-        font-size: $bigger-font-size; // Smaller font size for the short description
+        font-size: $bigger-font-size;
     }
 }
 
@@ -112,23 +112,23 @@ padding: 5%;
         justify-content: center;
         justify-items: center;
 
-        background-color: $secondary-background-color; // Set your desired background color
-        color: $primary-text-color; // Set your desired text color
-        border: $line-width solid $border-color; // Set your desired border properties
+        background-color: var(--bg-surface-elevated);
+        color: var(--text-primary);
+        border: $line-width solid var(--border-subtle);
 
-        border-radius: 14px; // Set your desired border radius
-        padding: 3px 8px; // Set your desired padding
-        font-size: $standard-font-size; // Set your desired font size
+        border-radius: 14px;
+        padding: 3px 8px;
+        font-size: $standard-font-size;
         cursor: pointer;
         transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        box-shadow: var(--shadow-sm);
         opacity: 0.6;
 
         &:hover {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); // Set your desired shadow on hover
-            opacity: 1; // Full opacity on hover
+            box-shadow: var(--shadow-md);
+            opacity: 1;
             text-decoration: none;
-            transform: translateY(-2px); // Slight lift on hover/focus
+            transform: translateY(-2px);
         }
     }
 }

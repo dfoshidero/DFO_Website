@@ -11,38 +11,39 @@
 }
 
 .connect-button {
-    background-color: $secondary-background-color; // Same as card background
-    color: $primary-text-color; // Primary text color for contrast
-    border: $line-width solid $border-color; // Border similar to cards
+    background-color: var(--bg-surface-elevated);
+    color: var(--text-primary);
+    border: $line-width solid var(--border-subtle);
     border-radius: 14px;
     padding: 3px 0px;
     margin: 3% 0px;
     font-size: $standard-font-size;
     cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s, background-color 0.3s, color 0.3s, border-color 0.3s;
+    box-shadow: var(--shadow-sm);
     opacity: 0.6;
     text-wrap: nowrap;
     width: 70%;
 
     display: flex;
-  align-items: center; // Align items in the center vertically
-  justify-content: center; // Center content horizontally 
+  align-items: center;
+  justify-content: center;
 
     &:hover {
-        background-color: $tertiary-background-color;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12); // Enhanced shadow on hover
-        opacity: 1; // Full opacity on hover
+        background-color: var(--accent);
+        color: var(--text-on-accent);
+        border-color: var(--accent);
+        box-shadow: var(--shadow-md);
+        opacity: 1;
         text-decoration: none;
     }
 
     .button-icon {
-        // Align the icon with the text
         display: inline-block;
-        margin-left: 4px; // Adjust spacing between text and icon
+        margin-left: 4px;
       }
 }
 
 .MuiSvgIcon-root {
-    font-size: $standard-font-size * 1.1 !important; // The !important is to override MUI default styles if necessary
+    font-size: $standard-font-size * 1.1 !important;
   }

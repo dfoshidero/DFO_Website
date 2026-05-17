@@ -5,6 +5,8 @@ import profileIcon from '../../assets/images/icon.jpeg';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 
+import ThemeToggle from '../theme-toggle/ThemeToggle';
+
 const Header = ({ onRandomizeClick }) => {
   return (
     <div className="header">
@@ -21,6 +23,7 @@ const Header = ({ onRandomizeClick }) => {
       </div>
       
       <div className="right-container">
+        <ThemeToggle />
         <button onClick={onRandomizeClick} className="shuffle-layout-button">
           <span className="button-text">Shuffle Cards</span>
           <AutorenewIcon fontSize="inherit" className="button-icon" />

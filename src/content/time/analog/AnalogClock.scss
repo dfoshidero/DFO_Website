@@ -15,36 +15,36 @@ $hand-dims: calc($mark-dims/2);
 
 .clock {
     position: absolute;
-    width:60%; // Clock takes full width of the container
-    height: 60%; // Padding bottom equal to full width for a square aspect ratio
+    width:60%;
+    height: 60%;
     display: flex;
-    align-items: center;  
+    align-items: center;
     justify-content: center;
     margin-bottom: 20%;
 
-  
+
   .hand {
     position: absolute;
-    bottom: $hand-dims; // Centered vertically
-    background-color: $important-font-colour;
+    bottom: $hand-dims;
+    background-color: var(--text-primary);
     transform-origin: bottom;
     transition: transform 0.05s ease-in-out;
   }
-  
+
   .hour-hand {
-    width: 2%; // Responsive width
-    height: 25%; // Responsive height
+    width: 2%;
+    height: 25%;
   }
-  
+
   .minute-hand {
     width: 2%;
     height: 35%;
   }
-  
+
   .second-hand {
     width: 1%;
     height: 40%;
-    background-color: red;
+    background-color: var(--accent-warm);
   }
 
   .mark {
@@ -57,21 +57,19 @@ $hand-dims: calc($mark-dims/2);
     justify-content: center;
     transform-origin: center bottom;
   }
-  
+
   .hour-mark .mark-line {
-    width: 1%; // Reduced width
-    height: 8%; // Height to fit within the clock's radius
-    background-color: $standard-font-colour;
-    transform: translateX(-50%) translateY(-300%); // Adjusting position to keep within bounds
+    width: 1%;
+    height: 8%;
+    background-color: var(--text-secondary);
+    transform: translateX(-50%) translateY(-300%);
   }
-  
+
   .minute-mark .minute-mark-line {
-    width: 1%; // Reduced width for minute marks
-    height: 5%; // Height to fit within the clock's radius
-    background-color: $border-color;
-    transform: translateX(-50%) translateY(-600%); // Adjusting position to keep within bounds
+    width: 1%;
+    height: 5%;
+    background-color: var(--border-strong);
+    transform: translateX(-50%) translateY(-600%);
   }
-  
+
 }
-  
-  

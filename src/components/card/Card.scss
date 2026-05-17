@@ -3,10 +3,10 @@
 .card {
   display: flex;
   flex-direction: column;
-  background-color: $card-background-color;
+  background-color: var(--bg-surface);
   border-radius: 8px;
-  border: $line-width solid $border-color;
-  box-shadow: $shadow-card;
+  border: $line-width solid var(--border-subtle);
+  box-shadow: var(--shadow-md);
   transition: transform 0.3s, box-shadow 0.3s;
   margin: 9px;
 
@@ -17,17 +17,15 @@
     margin: 5px;
   }
 
-  
-
   &:hover {
     transform: translateY(-3px);
-    box-shadow: $shadow-card-hover;
+    box-shadow: var(--shadow-lg);
   }
 
   .card-header {
-    display: flex; // Set card-header as a flex container
-    justify-content: space-between; // Space out children to the far ends
-    border-bottom: $line-width solid #545454;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: $line-width solid var(--border-subtle);
     margin: 0px 10px;
 
     .title,
@@ -39,12 +37,12 @@
 
     .title {
       flex-grow: 1;
-      color: $important-font-colour;
+      color: var(--text-primary);
       font-weight: $bigger-font-weight;
     }
 
     .extra {
-      color: $standard-font-colour;
+      color: var(--text-secondary);
       font-weight: $standard-font-weight;
       display: flex;
       justify-content: center;
@@ -68,7 +66,7 @@
   }
 
   p {
-    color: $standard-font-colour;
+    color: var(--text-secondary);
     /* Lighter text color for content */
     font-size: $standard-font-size;
     /* Smaller font size for content */

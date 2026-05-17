@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: space-between;
   margin: 14px 7px;
-  border-top: $line-width solid $border-color;
+  border-top: $line-width solid var(--border-subtle);
 
   @media (max-width: calc(4 * $min-card-width)) {
     flex-direction: column;
@@ -22,7 +22,7 @@
   .name-title, .left-container {
     @media (max-width: calc(4 * $min-card-width)) {
       text-align: center;
-      width: 100%; // Adjust width for mobile view
+      width: 100%;
     }
   }
 
@@ -31,28 +31,28 @@
   }
 
   .design-info {
-    color: $border-color;
+    color: var(--text-muted);
     font-size: $smaller-font-size;
     margin: 10px;
 
     @media (max-width: calc(4 * $min-card-width)) {
       text-align: center;
-      width: auto; // Adjust width for mobile view
+      width: auto;
     }
     a.link {
-      color: blue; // Hyperlink color
-      text-decoration: underline; // Underline to denote it's clickable
-      cursor: pointer; // Cursor changes to pointer on hover
+      color: var(--link);
+      text-decoration: underline;
+      cursor: pointer;
 
       &:hover {
-        color: darkblue; // Darker color on hover for visual feedback
-        text-decoration: none; // Optional: removes underline on hover for a different effect
+        color: var(--link-hover);
+        text-decoration: none;
       }
 
       &:focus,
       &:active {
-        outline: none; // Removes the default focus outline
-        color: purple; // Color change to indicate active/focus state
+        outline: none;
+        color: var(--link-active);
       }
     }
   }

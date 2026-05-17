@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useContext, useMemo, useState } from "react";
 import VerifiedIcon from '@mui/icons-material/Verified';
 
 import "./Skills.scss";
@@ -58,7 +58,7 @@ const skills = [
     skill: "Microsoft Power BI",
   },
   {
-    id: 12,
+    id: 10,
     skill: "Autodesk Revit  ",
     certified: true,
     link: "https://www.linkedin.com/in/favourdo/details/certifications/1707000019275/single-media-viewer/?profileId=ACoAACmhpvMB9MywAsViJ_T-Bq76dnz12-1Zx6c",
@@ -77,50 +77,126 @@ const skills = [
   },
 ];
 
+const DEFAULT_FILTERS = { certified: false, completed: false };
+const SkillsFilterContext = createContext({
+  filters: DEFAULT_FILTERS,
+  toggle: () => {},
+});
+
+export function SkillsFilterProvider({ children }) {
+  const [filters, setFilters] = useState(DEFAULT_FILTERS);
+  const value = useMemo(
+    () => ({
+      filters,
+      toggle: (key) =>
+        setFilters((prev) => ({ ...prev, [key]: !prev[key] })),
+    }),
+    [filters]
+  );
+  return (
+    <SkillsFilterContext.Provider value={value}>
+      {children}
+    </SkillsFilterContext.Provider>
+  );
+}
+
+function useSkillsFilter() {
+  return useContext(SkillsFilterContext);
+}
+
+export function SkillsFilterControls() {
+  const { filters, toggle } = useSkillsFilter();
+
+  const buttons = [
+    {
+      key: "certified",
+      modifier: "certified",
+      label: "Filter by certified",
+    },
+    {
+      key: "completed",
+      modifier: "completed",
+      label: "Filter by completed course",
+    },
+  ];
+
+  return (
+    <div className="skills-filter-controls" role="group" aria-label="Filter skills">
+      {buttons.map(({ key, modifier, label }) => {
+        const isActive = filters[key];
+        return (
+          <button
+            key={key}
+            type="button"
+            className={`skills-filter-button skills-filter-button--${modifier}${isActive ? " is-active" : ""}`}
+            onClick={() => toggle(key)}
+            aria-pressed={isActive}
+            aria-label={label}
+            title={label}
+          >
+            <VerifiedIcon fontSize="inherit" />
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function SkillsCard() {
-	return (
-		<div className="skills-container">
-			<ul className="skills-list">
-				{skills.map((item) => (
-					<li key={item.id} className="skills-item">
-						<span className="skills-title">{item.skill}</span>
-						{item.certified && item.link && (
-							<a
-								href={item.link}
-								target="_blank"
-								rel="noopener noreferrer"
-								className="certified-section"
-							>
-								<span className="certified-label">CERTIFIED</span>
-								<VerifiedIcon className="certified-icon" />
-							</a>
-						)}
-						{item.certified && !item.link && (
-							<div className="certified-section non-clickable">
-								<span className="certified-label">CERTIFIED</span>
-								<VerifiedIcon className="certified-icon" />
-							</div>
-						)}
-						{item.completed && item.link && (
-							<a
-								href={item.link}
-								target="_blank"
-								rel="noopener noreferrer"
-								className="completed-section"
-							>
-								<span className="completed-label">COURSE</span>
-								<VerifiedIcon className="completed-icon" />
-							</a>
-						)}
-						{item.completed && !item.link && (
-							<div className="completed-section non-clickable">
-								<span className="completed-label">COURSE</span>
-								<VerifiedIcon className="completed-icon" />
-							</div>
-						)}
-					</li>
-				))}
-			</ul>
-		</div>
-	);
+  const { filters } = useSkillsFilter();
+  const anyFilterActive = filters.certified || filters.completed;
+
+  const visibleSkills = anyFilterActive
+    ? skills.filter(
+        (item) =>
+          (filters.certified && item.certified) ||
+          (filters.completed && item.completed)
+      )
+    : skills;
+
+  return (
+    <div className="skills-container">
+      <ul className="skills-list">
+        {visibleSkills.map((item) => (
+          <li key={item.id} className="skills-item">
+            <span className="skills-title">{item.skill}</span>
+            {item.certified && item.link && (
+              <a
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="certified-section"
+              >
+                <span className="certified-label">CERTIFIED</span>
+                <VerifiedIcon className="certified-icon" />
+              </a>
+            )}
+            {item.certified && !item.link && (
+              <div className="certified-section non-clickable">
+                <span className="certified-label">CERTIFIED</span>
+                <VerifiedIcon className="certified-icon" />
+              </div>
+            )}
+            {item.completed && item.link && (
+              <a
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="completed-section"
+              >
+                <span className="completed-label">COURSE</span>
+                <VerifiedIcon className="completed-icon" />
+              </a>
+            )}
+            {item.completed && !item.link && (
+              <div className="completed-section non-clickable">
+                <span className="completed-label">COURSE</span>
+                <VerifiedIcon className="completed-icon" />
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }

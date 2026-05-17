@@ -10,18 +10,16 @@
 
   .text-container {
     max-width: 80%;
-      
-    background-color: white;
-    box-shadow: 2px 5px 3px rgba(0, 0, 0);
     margin: 3px 10px;
-    border: $line-width solid black;
+    background-color: var(--bg-base);
+    border: $line-width solid var(--border-subtle);
     border-radius: 8px;
 
     .status-text {
-      
+
       text-align: center;
       font-size: $standard-font-size;
-      color: $border-color;
+      color: var(--text-primary);
       padding: 5px;
     }
   }

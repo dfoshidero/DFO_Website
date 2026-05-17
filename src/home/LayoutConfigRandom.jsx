@@ -9,7 +9,10 @@ import StatusCard from "../content/status/Status";
 import PortfolioCard from "../content/portfolio/Portfolio";
 import ContactCard from "../content/contact/Contact";
 import RecommendationCard from "../content/recommendations/Recommendation";
-import SkillsCard from "../content/expertise/Skills";
+import SkillsCard, {
+  SkillsFilterControls,
+  SkillsFilterProvider,
+} from "../content/expertise/Skills";
 
 import StatusCircle from "../content/status/StatusCircle";
 import SeeMore from "../components/seemore-button/SeeMore";
@@ -40,7 +43,7 @@ const cardTypes = {
     { columns: 2, rows: 1 },
     { columns: 1, rows: 1 },
   ],
-  "TECHNICAL SKILLS": [
+  SKILLS: [
     { columns: 1, rows: 2 },
     { columns: 1, rows: 1 },
   ],
@@ -253,7 +256,7 @@ export const generateLayoutComponents = (gridColumns, gridRows) => {
 				//lightgreen
 				//orange
 				//red
-				extraContent = <StatusCircle color="red" />;
+				extraContent = <StatusCircle color="var(--status-busy)" />;
 				break;
 			case "RECOMMENDATIONS":
 				extraContent = (
@@ -286,6 +289,9 @@ export const generateLayoutComponents = (gridColumns, gridRows) => {
 					</div>
 				);
 				break;
+			case "SKILLS":
+				extraContent = <SkillsFilterControls />;
+				break;
 			default:
 				extraContent = null;
 		}
@@ -293,30 +299,32 @@ export const generateLayoutComponents = (gridColumns, gridRows) => {
 		const shouldScroll = allowAutoScroll.includes(config.cardType);
 
 		return () => (
-			<Card
-				key={index} // Add a unique key for each card
-				title={config.cardType.toUpperCase()}
-				extra={extraContent}
-				className={cardClasses}
-				style={{
-					gridColumn: `span ${config.size.columns}`,
-					gridRow: `span ${config.size.rows}`,
-					// Apply the animation delay
-					animationDelay: `${animationDelay}s`,
-				}}
-				scroll={shouldScroll}
-			>
-				{/* Render card content based on cardType */}
-				{config.cardType === "EXPERIENCE" && <ExperienceCard />}
-				{config.cardType === "EDUCATION & CERTIFICATIONS" && <EducationCard />}
-				{config.cardType === "TIMEZONE" && <AnalogClock />}
-				{config.cardType === "PROJECTS" && <ProjectCard />}
-				{config.cardType === "STATUS" && <StatusCard />}
-				{config.cardType === "MY WORK(S)" && <PortfolioCard />}
-				{config.cardType === "CONNECT" && <ContactCard />}
-				{config.cardType === "RECOMMENDATIONS" && <RecommendationCard />}
-				{config.cardType === "TECHNICAL SKILLS" && <SkillsCard />}
-			</Card>
+			<SkillsFilterProvider>
+				<Card
+					key={index} // Add a unique key for each card
+					title={config.cardType.toUpperCase()}
+					extra={extraContent}
+					className={cardClasses}
+					style={{
+						gridColumn: `span ${config.size.columns}`,
+						gridRow: `span ${config.size.rows}`,
+						// Apply the animation delay
+						animationDelay: `${animationDelay}s`,
+					}}
+					scroll={shouldScroll}
+				>
+					{/* Render card content based on cardType */}
+					{config.cardType === "EXPERIENCE" && <ExperienceCard />}
+					{config.cardType === "EDUCATION & CERTIFICATIONS" && <EducationCard />}
+					{config.cardType === "TIMEZONE" && <AnalogClock />}
+					{config.cardType === "PROJECTS" && <ProjectCard />}
+					{config.cardType === "STATUS" && <StatusCard />}
+					{config.cardType === "MY WORK(S)" && <PortfolioCard />}
+					{config.cardType === "CONNECT" && <ContactCard />}
+					{config.cardType === "RECOMMENDATIONS" && <RecommendationCard />}
+					{config.cardType === "SKILLS" && <SkillsCard />}
+				</Card>
+			</SkillsFilterProvider>
 		);
 	});
 };

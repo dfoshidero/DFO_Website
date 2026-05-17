@@ -21,7 +21,7 @@
         list-style-type: none;
 
         &:hover:not(:has(.view-button:hover)) {
-            background-color: $tertiary-background-color;
+            background-color: var(--accent-soft);
         }
 
         .project-card-link {
@@ -53,14 +53,14 @@
             grid-column: 1;
             grid-row: 2;
             justify-self: center;
-            background-color: $secondary-background-color;
-            color: $primary-text-color;
-            border: $line-width solid $border-color;
+            background-color: var(--bg-surface);
+            color: var(--text-primary);
+            border: $line-width solid var(--border-subtle);
             border-radius: 14px;
             padding: 0px 10px;
             cursor: pointer;
             transition: background-color 0.2s, box-shadow 0.3s, opacity 0.3s;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-sm);
             opacity: 0.6;
             font-size: $standard-font-size;
             text-align: center;
@@ -70,8 +70,10 @@
             text-decoration: none;
 
             &:hover {
-                background-color: $tertiary-background-color;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+                background-color: var(--accent);
+                color: var(--text-on-accent);
+                border-color: var(--accent);
+                box-shadow: var(--shadow-md);
                 opacity: 1;
             }
 
@@ -95,24 +97,27 @@
 
             .project-title {
                 font-size: $standard-font-size;
-                color: $important-font-colour;
+                color: var(--text-primary);
             }
 
             .project-description {
                 font-size: $standard-font-size;
-                color: $standard-font-colour;
+                color: var(--text-secondary);
             }
 
             .project-stack {
                 font-size: $standard-font-size;
-                color: $standard-font-colour;
+                color: var(--text-secondary);
                 margin-top: 5px;
             }
         }
     }
 
     .project-item {
-        background-color: darken($secondary-background-color, 10%);
+        background-color: var(--bg-surface-elevated);
+        border-radius: 10px;
+        margin: 10px;
+        padding: 12px;
     }
 
     .more-info-text {
@@ -120,7 +125,7 @@
         width: 100%;
         > span {
             font-size: $standard-font-size;
-            color: $standard-font-colour;
+            color: var(--text-muted);
         }
     }
 

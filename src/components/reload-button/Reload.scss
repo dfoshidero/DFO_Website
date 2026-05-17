@@ -1,27 +1,27 @@
-/* SeeMore.scss */
+/* Reload.scss */
 
 @import '../../utils/GlobalStyles.scss';
 
 .reload-button {
-    background-color: transparent; // Same as card background
-    color: $standard-font-colour; // Primary text color for contrast
-    border: none; // Remove border
+    background-color: transparent;
+    color: var(--text-secondary);
+    border: none;
     border-radius: 14px;
     padding: 3px 8px;
     font-size: $standard-font-size * 1.1;
     cursor: pointer;
-    transition: transform 0.3s, opacity 0.3s;
+    transition: transform 0.3s, opacity 0.3s, color 0.3s;
     opacity: 0.6;
     width: 110%;
     white-space: nowrap;
 
     display: flex;
-    align-items: center; // Align items in the center vertically
-    justify-content: center; // Center content horizontally 
+    align-items: center;
+    justify-content: center;
 
     &:hover {
-        opacity: 1; // Full opacity on hover
-        color: $important-font-colour;
+        opacity: 1;
+        color: var(--text-primary);
         text-decoration: none;
     }
 }

@@ -3,39 +3,39 @@
 .education-container {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; // Aligns items to the start (top) of the container
-    width: 100%; // Full width
-    height: 100%; // Full height to occupy the card
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
 }
 
 .education-list {
     padding: 0;
     margin: 0;
     list-style-type: none;
-    width: 100%; // Full width of the container
+    width: 100%;
 }
 
 .education-item {
     padding-top: 4px;
     padding-bottom: 10px;
     margin: 0px 10px;
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid var(--border-subtle);
     transition: background-color 0.2s;
 
     &.degree-item {
         border-radius: 4px;
-        background-color: black; // Choose a distinct color
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); // Optional: add a shadow for emphasis
-        border-left: 4px solid purple; // Optional: add a highlight border
+        background-color: var(--bg-surface-elevated);
+        box-shadow: var(--shadow-sm);
+        border-left: 4px solid var(--accent-strip-1);
         margin: 10px 10px;
         padding: 5px 10px;
     }
 
     &.a-levels-item {
         border-radius: 4px;
-        background-color: black; // Choose a distinct color
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); // Optional: add a shadow for emphasis
-        border-left: 4px solid orange; // Optional: add a highlight border
+        background-color: var(--bg-surface-elevated);
+        box-shadow: var(--shadow-sm);
+        border-left: 4px solid var(--accent-strip-2);
         margin: 10px 10px;
         padding: 5px 10px;
     }
@@ -43,40 +43,40 @@
     .education-title {
         font-size: $standard-font-size;
         font-weight: $standard-font-weight;
-        color: $important-font-colour;
+        color: var(--text-primary);
     }
 
     .education-grad,
     .education-location {
-        color: $standard-font-colour;
-        font-size: $standard-font-size; // Smaller font size for the short description
-        padding-top: 4px; // Space between title and short description 
+        color: var(--text-secondary);
+        font-size: $standard-font-size;
+        padding-top: 4px;
     }
 }
 
 
 .certification-button {
-    background-color: $secondary-background-color;
-    color: $primary-text-color;
-    border: $line-width solid $border-color;
+    background-color: var(--bg-surface-elevated);
+    color: var(--text-primary);
+    border: $line-width solid var(--border-subtle);
     border-radius: 14px;
     padding: 3px 0px;
     margin: 3% 0px 0px 0px;
     font-size: $standard-font-size;
     cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s, background-color 0.3s;
+    box-shadow: var(--shadow-sm);
     opacity: 0.6;
     text-wrap: nowrap;
     width: 100px;
-    
+
     display: flex;
     justify-content: center;
     align-items: center;
 
     &:hover {
-        background-color: $tertiary-background-color;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+        background-color: var(--accent-soft);
+        box-shadow: var(--shadow-md);
         opacity: 1;
         text-decoration: none;
     }
@@ -86,7 +86,7 @@
         align-items: center;
         justify-content: center;
         text-decoration: none;
-        color: inherit; // Ensure link color matches the button text color
+        color: inherit;
 
         .button-content {
             display: flex;
@@ -100,5 +100,5 @@
 }
 
 .MuiSvgIcon-root {
-    font-size: $standard-font-size * 1.1 !important; // The !important is to override MUI default styles if necessary
+    font-size: $standard-font-size * 1.1 !important;
   }

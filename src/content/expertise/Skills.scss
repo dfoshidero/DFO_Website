@@ -22,30 +22,29 @@
     padding-top: 4px;
     padding-bottom: 10px;
     margin: 0px 10px;
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid var(--border-subtle);
 
     .skills-title {
         font-size: $standard-font-size;
         font-weight: $standard-font-weight;
-        color: $important-font-colour;
-        margin-bottom: 4px; // Space between title and certified icon
+        color: var(--text-primary);
+        margin-bottom: 4px;
     }
 
     .certified-section {
         display: flex;
         align-items: center;
         cursor: pointer;
-        color: gold;
+        color: var(--badge-certified);
         font-size: $standard-font-size;
         position: relative;
         margin-right: 4px;
-        text-shadow: 0 0 20px gold; // Adds glow to the text
+        text-shadow: 0 0 20px var(--badge-certified);
 
         &:hover {
-            text-shadow: 0 0 50px gold;
+            text-shadow: 0 0 50px var(--badge-certified);
         }
-    
-        // Add this to override the cursor for non-clickable items
+
         &.non-clickable {
             cursor: default;
         }
@@ -63,17 +62,16 @@
         display: flex;
         align-items: center;
         cursor: pointer;
-        color: violet;
+        color: var(--badge-completed);
         font-size: $standard-font-size;
         position: relative;
         margin-right: 4px;
-        text-shadow: 0 0 20px violet; // Adds glow to the text
+        text-shadow: 0 0 20px var(--badge-completed);
 
         &:hover {
-            text-shadow: 0 0 50px violet;
+            text-shadow: 0 0 50px var(--badge-completed);
         }
-    
-        // Add this to override the cursor for non-clickable items
+
         &.non-clickable {
             cursor: default;
         }
@@ -87,3 +85,61 @@
         }
     }
 }
+
+.skills-filter-controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.skills-filter-button {
+    width: 22px;
+    height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: transparent;
+    border: $line-width solid var(--border-subtle);
+    border-radius: 6px;
+    cursor: pointer;
+    opacity: 0.45;
+    transition: opacity 0.2s, background-color 0.2s, border-color 0.2s, transform 0.2s;
+
+    .MuiSvgIcon-root {
+        font-size: $standard-font-size * 1.1 !important;
+    }
+
+    &:hover {
+        opacity: 0.85;
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--focus-ring);
+        outline-offset: 2px;
+    }
+
+    &--certified {
+        color: var(--badge-certified);
+    }
+
+    &--completed {
+        color: var(--badge-completed);
+    }
+
+    &.is-active {
+        opacity: 1;
+        transform: translateY(-1px);
+    }
+
+    &--certified.is-active {
+        background-color: var(--badge-certified-soft);
+        border-color: var(--badge-certified);
+    }
+
+    &--completed.is-active {
+        background-color: var(--badge-completed-soft);
+        border-color: var(--badge-completed);
+    }
+}
+

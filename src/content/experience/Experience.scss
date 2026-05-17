@@ -5,10 +5,11 @@
   flex-direction: row;
   width: 800px;
   height: 60vh;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-  border: $line-width solid $border-color;
+  box-shadow: var(--shadow-lg);
+  border: $line-width solid var(--border-subtle);
   border-radius: 10px;
-  color: $border-color; // Ensure text color is readable
+  color: var(--text-primary);
+  background-color: var(--bg-surface);
 
   @media (max-width: calc(4 * $min-card-width)) {
     flex-direction: column;
@@ -17,11 +18,11 @@
 
   .experience-list-modal {
     flex-basis: 30%;
-    border-right: 1px solid $border-color;
+    border-right: 1px solid var(--border-subtle);
     overflow-y: auto;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    background-color: rgba(245, 245, 245, 0.75);
+    background-color: var(--bg-surface-elevated);
     max-height: 60vh;
     padding: 20px 0px;
 
@@ -38,27 +39,24 @@
       font: inherit;
       text-align: left;
       cursor: pointer;
-      transition: background-color 0.2s;
+      transition: background-color 0.2s, color 0.2s;
       font-size: $standard-font-size;
       line-height: 1.5;
-      color: inherit;
+      color: var(--text-secondary);
 
       &:hover {
-        background-color: lighten(
-          $tertiary-background-color,
-          20%
-        );
-        color: $important-font-colour;
+        background-color: var(--accent-soft);
+        color: var(--text-primary);
       }
 
       &.active {
-        background-color: $tertiary-background-color;
-        color: $important-font-colour;
+        background-color: var(--accent);
+        color: var(--text-on-accent);
       }
     }
 
     .experience-item-modal:not(:last-child) {
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid var(--border-subtle);
 }
   }
 
@@ -70,9 +68,9 @@
     align-items: center;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.93);
+    background-color: var(--bg-surface);
     width: 70%;
-    overflow-y: auto; // Enable scrolling for the detail section
+    overflow-y: auto;
 
     @media (max-width: calc(4 * $min-card-width)) {
       flex-direction: column;
@@ -83,11 +81,12 @@
     }
 
     a {
-      color: $standard-font-colour; // Set the color to match your standard text color
-      text-decoration: underline; // Underline the link
+      color: var(--link);
+      text-decoration: underline;
 
       &:hover {
-        text-decoration: none; // Optionally, remove underline on hover for a change effect
+        color: var(--link-hover);
+        text-decoration: none;
       }
     }
 
@@ -105,6 +104,9 @@
         width: 75px;
         height: auto;
         margin-right: 20px;
+        padding: 4px;
+        border-radius: 6px;
+        background-color: var(--logo-chip-bg);
 
         @media (max-width: calc(4 * $min-card-width)) {
           margin-right: 0;
@@ -120,13 +122,13 @@
         }
 
         h2 {
-          color: $border-color;
+          color: var(--text-primary);
           margin: 5px 0;
           font-size: calc($standard-font-size * 1.5);
         }
 
         h3 {
-          color: $border-color;
+          color: var(--text-secondary);
           margin: 5px 0;
           font-size: calc($standard-font-size * 1.2);
         }
@@ -134,7 +136,7 @@
     }
 
     p {
-      color: $standard-font-colour;
+      color: var(--text-secondary);
       font-size: $standard-font-size;
       margin: 10px 0;
 
@@ -143,12 +145,11 @@
       }
     }
 
-    // For HTML content inside longdesc
     ul {
       list-style-type: disc;
       padding-left: 20px;
       font-size: $standard-font-size;
-      color: $standard-font-colour;
+      color: var(--text-secondary);
       margin: 10px 0;
     }
 
@@ -161,7 +162,7 @@
       padding-bottom: 10px;
       font-size: $standard-font-size;
       font-weight: bold;
-      color: rgb(99, 99, 99);
+      color: var(--text-secondary);
 
       @media (max-width: calc(4 * $min-card-width)) {
         text-align: center;
@@ -173,21 +174,21 @@
 .experience-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; // Aligns items to the start (top) of the container
-  width: 100%; // Full width
-  height: 100%; // Full height to occupy the card
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
 }
 
 .experience-list {
   padding: 0;
   margin: 0;
   list-style-type: none;
-  width: 100%; // Full width of the container
+  width: 100%;
 }
 
 .experience-item {
   margin: 0px 10px;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid var(--border-subtle);
 
   &:has(.experience-item-button:hover) {
     border-bottom-color: transparent;
@@ -207,12 +208,12 @@
     color: inherit;
 
     &:hover {
-      background-color: $tertiary-background-color;
+      background-color: var(--accent-soft);
 
       .experience-title,
       .experience-shortdesc,
       .experience-location {
-        color: $important-font-colour;
+        color: var(--text-primary);
       }
     }
   }
@@ -220,13 +221,13 @@
   .experience-title {
     font-size: $standard-font-size;
     font-weight: $standard-font-weight;
-    color: $important-font-colour;
+    color: var(--text-primary);
   }
 
   .experience-shortdesc,
   .experience-location {
-    color: $standard-font-colour;
-    font-size: $standard-font-size; // Smaller font size for the short description
-    padding-top: 4px; // Space between title and short description
+    color: var(--text-secondary);
+    font-size: $standard-font-size;
+    padding-top: 4px;
   }
 }

@@ -1,0 +1,120 @@
+// theme.scss
+//
+// Single source of truth for every color, shadow, and visual token used in
+// the app. Tokens are exposed as CSS custom properties on :root so they can
+// switch at runtime by toggling the `data-theme` attribute on the <html>
+// element. Feature SCSS should never reference raw hex / rgb / named colors,
+// only the var(--token) names defined below.
+
+:root,
+:root[data-theme="dark"] {
+  // Backgrounds
+  --bg-base: #0b1014;
+  --bg-surface: #131820;
+  --bg-surface-elevated: #1a2029;
+  --bg-surface-strong: #05080b;
+  --bg-overlay: rgba(0, 0, 0, 0.65);
+
+  // Borders
+  --border-subtle: #232a34;
+  --border-strong: #2f3845;
+
+  // Text
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
+  --text-on-accent: #04201d;
+  --text-on-strong: #f1f5f9;
+
+  // Accents
+  --accent: #2dd4bf;
+  --accent-hover: #5eead4;
+  --accent-soft: rgba(45, 212, 191, 0.15);
+  --accent-glow: rgba(45, 212, 191, 0.55);
+  --accent-warm: #f87171;
+
+  // Links / focus
+  --link: var(--accent);
+  --link-hover: var(--accent-hover);
+  --link-active: #99f6e4;
+  --focus-ring: #5eead4;
+
+  // Semantic badges / strips / status
+  --badge-certified: #fbbf24;
+  --badge-certified-soft: rgba(251, 191, 36, 0.18);
+  --badge-completed: #a78bfa;
+  --badge-completed-soft: rgba(167, 139, 250, 0.18);
+  --accent-strip-1: var(--accent);
+  --accent-strip-2: #fbbf24;
+  --status-busy: #f87171;
+  --status-available: #34d399;
+
+  // Shadows
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.6);
+  --shadow-accent: 0 0 14px var(--accent-glow);
+
+  // Scrollbar
+  --scrollbar-thumb: var(--border-strong);
+  --scrollbar-thumb-hover: var(--accent);
+
+  // Logo chip — white tile behind dark-mark logos so they remain visible
+  --logo-chip-bg: #ffffff;
+}
+
+:root[data-theme="light"] {
+  // Backgrounds — warm cream surfaces sitting on the beige body
+  --bg-base: #f5ebe0;
+  --bg-surface: #fffaf3;
+  --bg-surface-elevated: #efe3d2;
+  --bg-surface-strong: #2a2118;
+  --bg-overlay: rgba(42, 33, 24, 0.45);
+
+  // Borders — warm tan
+  --border-subtle: #e2d5bf;
+  --border-strong: #b8a78c;
+
+  // Text — warm near-black + brown grays (drop cool slate)
+  --text-primary: #2a2118;
+  --text-secondary: #5e5042;
+  --text-muted: #9c8b78;
+  --text-on-accent: #ffffff;
+  --text-on-strong: #fffaf3;
+
+  // Accent — grounded teal, the single cool note against warm neutrals
+  --accent: #0e8f80;
+  --accent-hover: #0a6f63;
+  --accent-soft: rgba(14, 143, 128, 0.12);
+  --accent-glow: rgba(14, 143, 128, 0.4);
+  --accent-warm: #c75c34;
+
+  // Links / focus
+  --link: var(--accent);
+  --link-hover: var(--accent-hover);
+  --link-active: #0a5c52;
+  --focus-ring: #38b2a3;
+
+  // Earthy semantics — badges / strips / status
+  --badge-certified: #b8651a;
+  --badge-certified-soft: rgba(184, 101, 26, 0.14);
+  --badge-completed: #6b4f8f;
+  --badge-completed-soft: rgba(107, 79, 143, 0.14);
+  --accent-strip-1: var(--accent);
+  --accent-strip-2: #b8651a;
+  --status-busy: #b8442c;
+  --status-available: #5a8a4e;
+
+  // Shadows — warm-biased grey
+  --shadow-sm: 0 1px 2px rgba(42, 33, 24, 0.06);
+  --shadow-md: 0 4px 12px rgba(42, 33, 24, 0.10);
+  --shadow-lg: 0 12px 28px rgba(42, 33, 24, 0.16);
+  --shadow-accent: 0 0 12px var(--accent-glow);
+
+  // Scrollbar
+  --scrollbar-thumb: var(--border-strong);
+  --scrollbar-thumb-hover: var(--accent);
+
+  // Logo chip — no tile needed in light mode
+  --logo-chip-bg: transparent;
+}
