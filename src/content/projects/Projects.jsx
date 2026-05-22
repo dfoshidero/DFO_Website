@@ -36,7 +36,7 @@ const projects = [
       "ECO is an ML-based tool which predicts embodied carbon from textual descriptions of architectural designs, integrating sustainability into early design processes.",
     stack: "Python (Scikit-learn, spaCy, NLTK), Flask, Docker, React.js",
     imageUrl: ecoImage,
-    projectUrl: "https://github.com/dfoshidero/ECO",
+    projectUrl: "https://www.talkingcarbon.com",
     videoUrl: "https://www.youtube.com/watch?v=3kOdSKeSc2k",
   },
   {
