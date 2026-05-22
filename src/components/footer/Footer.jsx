@@ -9,32 +9,20 @@ const formattedLastUpdated = new Date(buildInfo.lastUpdated).toLocaleDateString(
 });
 
 const Footer = ({ onRandomizeClick }) => {
+    const currentYear = new Date().getFullYear();
+
     return (
       <div className="footer">
         <div className="name-title">
-          <div>
-            <span className="design-info">
-              Last updated: {formattedLastUpdated}
-            </span>
-          </div>
+          <span className="design-info">
+            &copy; {currentYear} Daniel Favour Oshidero. All rights reserved.
+          </span>
         </div>
 
         <div className="left-container">
-          <div>
-            <span className="design-info">
-              Original Design Concept by
-              <span> </span>
-              <a
-                className="link"
-                href="https://lucasporterbakker.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Lukas Porter Bakker
-              </a>
-              . | Adapted & Re-Developed for DFO by DFO.
-            </span>
-          </div>
+          <span className="design-info">
+            Designed &amp; built with care. <span className="dot">&middot;</span> Last updated {formattedLastUpdated}.
+          </span>
         </div>
       </div>
     );
