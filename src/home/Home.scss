@@ -41,6 +41,8 @@
 }
 
 .page-framer {
+    --page-scale: 1;
+
     animation: fadeInAnimation ease 2s;
     animation-delay: 0s;
     animation-iteration-count: 1;
@@ -49,7 +51,13 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(var(--page-scale));
+    transform-origin: center center;
+    transition: transform 120ms ease-out;
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+    }
 
     height: 100vh;
     display: flex;

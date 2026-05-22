@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState, useCallback, useLayoutEffect } from 'react';
 import Header from "../components/header/Header";
 import { generateLayout, LayoutCard } from './LayoutConfigRandom';
 import './Home.scss';
@@ -7,11 +7,15 @@ import ScrollIndicator from '../components/scrollIndicator/scrollIndicator';
 import Footer from '../components/footer/Footer';
 
 const MIN_CARD_WIDTH = 200;
+const MIN_SCALE = 0.85;
 
 let sessionInitialLayout = null;
 
 function Home() {
   const containerRef = useRef(null);
+  const pageFramerRef = useRef(null);
+  const pageCenteringRef = useRef(null);
+  const naturalSizeRef = useRef(null);
 
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
 
@@ -62,10 +66,71 @@ function Home() {
     setLayout(generateLayout(gridColumns, gridRows));
   }, [gridColumns, gridRows]);
 
+  const updatePageScale = useCallback((remeasure = false) => {
+    const framer = pageFramerRef.current;
+    const centering = pageCenteringRef.current;
+    if (!framer || !centering) return;
+
+    // Only apply scaling on the desktop (6x4) layout. Intermediate (4x6) and
+    // mobile (2x12) layouts have their own reflow, so let them lay out at 1x.
+    if (isFinalLayout || isIntermediateLayout) {
+      naturalSizeRef.current = null;
+      framer.style.setProperty('--page-scale', '1');
+      return;
+    }
+
+    if (remeasure || !naturalSizeRef.current) {
+      const currentScaleRaw = getComputedStyle(framer)
+        .getPropertyValue('--page-scale')
+        .trim();
+      const currentScale = parseFloat(currentScaleRaw) || 1;
+
+      const rect = centering.getBoundingClientRect();
+      const naturalWidth = rect.width / currentScale;
+      const naturalHeight = rect.height / currentScale;
+
+      if (naturalWidth <= 0 || naturalHeight <= 0) return;
+
+      naturalSizeRef.current = { width: naturalWidth, height: naturalHeight };
+    }
+
+    const { width: naturalWidth, height: naturalHeight } = naturalSizeRef.current;
+
+    const fitW = window.innerWidth / naturalWidth;
+    const fitH = window.innerHeight / naturalHeight;
+    const scale = Math.max(MIN_SCALE, Math.min(1, fitW, fitH));
+
+    framer.style.setProperty('--page-scale', String(scale));
+  }, [isFinalLayout, isIntermediateLayout]);
+
+  useLayoutEffect(() => {
+    naturalSizeRef.current = null;
+    updatePageScale(true);
+
+    const handleResize = () => {
+      naturalSizeRef.current = null;
+      updatePageScale(true);
+    };
+    window.addEventListener('resize', handleResize);
+
+    let cancelled = false;
+    document.fonts.ready.then(() => {
+      if (!cancelled) {
+        naturalSizeRef.current = null;
+        updatePageScale(true);
+      }
+    });
+
+    return () => {
+      cancelled = true;
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [updatePageScale, gridColumns, gridRows]);
+
   return (
     <div>
-      <div className="page-framer">
-        <div className="page-centering">
+      <div className="page-framer" ref={pageFramerRef}>
+        <div className="page-centering" ref={pageCenteringRef}>
           {showScrollIndicator && <ScrollIndicator />}
           <Header onRandomizeClick={handleRandomize} />
           <div className="main-content-framer" ref={containerRef}>
