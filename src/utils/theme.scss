@@ -54,6 +54,8 @@
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
   --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.6);
   --shadow-accent: 0 0 14px var(--accent-glow);
+  --icon-shadow: rgba(0, 0, 0, 0.3);
+  --icon-shadow-strong: rgba(0, 0, 0, 0.5);
 
   // Scrollbar
   --scrollbar-thumb: var(--border-strong);
@@ -110,6 +112,8 @@
   --shadow-md: 0 4px 12px rgba(42, 33, 24, 0.10);
   --shadow-lg: 0 12px 28px rgba(42, 33, 24, 0.16);
   --shadow-accent: 0 0 12px var(--accent-glow);
+  --icon-shadow: rgba(42, 33, 24, 0.3);
+  --icon-shadow-strong: rgba(42, 33, 24, 0.4);
 
   // Scrollbar
   --scrollbar-thumb: var(--border-strong);

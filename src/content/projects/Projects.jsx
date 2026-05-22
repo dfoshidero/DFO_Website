@@ -4,8 +4,8 @@ import './Projects.scss';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 
 import bloomImage from '../../assets/images/project-icons/bloom.png';
-import ecoImage from "../../assets/images/project-icons/eco.svg";
-import chip8Image from '../../assets/images/project-icons/chip-8.png';
+import ecoImage from "../../assets/images/project-icons/eco.png";
+import chip8Image from '../../assets/images/project-icons/chip-8.svg';
 import personalWebsite from '../../assets/images/project-icons/personal-website.png';
 import deepRlImage from '../../assets/images/project-icons/deep-rl.svg';
 

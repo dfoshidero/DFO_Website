@@ -47,6 +47,16 @@
             max-height: 80%;
             border-radius: 30%;
             object-fit: contain;
+            filter: drop-shadow(0 4px 3px var(--icon-shadow))
+                    drop-shadow(0 1px 1px var(--icon-shadow-strong));
+            transition: filter 0.25s ease, transform 0.25s ease;
+            will-change: transform, filter;
+        }
+
+        &:hover .project-image {
+            filter: drop-shadow(0 8px 5px var(--icon-shadow))
+                    drop-shadow(0 3px 2px var(--icon-shadow-strong));
+            transform: translateY(-2px);
         }
 
         .view-button {
