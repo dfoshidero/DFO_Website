@@ -32,7 +32,6 @@ const cardTypes = {
   ],
   "MY WORK(S)": [
     { columns: 2, rows: 2 },
-    { columns: 2, rows: 1 },
   ],
   "EDUCATION & CERTIFICATIONS": [
     { columns: 2, rows: 1 },

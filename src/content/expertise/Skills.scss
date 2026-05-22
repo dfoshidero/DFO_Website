@@ -89,10 +89,11 @@
 .skills-filter-controls {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
 }
 
 .skills-filter-button {
+    position: relative;
     width: 22px;
     height: 22px;
     display: inline-flex;
@@ -105,6 +106,12 @@
     cursor: pointer;
     opacity: 0.45;
     transition: opacity 0.2s, background-color 0.2s, border-color 0.2s, transform 0.2s;
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: -5px;
+    }
 
     .MuiSvgIcon-root {
         font-size: $standard-font-size * 1.1 !important;

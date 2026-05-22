@@ -251,6 +251,10 @@
   margin: 0px 10px;
   border-bottom: 1px solid var(--border-subtle);
 
+  & + .experience-item {
+    margin-top: 2px;
+  }
+
   &:has(.experience-item-button:hover) {
     border-bottom-color: transparent;
   }
@@ -259,7 +263,7 @@
     display: block;
     width: 100%;
     margin: 0;
-    padding: 4px 10px 10px;
+    padding: 10px 10px 12px;
     border: none;
     background: transparent;
     font: inherit;

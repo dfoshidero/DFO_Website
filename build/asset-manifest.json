@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3a3fc466.css",
+    "main.js": "/static/js/main.c7c20cf9.js",
+    "static/media/bloom.png": "/static/media/bloom.aba2a3f04eaf0c6b5237.png",
+    "static/media/eco.png": "/static/media/eco.2bbd4b07d35ffd66e29d.png",
+    "static/media/personal-website.png": "/static/media/personal-website.414b12c8ae73a94cdfec.png",
+    "static/media/university_of_bath.png": "/static/media/university_of_bath.8741eac41f08a0bf7edc.png",
+    "static/media/Quicksand-Medium.ttf": "/static/media/Quicksand-Medium.9fd398f86ce80d968762.ttf",
+    "static/media/Quicksand-Regular.ttf": "/static/media/Quicksand-Regular.67e7ce07307c681fb49d.ttf",
+    "static/media/Quicksand-SemiBold.ttf": "/static/media/Quicksand-SemiBold.6018f97203d39e0dfc6d.ttf",
+    "static/media/Quicksand-Light.ttf": "/static/media/Quicksand-Light.20523381a742ca1d4a26.ttf",
+    "static/media/Quicksand-Bold.ttf": "/static/media/Quicksand-Bold.bac7ed87f9bcd95a6c55.ttf",
+    "static/media/ktc.png": "/static/media/ktc.0e88c31d12a2801c55a3.png",
+    "static/media/icon.jpeg": "/static/media/icon.afa96f2654ac3982b388.jpeg",
+    "static/media/university_of_bath_acs.png": "/static/media/university_of_bath_acs.201b09a4356a0d2e0e18.png",
+    "static/media/ahmm.png": "/static/media/ahmm.d6e30edbb34153d6cd46.png",
+    "static/media/etas.png": "/static/media/etas.c7f19b1028965028928a.png",
+    "static/media/rs_architects_logo.png": "/static/media/rs_architects_logo.4226e9faae208a39e13e.png",
+    "static/media/intropic.webp": "/static/media/intropic.204c01dd6b365dac1e1b.webp",
+    "static/media/deep-rl.svg": "/static/media/deep-rl.b7ffc336eb7bdde7477ba5c96453ac5a.svg",
+    "static/media/chip-8.svg": "/static/media/chip-8.33cd7b5893a35bcae58c27a503c96990.svg",
+    "index.html": "/index.html",
+    "main.3a3fc466.css.map": "/static/css/main.3a3fc466.css.map",
+    "main.c7c20cf9.js.map": "/static/js/main.c7c20cf9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3a3fc466.css",
+    "static/js/main.c7c20cf9.js"
+  ]
+}
