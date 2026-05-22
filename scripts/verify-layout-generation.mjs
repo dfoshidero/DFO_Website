@@ -1,29 +1,13 @@
-// LayoutConfigRandom.js
-import React from "react";
-import Card from "../components/card/Card";
-import ExperienceCard from "../content/experience/Experience";
-import EducationCard from "../content/education/Education";
-import AnalogClock from "../content/time/analog/AnalogClock";
-import ProjectCard from "../content/projects/Projects";
-import StatusCard from "../content/status/Status";
-import PortfolioCard from "../content/portfolio/Portfolio";
-import ContactCard from "../content/contact/Contact";
-import RecommendationCard from "../content/recommendations/Recommendation";
-import SkillsCard, {
-  SkillsFilterControls,
-  SkillsFilterProvider,
-} from "../content/expertise/Skills";
+/**
+ * Smoke test for layout generation (mirrors LayoutConfigRandom.jsx algorithm).
+ * Run: node scripts/verify-layout-generation.mjs
+ */
 
-import StatusIndicator from "../content/status/StatusIndicator";
-import SeeMore from "../components/seemore-button/SeeMore";
-import Reload from "../components/reload-button/Reload";
-
-// Define the possible sizes for each card type
 const cardTypes = {
   EXPERIENCE: [
     { columns: 2, rows: 3 },
     { columns: 2, rows: 2 },
-  ], // Now an array of sizes
+  ],
   TIMEZONE: [{ columns: 1, rows: 1 }],
   CONNECT: [{ columns: 1, rows: 1 }],
   PROJECTS: [
@@ -69,9 +53,7 @@ const createEmptyGrid = (gridRows, gridColumns) =>
 const findNextEmptyCell = (grid) => {
   for (let row = 0; row < grid.length; row++) {
     for (let col = 0; col < grid[row].length; col++) {
-      if (!grid[row][col]) {
-        return { row: row + 1, col: col + 1 };
-      }
+      if (!grid[row][col]) return { row: row + 1, col: col + 1 };
     }
   }
   return null;
@@ -103,18 +85,13 @@ const isValidPosition = (size, position, grid, gridColumns, gridRows) => {
     return false;
   }
 
-  if (columnEnd > gridColumns || rowEnd > gridRows) {
-    return false;
-  }
+  if (columnEnd > gridColumns || rowEnd > gridRows) return false;
 
   for (let r = position.rowStart; r <= rowEnd; r++) {
     for (let c = position.columnStart; c <= columnEnd; c++) {
-      if (grid[r - 1][c - 1]) {
-        return false;
-      }
+      if (grid[r - 1][c - 1]) return false;
     }
   }
-
   return true;
 };
 
@@ -149,13 +126,12 @@ const getAvailableCardTypesAndSizes = (
   const position = { columnStart: col, rowStart: row };
   const options = [];
 
-  const mustPlaceSpecialInTopRows =
+  if (
     gridRows === MOBILE_GRID_ROWS &&
     !specialInTopRows &&
     row > MOBILE_SPECIAL_TOP_ROW &&
-    hasUnusedSpecialCard(placedSet);
-
-  if (mustPlaceSpecialInTopRows) {
+    hasUnusedSpecialCard(placedSet)
+  ) {
     return options;
   }
 
@@ -167,25 +143,16 @@ const getAvailableCardTypesAndSizes = (
     row === MOBILE_SPECIAL_TOP_ROW;
 
   for (const cardType of CARD_TYPE_KEYS) {
-    if (placedSet.has(cardType)) {
-      continue;
-    }
-
-    if (restrictToSpecialCards && !SPECIAL_CARD_TYPES.includes(cardType)) {
-      continue;
-    }
+    if (placedSet.has(cardType)) continue;
+    if (restrictToSpecialCards && !SPECIAL_CARD_TYPES.includes(cardType)) continue;
 
     for (const size of cardTypes[cardType]) {
-      if (isSizeExcluded(cardType, size, gridRows)) {
-        continue;
-      }
-
+      if (isSizeExcluded(cardType, size, gridRows)) continue;
       if (isValidPosition(size, position, grid, gridColumns, gridRows)) {
         options.push({ cardType, size });
       }
     }
   }
-
   return options;
 };
 
@@ -199,19 +166,13 @@ const placeBacktrack = (
 ) => {
   if (placedSet.size === CARD_TYPE_KEYS.length) {
     const nextCell = findNextEmptyCell(grid);
-    if (nextCell !== null) {
-      return false;
-    }
-    if (gridRows === MOBILE_GRID_ROWS && !specialInTopRows) {
-      return false;
-    }
+    if (nextCell !== null) return false;
+    if (gridRows === MOBILE_GRID_ROWS && !specialInTopRows) return false;
     return true;
   }
 
   const nextCell = findNextEmptyCell(grid);
-  if (!nextCell) {
-    return false;
-  }
+  if (!nextCell) return false;
 
   const { row, col } = nextCell;
   const options = shuffleArray(
@@ -236,8 +197,6 @@ const placeBacktrack = (
     placedSet.add(cardType);
     setGridOccupied(grid, position, size, true);
 
-    const nextSpecialInTopRows = specialInTopRows || isSpecialInTop;
-
     if (
       placeBacktrack(
         layout,
@@ -245,7 +204,7 @@ const placeBacktrack = (
         placedSet,
         gridColumns,
         gridRows,
-        nextSpecialInTopRows
+        specialInTopRows || isSpecialInTop
       )
     ) {
       return true;
@@ -255,7 +214,6 @@ const placeBacktrack = (
     placedSet.delete(cardType);
     setGridOccupied(grid, position, size, false);
   }
-
   return false;
 };
 
@@ -264,125 +222,75 @@ const generateRandomLayout = (gridColumns, gridRows) => {
   const layout = [];
   const placedSet = new Set();
 
-  const solved = placeBacktrack(
-    layout,
-    grid,
-    placedSet,
-    gridColumns,
-    gridRows,
-    false
-  );
+  if (
+    placeBacktrack(layout, grid, placedSet, gridColumns, gridRows, false)
+  ) {
+    return layout;
+  }
+  return generateRandomLayout(gridColumns, gridRows);
+};
 
-  if (!solved) {
-    console.warn(
-      "[LayoutConfigRandom] Failed to generate a valid layout; retrying."
-    );
-    return generateRandomLayout(gridColumns, gridRows);
+const validateLayout = (layout, gridColumns, gridRows) => {
+  const grid = createEmptyGrid(gridRows, gridColumns);
+  const types = new Set();
+  let area = 0;
+  let specialInTop = false;
+
+  for (const { cardType, size, position } of layout) {
+    types.add(cardType);
+    area += size.columns * size.rows;
+
+    if (
+      SPECIAL_CARD_TYPES.includes(cardType) &&
+      position.rowStart <= MOBILE_SPECIAL_TOP_ROW
+    ) {
+      specialInTop = true;
+    }
+
+    if (!isValidPosition(size, position, grid, gridColumns, gridRows)) {
+      return { ok: false, reason: "overlap or OOB" };
+    }
+    setGridOccupied(grid, position, size, true);
   }
 
-  return layout;
+  if (types.size !== CARD_TYPE_KEYS.length) {
+    return { ok: false, reason: "missing card types" };
+  }
+  if (area !== gridColumns * gridRows) {
+    return { ok: false, reason: `area ${area} != ${gridColumns * gridRows}` };
+  }
+  if (gridRows === MOBILE_GRID_ROWS && !specialInTop) {
+    return { ok: false, reason: "mobile special not in top rows" };
+  }
+  if (findNextEmptyCell(grid) !== null) {
+    return { ok: false, reason: "grid not full" };
+  }
+
+  return { ok: true };
 };
 
-export const generateLayout = (gridColumns, gridRows) =>
-	generateRandomLayout(gridColumns, gridRows);
+const GRIDS = [
+  { name: "desktop", gridColumns: 6, gridRows: 4 },
+  { name: "intermediate", gridColumns: 4, gridRows: 6 },
+  { name: "mobile", gridColumns: 2, gridRows: 12 },
+];
 
-const getExtraContent = (cardType) => {
-	switch (cardType) {
-		case "TIMEZONE":
-			return "London, UK";
-		case "STATUS":
-			return <StatusIndicator />;
-		case "RECOMMENDATIONS":
-			return (
-				<div style={{ display: "flex", flexDirection: "row" }}>
-					<Reload />
-					|
-					<SeeMore
-						url="https://www.linkedin.com/in/favourdo/details/recommendations/?detailScreenTabIndex=0"
-						text="READ MORE"
-					/>
-				</div>
-			);
-		case "PROJECTS":
-			return (
-				<SeeMore
-					url="https://github.com/dfoshidero?tab=repositories"
-					text="VIEW REPOSITORIES"
-				/>
-			);
-		case "MY WORK(S)":
-			return (
-				<div style={{ display: "flex", flexDirection: "row" }}>
-					<SeeMore
-						url="https://www.instagram.com/untitled.fvr/"
-						text="PORTFOLIO"
-						style={{ marginRight: "10px" }}
-					/>{" "}
-				</div>
-			);
-		case "SKILLS":
-			return <SkillsFilterControls />;
-		default:
-			return null;
-	}
-};
+const RUNS = 200;
+let failed = false;
 
-const renderCardContent = (cardType) => {
-	switch (cardType) {
-		case "EXPERIENCE":
-			return <ExperienceCard />;
-		case "EDUCATION & CERTIFICATIONS":
-			return <EducationCard />;
-		case "TIMEZONE":
-			return <AnalogClock />;
-		case "PROJECTS":
-			return <ProjectCard />;
-		case "STATUS":
-			return <StatusCard />;
-		case "MY WORK(S)":
-			return <PortfolioCard />;
-		case "CONNECT":
-			return <ContactCard />;
-		case "RECOMMENDATIONS":
-			return <RecommendationCard />;
-		case "SKILLS":
-			return <SkillsCard />;
-		default:
-			return null;
-	}
-};
-
-export function LayoutCard({ config, animationDelay = 0, animateEntrance = true }) {
-	const { cardType, size } = config;
-	const cardClasses = [
-		"card",
-		`${size.columns}-columns`,
-		`${size.rows}-rows`,
-		!animateEntrance && "card--no-entrance",
-	]
-		.filter(Boolean)
-		.join(" ");
-
-	const cardStyle = {
-		gridColumn: `span ${size.columns}`,
-		gridRow: `span ${size.rows}`,
-		...(animateEntrance && { animationDelay: `${animationDelay}s` }),
-	};
-
-	const card = (
-		<Card
-			title={cardType.toUpperCase()}
-			extra={getExtraContent(cardType)}
-			className={cardClasses}
-			style={cardStyle}
-		>
-			{renderCardContent(cardType)}
-		</Card>
-	);
-
-	if (cardType === "SKILLS") {
-		return <SkillsFilterProvider>{card}</SkillsFilterProvider>;
-	}
-
-	return card;
+for (const { name, gridColumns, gridRows } of GRIDS) {
+  const start = performance.now();
+  for (let i = 0; i < RUNS; i++) {
+    const layout = generateRandomLayout(gridColumns, gridRows);
+    const result = validateLayout(layout, gridColumns, gridRows);
+    if (!result.ok) {
+      console.error(`FAIL [${name}] run ${i}: ${result.reason}`);
+      failed = true;
+      break;
+    }
+  }
+  const ms = (performance.now() - start).toFixed(1);
+  console.log(`OK [${name}] ${RUNS} layouts in ${ms}ms`);
 }
+
+process.exit(failed ? 1 : 0);
