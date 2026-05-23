@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 const SCALE_FACTOR = 0.7;
 const SPACING_CQW = 30;
 const TRANSITION_MS = 350;
+const SWIPE_THRESHOLD = 50;
 
 function getSlideStyle(offset, visibleRadius) {
   const absOffset = Math.abs(offset);
@@ -33,6 +34,8 @@ function PortfolioCarousel({ images, startIndex = 0 }) {
   const [ratios, setRatios] = useState({});
   const transitionTimerRef = useRef(null);
   const isTransitioningRef = useRef(false);
+  const pointerStartRef = useRef(null);
+  const wasSwipingRef = useRef(false);
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 600px)');
@@ -92,6 +95,48 @@ function PortfolioCarousel({ images, startIndex = 0 }) {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [goPrev, goNext]);
 
+  const handlePointerDown = useCallback((event) => {
+    if (event.pointerType === 'mouse' && event.button !== 0) return;
+    pointerStartRef.current = {
+      x: event.clientX,
+      y: event.clientY,
+      id: event.pointerId,
+    };
+  }, []);
+
+  const handlePointerUp = useCallback(
+    (event) => {
+      const start = pointerStartRef.current;
+      if (!start || start.id !== event.pointerId) return;
+      pointerStartRef.current = null;
+
+      const dx = event.clientX - start.x;
+      const dy = event.clientY - start.y;
+
+      if (Math.abs(dx) > SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
+        wasSwipingRef.current = true;
+        setTimeout(() => {
+          wasSwipingRef.current = false;
+        }, 0);
+        if (dx < 0) goNext();
+        else goPrev();
+      }
+    },
+    [goPrev, goNext]
+  );
+
+  const handlePointerCancel = useCallback(() => {
+    pointerStartRef.current = null;
+  }, []);
+
+  const handleSlideClick = useCallback(
+    (index, isActive) => {
+      if (wasSwipingRef.current) return;
+      if (!isActive) goTo(index);
+    },
+    [goTo]
+  );
+
   const activeImage = images[activeIndex];
   const activeCaption = activeImage ? getCaption(activeImage) : '';
   const atStart = activeIndex === 0;
@@ -99,7 +144,12 @@ function PortfolioCarousel({ images, startIndex = 0 }) {
 
   return (
     <div className="portfolio-carousel" role="region" aria-label="Portfolio image carousel">
-      <div className="portfolio-carousel__stage">
+      <div
+        className="portfolio-carousel__stage"
+        onPointerDown={handlePointerDown}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerCancel}
+      >
         {images.map((image, index) => {
           const offset = index - activeIndex;
           if (Math.abs(offset) > visibleRadius) return null;
@@ -113,11 +163,8 @@ function PortfolioCarousel({ images, startIndex = 0 }) {
               key={image.id}
               type="button"
               className={`portfolio-carousel__slide${isActive ? ' portfolio-carousel__slide--active' : ''}`}
-              style={{
-                ...getSlideStyle(offset, visibleRadius),
-                aspectRatio: ratio,
-              }}
-              onClick={() => !isActive && goTo(index)}
+              style={getSlideStyle(offset, visibleRadius)}
+              onClick={() => handleSlideClick(index, isActive)}
               aria-label={
                 isActive
                   ? `Current image: ${image.caption || 'Instagram image'}`
@@ -131,6 +178,7 @@ function PortfolioCarousel({ images, startIndex = 0 }) {
                 alt={image.caption || ''}
                 draggable={false}
                 onLoad={(e) => handleImageLoad(image.id, e)}
+                style={{ aspectRatio: ratio }}
               />
               {isActive && slideCaption && (
                 <span className="portfolio-carousel__caption">{slideCaption}</span>
