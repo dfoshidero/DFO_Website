@@ -125,6 +125,18 @@
   }
 }
 
+.modal:has(.portfolio-carousel) {
+  width: min(92vw, 56rem);
+  max-width: 100%;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+
+  @media (max-width: calc(4 * $min-card-width)) {
+    width: 100%;
+  }
+}
+
 // Experience layout: sidebar full-height on the left, close bar only over the detail pane
 .modal:has(.experience-modal-content) {
   width: $modal-experience-width;

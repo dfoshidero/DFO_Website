@@ -3,6 +3,7 @@ import axios from 'axios';
 import { ModalContext } from '../../utils/modalContext';
 
 import PortfolioItem from './PortfolioItem';
+import PortfolioCarousel from './PortfolioCarousel';
 import './Portfolio.scss';
 
 function PortfolioCard() {
@@ -23,7 +24,7 @@ function PortfolioCard() {
         try {
           attempts++;
           const response = await axios.get(
-            "https://z3mlw599i2.execute-api.eu-west-2.amazonaws.com/dev/fetchInstagramData" //change endpoint to test/fetchInstagramData for testing
+            "https://z3mlw599i2.execute-api.eu-west-2.amazonaws.com/test/fetchInstagramData" //change endpoint to test/fetchInstagramData for testing
           );
           const imagesData = JSON.parse(response.data.body); // Parse the JSON string into an array
 
@@ -91,19 +92,13 @@ function PortfolioCard() {
       </div>
 
       <div className="portfolio-grid">
-        {images.map((image) => (
+        {images.map((image, index) => (
           <PortfolioItem
             key={image.id}
             image={image}
             onOpen={() =>
               openModal(
-                <div className="portfolio-modal-content">
-                  <img src={image.media_url} alt={image.caption} />
-                  <p>{image.caption}</p>
-                  {image.media_type === 'CAROUSEL_ALBUM' && (
-                    <p>{image.children[0].caption}</p>
-                  )}
-                </div>,
+                <PortfolioCarousel images={images} startIndex={index} />,
                 { title: image.caption || 'Portfolio image' }
               )
             }
