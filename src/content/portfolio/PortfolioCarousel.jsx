@@ -1,4 +1,7 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef, useContext } from 'react';
+import PaletteOutlinedIcon from '@mui/icons-material/PaletteOutlined';
+import { ModalContext } from '../../utils/modalContext';
+import InquireForm from './InquireForm';
 
 const SCALE_FACTOR = 0.7;
 const SPACING_CQW = 30;
@@ -29,6 +32,7 @@ function getCaption(image) {
 }
 
 function PortfolioCarousel({ images, startIndex = 0 }) {
+  const { openModal } = useContext(ModalContext);
   const [activeIndex, setActiveIndex] = useState(startIndex);
   const [visibleRadius, setVisibleRadius] = useState(2);
   const [ratios, setRatios] = useState({});
@@ -142,6 +146,14 @@ function PortfolioCarousel({ images, startIndex = 0 }) {
   const atStart = activeIndex === 0;
   const atEnd = activeIndex === images.length - 1;
 
+  const handleInquire = useCallback(() => {
+    if (!activeImage) return;
+    openModal(
+      <InquireForm initialImageId={activeImage.id} />,
+      { title: 'Inquire about a painting' }
+    );
+  }, [activeImage, openModal]);
+
   return (
     <div className="portfolio-carousel" role="region" aria-label="Portfolio image carousel">
       <div
@@ -209,6 +221,14 @@ function PortfolioCarousel({ images, startIndex = 0 }) {
           aria-label="Next image"
         >
           ›
+        </button>
+        <button
+          type="button"
+          className="portfolio-carousel__inquire-button"
+          onClick={handleInquire}
+          aria-label="Inquire about this painting"
+        >
+          Inquire about this <PaletteOutlinedIcon fontSize="inherit" className="button-icon" />
         </button>
       </div>
     </div>

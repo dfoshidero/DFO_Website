@@ -18,6 +18,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    line-height: 1;
+    gap: 4px;
 
     &:hover {
         opacity: 1;
@@ -28,7 +30,6 @@
 
 .button-icon {
     display: inline-block;
-    margin-left: 4px;
 }
 
 .MuiSvgIcon-root {

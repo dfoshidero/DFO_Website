@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useCallback } from 'react';
 import './Card.scss';
 
-function Card({ title, extra, children, onClick, className, style }) {
+function Card({ title, titleAction, extra, children, onClick, className, style }) {
   const contentRef = useRef(null);
 
   const handleScroll = useCallback(() => {
@@ -40,7 +40,10 @@ function Card({ title, extra, children, onClick, className, style }) {
       style={style}
     >
       <div className="card-header">
-        <h2 className="title">{title}</h2>
+        <div className="title-group">
+          <h2 className="title">{title}</h2>
+          {titleAction}
+        </div>
         <div className="extra">
           {typeof extra === 'string' ? (
             <span>{extra}</span>

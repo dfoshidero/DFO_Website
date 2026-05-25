@@ -1,5 +1,10 @@
 @import '../../utils/GlobalStyles.scss';
 
+@keyframes reload-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 .card {
   display: flex;
   flex-direction: column;
@@ -25,8 +30,18 @@
   .card-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     border-bottom: $line-width solid var(--border-subtle);
     margin: 0px 10px;
+    gap: 8px;
+
+    .title-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-grow: 1;
+      min-width: 0;
+    }
 
     .title,
     .extra {
@@ -36,7 +51,6 @@
     }
 
     .title {
-      flex-grow: 1;
       color: var(--text-primary);
       font-weight: $bigger-font-weight;
     }
@@ -47,6 +61,54 @@
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+
+    .see-more-button {
+      min-height: 0;
+      padding: 2px 8px;
+      gap: 4px;
+      line-height: 1;
+
+      .button-icon {
+        margin-left: 0;
+      }
+    }
+
+    .reload-button {
+      width: 20px;
+      height: 20px;
+      min-width: 0;
+      min-height: 0;
+      padding: 0;
+      border: $line-width solid var(--border-subtle);
+      border-radius: 50%;
+      font-size: $standard-font-size;
+      line-height: 1;
+
+      .MuiSvgIcon-root {
+        font-size: 0.85rem !important;
+      }
+
+      &:hover {
+        border-color: var(--accent);
+        opacity: 1;
+      }
+
+      &.is-spinning .MuiSvgIcon-root {
+        animation: reload-spin 0.35s ease-out;
+      }
+    }
+
+    .extra > div {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+
+      > div:not(.skills-filter-controls) {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
     }
   }
 

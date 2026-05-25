@@ -34,6 +34,8 @@
     .certified-section {
         display: flex;
         align-items: center;
+        line-height: 1;
+        gap: 4px;
         cursor: pointer;
         color: var(--badge-certified);
         font-size: $standard-font-size;
@@ -49,10 +51,6 @@
             cursor: default;
         }
 
-        .certified-label {
-            margin-right: 4px;
-        }
-
         .certified-icon {
             font-size: $standard-font-size * 1.1;
         }
@@ -61,6 +59,8 @@
     .completed-section {
         display: flex;
         align-items: center;
+        line-height: 1;
+        gap: 4px;
         cursor: pointer;
         color: var(--badge-completed);
         font-size: $standard-font-size;
@@ -74,10 +74,6 @@
 
         &.non-clickable {
             cursor: default;
-        }
-
-        .completed-label {
-            margin-right: 4px;
         }
 
         .certified-icon {

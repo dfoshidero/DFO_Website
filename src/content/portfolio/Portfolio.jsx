@@ -1,62 +1,15 @@
-import React, { useEffect, useState, useContext } from 'react';
-import axios from 'axios';
+import React, { useContext } from 'react';
 import { ModalContext } from '../../utils/modalContext';
 
 import PortfolioItem from './PortfolioItem';
 import PortfolioCarousel from './PortfolioCarousel';
+import { usePortfolioImages } from './usePortfolioImages';
 import './Portfolio.scss';
 
 function PortfolioCard() {
   const { openModal } = useContext(ModalContext);
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const { images, loading, error } = usePortfolioImages();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      setError(null);
-
-      let attempts = 0;
-      const maxAttempts = 3;
-
-      while (attempts < maxAttempts) {
-        try {
-          attempts++;
-          const response = await axios.get(
-            "https://z3mlw599i2.execute-api.eu-west-2.amazonaws.com/dev/fetchInstagramData" //change endpoint to test/fetchInstagramData for testing
-          );
-          const imagesData = JSON.parse(response.data.body); // Parse the JSON string into an array
-
-          if (!Array.isArray(imagesData)) {
-            console.log(imagesData);
-            throw new Error(
-              "API connected; token expired or response format invalid."
-            );
-          }
-
-          setImages(imagesData);
-          setLoading(false);
-          return; // Exit the function if successful
-        } catch (error) {
-          console.error(`Attempt ${attempts} failed:`, error);
-          if (attempts === maxAttempts) {
-            setError(
-              "Failed to fetch Instagram images: Connection or API error."
-            );
-            setLoading(false);
-          }
-        }
-      }
-    };
-
-    fetchData();
-  }, []);
-
-
-  
-
-  // Conditional rendering based on loading and error states
   if (loading) {
     return <div className="centered"><p key="loading">Loading data...</p></div>;
   }

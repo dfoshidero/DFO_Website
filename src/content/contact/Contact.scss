@@ -15,7 +15,7 @@
     color: var(--text-primary);
     border: $line-width solid var(--border-subtle);
     border-radius: 14px;
-    padding: 3px 0px;
+    padding: 6px 0px;
     margin: 3% 0px;
     font-size: $standard-font-size;
     cursor: pointer;
@@ -28,6 +28,8 @@
     display: flex;
   align-items: center;
   justify-content: center;
+  line-height: 1;
+  gap: 4px;
 
     &:hover {
         background-color: var(--accent);
@@ -40,7 +42,6 @@
 
     .button-icon {
         display: inline-block;
-        margin-left: 4px;
       }
 }
 

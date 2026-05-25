@@ -17,6 +17,7 @@ import SkillsCard, {
 import StatusIndicator from "../content/status/StatusIndicator";
 import SeeMore from "../components/seemore-button/SeeMore";
 import Reload from "../components/reload-button/Reload";
+import InquireButton from "../content/portfolio/InquireButton";
 
 // Define the possible sizes for each card type
 const cardTypes = {
@@ -285,6 +286,15 @@ const generateRandomLayout = (gridColumns, gridRows) => {
 export const generateLayout = (gridColumns, gridRows) =>
 	generateRandomLayout(gridColumns, gridRows);
 
+const getTitleAction = (cardType) => {
+	switch (cardType) {
+		case "RECOMMENDATIONS":
+			return <Reload />;
+		default:
+			return null;
+	}
+};
+
 const getExtraContent = (cardType) => {
 	switch (cardType) {
 		case "TIMEZONE":
@@ -293,14 +303,10 @@ const getExtraContent = (cardType) => {
 			return <StatusIndicator />;
 		case "RECOMMENDATIONS":
 			return (
-				<div style={{ display: "flex", flexDirection: "row" }}>
-					<Reload />
-					|
-					<SeeMore
-						url="https://www.linkedin.com/in/favourdo/details/recommendations/?detailScreenTabIndex=0"
-						text="READ MORE"
-					/>
-				</div>
+				<SeeMore
+					url="https://www.linkedin.com/in/favourdo/details/recommendations/?detailScreenTabIndex=0"
+					text="READ MORE"
+				/>
 			);
 		case "PROJECTS":
 			return (
@@ -310,15 +316,7 @@ const getExtraContent = (cardType) => {
 				/>
 			);
 		case "MY WORK(S)":
-			return (
-				<div style={{ display: "flex", flexDirection: "row" }}>
-					<SeeMore
-						url="https://www.instagram.com/untitled.fvr/"
-						text="PORTFOLIO"
-						style={{ marginRight: "10px" }}
-					/>{" "}
-				</div>
-			);
+			return <InquireButton />;
 		case "SKILLS":
 			return <SkillsFilterControls />;
 		default:
@@ -371,6 +369,7 @@ export function LayoutCard({ config, animationDelay = 0, animateEntrance = true 
 	const card = (
 		<Card
 			title={cardType.toUpperCase()}
+			titleAction={getTitleAction(cardType)}
 			extra={getExtraContent(cardType)}
 			className={cardClasses}
 			style={cardStyle}

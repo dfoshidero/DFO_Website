@@ -85,16 +85,15 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        line-height: 1;
         text-decoration: none;
         color: inherit;
 
         .button-content {
             display: flex;
             align-items: center;
-        }
-
-        .button-icon {
-            margin-left: 4px;
+            line-height: 1;
+            gap: 4px;
         }
     }
 }
