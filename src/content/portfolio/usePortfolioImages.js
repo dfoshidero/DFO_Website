@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const API_URL =
-  'https://z3mlw599i2.execute-api.eu-west-2.amazonaws.com/test/fetchInstagramData';
+  'https://z3mlw599i2.execute-api.eu-west-2.amazonaws.com/dev/fetchInstagramData';
 
 const cache = {
   images: null,
