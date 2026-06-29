@@ -8,6 +8,8 @@
 
 :root,
 :root[data-theme="dark"] {
+  color-scheme: dark;
+
   // Backgrounds
   --bg-base: #0b1014;
   --bg-surface: #131820;
@@ -66,6 +68,8 @@
 }
 
 :root[data-theme="light"] {
+  color-scheme: light;
+
   // Backgrounds — warm cream surfaces sitting on the beige body
   --bg-base: #f5ebe0;
   --bg-surface: #fffaf3;

@@ -8,15 +8,12 @@
 // that data attribute.
 
 const STORAGE_KEY = "theme";
-const INTRO_STORAGE_KEY = "themeIntroSeen";
 const DEFAULT_THEME = "light";
 
 export const THEMES = Object.freeze({
   LIGHT: "light",
   DARK: "dark",
 });
-
-let introRunning = false;
 
 function readStoredTheme() {
   try {
@@ -66,52 +63,4 @@ export function getCurrentTheme() {
 export function toggleTheme() {
   const next = getCurrentTheme() === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
   return applyTheme(next);
-}
-
-export function shouldRunThemeIntro() {
-  try {
-    return !window.localStorage.getItem(INTRO_STORAGE_KEY);
-  } catch (err) {
-    return false;
-  }
-}
-
-export function markThemeIntroSeen() {
-  try {
-    window.localStorage.setItem(INTRO_STORAGE_KEY, "1");
-  } catch (err) {
-    // Ignore storage errors.
-  }
-}
-
-/**
- * First-visit demo: briefly flash the opposite theme, then settle on the
- * theme already applied at intro start (system or stored). Does not persist
- * the intermediate flash.
- */
-export function runThemeIntro() {
-  if (introRunning || !shouldRunThemeIntro()) {
-    return Promise.resolve();
-  }
-
-  introRunning = true;
-  const html = document.documentElement;
-  const initialTheme = getCurrentTheme();
-  const flashTheme =
-    initialTheme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
-  html.classList.add("theme-transitioning");
-
-  return new Promise((resolve) => {
-    window.setTimeout(() => {
-      applyTheme(flashTheme, { persist: false });
-    }, 700);
-
-    window.setTimeout(() => {
-      applyTheme(initialTheme, { persist: true });
-      html.classList.remove("theme-transitioning");
-      markThemeIntroSeen();
-      introRunning = false;
-      resolve();
-    }, 1500);
-  });
 }

@@ -92,22 +92,4 @@ $thumb-travel: $toggle-width - $thumb-size - ($thumb-offset * 2);
     color: var(--accent);
   }
 
-  &--intro &__track {
-    animation: themeToggleIntroPulse 0.9s ease-in-out infinite;
-    border-color: var(--accent);
-    box-shadow: var(--shadow-accent);
-  }
-}
-
-@keyframes themeToggleIntroPulse {
-  0%,
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 8px var(--accent-glow);
-  }
-
-  50% {
-    transform: scale(1.05);
-    box-shadow: 0 0 18px var(--accent-glow);
-  }
 }
