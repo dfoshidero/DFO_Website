@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 
-const API_URL =
-  'https://z3mlw599i2.execute-api.eu-west-2.amazonaws.com/dev/fetchInstagramData';
+const MANIFEST_URL = '/portfolio/images.json';
 
 const cache = {
   images: null,
@@ -11,31 +9,21 @@ const cache = {
 };
 
 async function fetchPortfolioImages() {
-  const maxAttempts = 3;
-  let lastError = null;
+  const response = await fetch(MANIFEST_URL);
 
-  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-    try {
-      const response = await axios.get(API_URL);
-      const imagesData = JSON.parse(response.data.body);
-
-      if (!Array.isArray(imagesData)) {
-        throw new Error(
-          'API connected; token expired or response format invalid.'
-        );
-      }
-
-      return imagesData;
-    } catch (error) {
-      lastError = error;
-      console.error(`Attempt ${attempt} failed:`, error);
-    }
+  if (!response.ok) {
+    throw new Error(
+      `Failed to load portfolio images (${response.status}).`
+    );
   }
 
-  throw (
-    lastError ||
-    new Error('Failed to fetch Instagram images: Connection or API error.')
-  );
+  const imagesData = await response.json();
+
+  if (!Array.isArray(imagesData)) {
+    throw new Error('Portfolio data format is invalid.');
+  }
+
+  return imagesData;
 }
 
 function loadImages() {
@@ -52,8 +40,7 @@ function loadImages() {
       })
       .catch((error) => {
         cache.error =
-          error?.message ||
-          'Failed to fetch Instagram images: Connection or API error.';
+          error?.message || 'Failed to load portfolio images.';
         cache.promise = null;
         throw error;
       });
@@ -95,8 +82,7 @@ export function usePortfolioImages() {
       .catch((err) => {
         if (!cancelled) {
           setError(
-            err?.message ||
-              'Failed to fetch Instagram images: Connection or API error.'
+            err?.message || 'Failed to load portfolio images.'
           );
           setLoading(false);
         }

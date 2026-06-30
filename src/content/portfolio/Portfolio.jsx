@@ -41,7 +41,7 @@ function PortfolioCard() {
   return (
     <div className="portfolio-container">
       <div className="pull-text">
-        <p>Pulled using Instagram API...</p>
+        <p>Pulled using Instagram API.</p>
       </div>
 
       <div className="portfolio-grid">
