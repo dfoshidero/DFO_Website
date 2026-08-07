@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="48 30 168 194" role="img" aria-labelledby="title desc">
-  <title id="title">Papertalk mark</title>
-  <desc id="desc">A letter P combining a folded page and a conversation bubble.</desc>
-  <g fill="none" stroke="#0B748A" stroke-width="15" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M64 211V94Q64 84 73 78L126 45Q132 41 138 45L190 78Q200 84 200 94V120Q200 155 174 175Q160 181 139 181H104L64 211Z"/>
-    <path d="M134 46V82Q134 95 148 95H192"/>
-  </g>
-</svg>

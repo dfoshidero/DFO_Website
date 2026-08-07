@@ -8,7 +8,7 @@ import ecoImage from "../../assets/images/project-icons/eco.png";
 import chip8Image from '../../assets/images/project-icons/chip-8.svg';
 import personalWebsite from '../../assets/images/project-icons/personal-website.png';
 import deepRlImage from '../../assets/images/project-icons/deep-rl.svg';
-import papertalkImage from '../../assets/images/project-icons/papertalk.svg';
+import papertalkImage from '../../assets/images/project-icons/papertalk.png';
 
 const projects = [
   {
