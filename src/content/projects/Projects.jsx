@@ -8,6 +8,7 @@ import ecoImage from "../../assets/images/project-icons/eco.png";
 import chip8Image from '../../assets/images/project-icons/chip-8.svg';
 import personalWebsite from '../../assets/images/project-icons/personal-website.png';
 import deepRlImage from '../../assets/images/project-icons/deep-rl.svg';
+import papertalkImage from '../../assets/images/project-icons/papertalk.svg';
 
 const projects = [
   {
@@ -18,6 +19,15 @@ const projects = [
     stack: "JavaScript with React, SCSS, Node.js, AWS for API interactions.",
     imageUrl: personalWebsite,
     projectUrl: "https://github.com/dfoshidero/dfo-website",
+  },
+  {
+    id: 6,
+    title: "Papertalk | Change Intelligence for Building Design",
+    description:
+      "Papertalk shows how client and design changes affect carbon, cost, energy, materials and project assumptions while there is still time to respond.",
+    stack: "TypeScript with React, Vite, Python, Docker",
+    imageUrl: papertalkImage,
+    projectUrl: "https://www.papertalk.now",
   },
   {
     id: 5,
@@ -78,7 +88,7 @@ function ProjectCard({ project, asListItem = false }) {
         href={project.projectUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={`Open ${project.title} on GitHub`}
+        aria-label={`Open ${project.title}`}
       >
         {project.imageUrl && (
           <div className="project-image-container">
