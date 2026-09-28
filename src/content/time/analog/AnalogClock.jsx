@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useMemo } from 'react';
 import "./AnalogClock.scss";
 import { useSettings } from "../../../utils/contentContext";
 
@@ -32,13 +32,11 @@ const AnalogClock = () => {
 
   const { hour: hours, minute: minutes, second: seconds } = getLocalTime();
 
-  const hourDegrees = ((hours % 12) + minutes / 60) * 30;
-  const minuteDegrees = (minutes + seconds / 60) * 6;
-  const secondDegrees = seconds * 6;
-  
-  return (
-    <div className="clock-container">
-      <div className="clock">
+  // The 72 dial marks never change, but the component re-renders every second.
+  // Building them once lets React skip the whole subtree on each tick.
+  const marks = useMemo(
+    () => (
+      <>
         {Array.from({ length: 12 }).map((_, index) => (
           <div
             key={`hour_${index}`}
@@ -57,6 +55,19 @@ const AnalogClock = () => {
             <div className="minute-mark-line" />
           </div>
         ))}
+      </>
+    ),
+    []
+  );
+
+  const hourDegrees = ((hours % 12) + minutes / 60) * 30;
+  const minuteDegrees = (minutes + seconds / 60) * 6;
+  const secondDegrees = seconds * 6;
+  
+  return (
+    <div className="clock-container">
+      <div className="clock">
+        {marks}
         <div className="hand hour-hand" style={{ transform: `rotate(${hourDegrees}deg)` }} />
         <div className="hand minute-hand" style={{ transform: `rotate(${minuteDegrees}deg)` }} />
         <div className="hand second-hand" style={{ transform: `rotate(${secondDegrees}deg)` }} />
