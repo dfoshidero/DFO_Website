@@ -11,9 +11,35 @@
   background-color: var(--bg-surface);
   border-radius: 8px;
   border: $line-width solid var(--border-subtle);
-  box-shadow: var(--shadow-md);
-  transition: transform 0.3s, box-shadow 0.3s;
   margin: 9px;
+
+  // The shadows live on pseudo-elements and cross-fade, rather than the card
+  // transitioning box-shadow directly. Animating a shadow value repaints every
+  // frame; animating opacity is handled by the compositor.
+  position: relative;
+  transition: transform 0.3s;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    // Behind the card's own background, so only the outer shadow shows.
+    z-index: -1;
+    transition: opacity 0.3s;
+  }
+
+  &::before {
+    box-shadow: var(--shadow-md);
+    opacity: 1;
+  }
+
+  &::after {
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+  }
 
   max-height: 100%;
   max-width: 100%;
@@ -24,7 +50,14 @@
 
   &:hover {
     transform: translateY(-3px);
-    box-shadow: var(--shadow-lg);
+
+    &::before {
+      opacity: 0;
+    }
+
+    &::after {
+      opacity: 1;
+    }
   }
 
   .card-header {

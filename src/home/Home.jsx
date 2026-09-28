@@ -146,7 +146,7 @@ function Home() {
                     : config.cardType
                 }
                 config={config}
-                animationDelay={index * 0.1}
+                animationDelay={index * 0.035}
                 animateEntrance={animateEntrance}
               />
             ))}

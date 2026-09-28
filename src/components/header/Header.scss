@@ -131,7 +131,20 @@
   opacity: 0.85;
 
   // Apply the pulse animation
-  animation: pulse-glow 2s infinite;
+  // The glow lives on a pseudo-element whose opacity pulses. Animating the
+  // box-shadow blur itself repainted this button every frame, permanently.
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: 0 0 20px var(--accent-glow);
+    pointer-events: none;
+    z-index: -1;
+    animation: pulse-glow 2s infinite;
+  }
 
   &:hover {
     box-shadow: var(--shadow-accent);
@@ -150,11 +163,11 @@
 @keyframes pulse-glow {
   0%,
   100% {
-    box-shadow: 0 0 8px var(--accent-glow);
+    opacity: 0.45;
   }
 
   50% {
-    box-shadow: 0 0 20px var(--accent-glow);
+    opacity: 1;
   }
 }
 

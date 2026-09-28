@@ -4,24 +4,12 @@
 @keyframes dropIn {
     0% {
         opacity: 0;
-        transform: translateY(-100px) scaleY(0.85);
+        transform: translateY(-28px) scaleY(0.97);
     }
 
-    50% {
-        opacity: 0.5;
-        transform: translateY(15px) scaleY(1.1);
-    }
-
-    65% {
-        transform: translateY(-10px) scaleY(0.95);
-    }
-
-    80% {
-        transform: translateY(5px) scaleY(1.05);
-    }
-
-    90% {
-        transform: translateY(-2px) scaleY(0.98);
+    60% {
+        opacity: 1;
+        transform: translateY(3px) scaleY(1.01);
     }
 
     100% {
@@ -104,8 +92,11 @@
             }
 
             animation-name: dropIn;
-            animation-duration: 1.2s; // Slightly longer duration for a more natural feel
-            animation-timing-function: ease-in-out; // Smoother transitions
+            // Was 1.2s with ease-in-out, which spent the first third barely
+            // moving. A fast-out curve reads as snappier at less than half the
+            // length.
+            animation-duration: 0.45s;
+            animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
             animation-fill-mode: backwards;
 
             ::-webkit-scrollbar-track {
