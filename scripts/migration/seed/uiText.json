@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "pageTitle": "DFO",
+    "metaDescription": "Personal site of Daniel Favour Oshidero — software engineer and computer scientist. Projects, experience, and ways to get in touch.",
+    "siteUrl": "https://dfvro.com/",
+    "favicon": "public/favicon.png",
+    "noscript": "You need JavaScript to run this page.",
+    "manifestName": "Create React App Sample",
+    "manifestShortName": "React App"
+  },
+  "cardTitles": {
+    "EXPERIENCE": "EXPERIENCE",
+    "TIMEZONE": "TIMEZONE",
+    "CONNECT": "CONNECT",
+    "PROJECTS": "PROJECTS",
+    "MY WORK(S)": "MY WORK(S)",
+    "EDUCATION & CERTIFICATIONS": "EDUCATION & CERTIFICATIONS",
+    "RECOMMENDATIONS": "RECOMMENDATIONS",
+    "STATUS": "STATUS",
+    "SKILLS": "SKILLS"
+  },
+  "header": {
+    "profileIconAlt": "Profile Icon",
+    "shuffleButtonLabel": "Shuffle Cards",
+    "contactButtonLabel": "Contact"
+  },
+  "footer": {
+    "rightsText": "All rights reserved.",
+    "builtWithText": "Designed & built with care.",
+    "lastUpdatedPrefix": "Last updated"
+  },
+  "cardExtras": {
+    "recommendationsMoreLabel": "READ MORE",
+    "projectsMoreLabel": "VIEW REPOSITORIES",
+    "inquireButtonLabel": "INQUIRE",
+    "recommendationsRefreshAriaLabel": "Refresh recommendation"
+  },
+  "projects": {
+    "hint": "Click items to see more...",
+    "stackPrefix": "Stack: ",
+    "demoButtonLabel": "Demo"
+  },
+  "experience": {
+    "skillsSectionLabel": "Skills",
+    "skillsSeparator": " · "
+  },
+  "education": {
+    "viewButtonLabel": "View"
+  },
+  "skills": {
+    "certifiedLabel": "CERTIFIED",
+    "completedLabel": "COURSE",
+    "filterCertifiedLabel": "Filter by certified",
+    "filterCompletedLabel": "Filter by completed course",
+    "filterGroupLabel": "Filter skills"
+  },
+  "contact": {
+    "linkedinLabel": "LinkedIn",
+    "githubLabel": "GitHub",
+    "cvButtonLabel": "Download CV"
+  },
+  "portfolio": {
+    "pullText": "Pulled using Instagram API.",
+    "loadingText": "Loading data...",
+    "errorHelpText": "Please select the link above to view.",
+    "reportButtonLabel": "Report Issue",
+    "reportEmailSubject": "Issue Report | Portfolio API ",
+    "reportEmailBody": "Hello,\n\nI have encountered an issue with the Instagram Portfolio feature on the website. There seems to be a technical problem affecting its functionality.\n\nPlease investigate and resolve this issue at your earliest convenience.\n\nThank you.\n"
+  },
+  "inquiryForm": {
+    "modalTitle": "Inquire about a painting",
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone",
+    "paintingLabel": "Painting",
+    "budgetLabel": "Budget / price range",
+    "budgetPlaceholder": "e.g. £200–£500",
+    "messageLabel": "Message",
+    "requiredSuffix": " (required)",
+    "optionalSuffix": "(optional)",
+    "generalInquiryOption": "General inquiry (no specific painting)",
+    "paintingsLoadingText": "Loading paintings...",
+    "paintingsErrorText": "Could not load paintings. You can still send a general inquiry.",
+    "submitLabel": "Send inquiry",
+    "submittingLabel": "Sending...",
+    "successTitle": "Thank you!",
+    "successText": "Your inquiry has been sent. I'll get back to you soon.",
+    "successButtonLabel": "Send another inquiry",
+    "submitFailedText": "Submission failed. Please try again.",
+    "genericErrorText": "Something went wrong. Please try again later.",
+    "honeypotLabel": "Don't fill this out:"
+  }
+}

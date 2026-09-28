@@ -4,24 +4,29 @@ import './Contact.scss';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
+import { useSettings, useUiText } from '../../utils/contentContext';
+import { downloadUrl } from '../../lib/sanity';
+
 
 export default function ContactCard() {
-  const pdfUrl = "Oshidero_Daniel Favour_CV.pdf";
+  const settings = useSettings();
+  const { contact } = useUiText();
+  const pdfUrl = downloadUrl(settings.cvFile, settings.cvDownloadName);
 
   return (
     <div className="contact-container">
-      <a href="https://www.linkedin.com/in/favourdo/" className="connect-button linkedin" target="_blank" rel="noreferrer">
-        LinkedIn <ArrowOutwardIcon fontSize="inherit" className="button-icon" />
+      <a href={settings.linkedinUrl} className="connect-button linkedin" target="_blank" rel="noreferrer">
+        {contact.linkedinLabel} <ArrowOutwardIcon fontSize="inherit" className="button-icon" />
         </a>
-      <a href="https://github.com/dfoshidero" className="connect-button github" target="_blank" rel="noreferrer">
-        GitHub<ArrowOutwardIcon fontSize="inherit" className="button-icon" />
+      <a href={settings.githubUrl} className="connect-button github" target="_blank" rel="noreferrer">
+        {contact.githubLabel}<ArrowOutwardIcon fontSize="inherit" className="button-icon" />
         </a>
 
       <a
         href={pdfUrl}
-        download="Oshidero_Daniel Favour_CV.pdf"
+        download={settings.cvDownloadName}
         className="connect-button download-cv">
-        Download CV
+        {contact.cvButtonLabel}
         <ArrowDownwardIcon fontSize="inherit" className="button-icon" />
       </a>
     </div>

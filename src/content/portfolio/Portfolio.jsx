@@ -5,20 +5,27 @@ import PortfolioItem from './PortfolioItem';
 import PortfolioCarousel from './PortfolioCarousel';
 import { usePortfolioImages } from './usePortfolioImages';
 import './Portfolio.scss';
+import { useSettings, useUiText } from '../../utils/contentContext';
 
 function PortfolioCard() {
   const { openModal } = useContext(ModalContext);
   const { images, loading, error } = usePortfolioImages();
+  const { contactEmail } = useSettings();
+  const copy = useUiText().portfolio;
 
   if (loading) {
-    return <div className="centered"><p key="loading">Loading data...</p></div>;
+    return <div className="centered"><p key="loading">{copy.loadingText}</p></div>;
   }
 
   if (error) {
     const handleReportIssue = () => {
-      window.location.href = "mailto:dfoshidero@outlook.com" +
-        "?subject=Issue Report | Portfolio API " +
-        "&body=Hello,%0D%0A%0D%0AI have encountered an issue with the Instagram Portfolio feature on the website. There seems to be a technical problem affecting its functionality.%0D%0A%0D%0APlease investigate and resolve this issue at your earliest convenience.%0D%0A%0D%0AThank you.%0D%0A";
+      // The body is stored as plain text with real line breaks; mailto needs it
+      // percent-encoded, with CRLF pairs for the line separators.
+      const body = copy.reportEmailBody.replace(/\r?\n/g, '\r\n');
+      window.location.href =
+        `mailto:${contactEmail}` +
+        `?subject=${encodeURIComponent(copy.reportEmailSubject)}` +
+        `&body=${encodeURIComponent(body)}`;
     };
 
     return (
@@ -26,11 +33,11 @@ function PortfolioCard() {
         <p key="error" style={{ textAlign: "center" }}>
           {error}
           <br />
-          Please select the link above to view.
+          {copy.errorHelpText}
         </p>
         <div className="report-padding">
           <button className="report-button" onClick={handleReportIssue}>
-            Report Issue
+            {copy.reportButtonLabel}
           </button>
         </div>
       </div>
@@ -41,7 +48,7 @@ function PortfolioCard() {
   return (
     <div className="portfolio-container">
       <div className="pull-text">
-        <p>Pulled using Instagram API.</p>
+        <p>{copy.pullText}</p>
       </div>
 
       <div className="portfolio-grid">

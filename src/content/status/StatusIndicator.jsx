@@ -1,7 +1,8 @@
 import React from 'react';
 import StatusCircle from './StatusCircle';
-import { statusConfig } from './statusConfig';
+import { useSettings } from '../../utils/contentContext';
 
 export default function StatusIndicator() {
-  return <StatusCircle severity={statusConfig.indicatorSeverity} />;
+  const { status } = useSettings();
+  return <StatusCircle severity={status.indicatorSeverity} />;
 }

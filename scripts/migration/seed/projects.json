@@ -1,0 +1,60 @@
+[
+  {
+    "id": 1000,
+    "title": "DFVRO | Personal Resume Website",
+    "description": "If you're seeing this, you've successfully found my personal hub. Be sure to check it out on both mobile and web.",
+    "stack": "JavaScript with React, SCSS, Node.js, AWS for API interactions.",
+    "imageUrl": "src/assets/images/project-icons/personal-website.png",
+    "projectUrl": "https://github.com/dfoshidero/dfo-website"
+  },
+  {
+    "id": 6,
+    "title": "Papertalk | Change Intelligence for Building Design",
+    "description": "Papertalk shows how client and design changes affect carbon, cost, energy, materials and project assumptions while there is still time to respond.",
+    "stack": "TypeScript with React, Vite, Python, Docker",
+    "imageUrl": "src/assets/images/project-icons/papertalk.png",
+    "projectUrl": "https://www.papertalk.now"
+  },
+  {
+    "id": 5,
+    "title": "Deep RL for Game Environments: Doom & CartPole",
+    "description": "Deep reinforcement learning agents trained with DDDQN, DRQN, PPO, and REINFORCE on CartPole and VizDoom's \"Defend the Center\", using MDP/CNN frameworks to navigate high-dimensional state/action spaces.",
+    "stack": "Python, PyTorch",
+    "imageUrl": "src/assets/images/project-icons/deep-rl.svg",
+    "projectUrl": "https://github.com/dfoshidero/RLModels_DOOM-CP",
+    "videoUrl": "https://www.youtube.com/watch?v=LtSFtUWTaws"
+  },
+  {
+    "id": 4,
+    "title": "ECO (Early-stage Carbon Observer)",
+    "description": "ECO is an ML-based tool which predicts embodied carbon from textual descriptions of architectural designs, integrating sustainability into early design processes.",
+    "stack": "Python (Scikit-learn, spaCy, NLTK), Flask, Docker, React.js",
+    "imageUrl": "src/assets/images/project-icons/eco.png",
+    "projectUrl": "https://www.talkingcarbon.com",
+    "videoUrl": "https://www.youtube.com/watch?v=3kOdSKeSc2k"
+  },
+  {
+    "id": 3,
+    "title": "Bloom",
+    "description": "Bloom is an educational mobile app by Team Plum for University of Bath's CM50109 module. It teaches indoor plant care and offers interactive gameplay with rewards.",
+    "stack": "JavaScript with React-Native, Expo, Node.js",
+    "imageUrl": "src/assets/images/project-icons/bloom.png",
+    "projectUrl": "https://github.com/dfoshidero/Bloom",
+    "videoUrl": "https://www.youtube.com/watch?v=v2pALOEpWOQ"
+  },
+  {
+    "id": 2,
+    "title": "CHIP-8 Emulator // Ongoing",
+    "description": "This emulator aims to replicate the behaviour of a CHIP-8 machine, allowing users to run and interact with CHIP-8 programs.",
+    "stack": "C, SDL2",
+    "imageUrl": "src/assets/images/project-icons/chip-8.svg",
+    "projectUrl": "https://github.com/dfoshidero/CHIP-8-Emulator"
+  },
+  {
+    "id": 1,
+    "title": "Airline Database (CRUD) Simulator",
+    "stack": "Python with Tkinter, SQLite3",
+    "description": "Basic database simulator developed to explore data management in the context of a real-world system, using CRUD operations.",
+    "projectUrl": "https://github.com/dfoshidero/Database-CRUD-Sim"
+  }
+]

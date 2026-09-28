@@ -30,3 +30,11 @@ yarn-debug.log*
 yarn-error.log*
 gt
 
+
+# sanity studio
+/studio/node_modules
+/studio/.sanity
+/studio/dist
+/studio/.env
+/scripts/migration/node_modules
+/src/content/snapshot.json
