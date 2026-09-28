@@ -1,17 +1,19 @@
 import React, { useReducer, useEffect } from 'react';
 import "./AnalogClock.scss";
+import { useSettings } from "../../../utils/contentContext";
 
 const AnalogClock = () => {
   const [, tick] = useReducer((n) => n + 1, 0);
+  const { timezoneIana } = useSettings();
 
   useEffect(() => {
     const timer = setInterval(tick, 1000);
     return () => clearInterval(timer);
   }, []);
 
-  const getLondonTime = () => {
+  const getLocalTime = () => {
     const formatter = new Intl.DateTimeFormat("en-GB", {
-      timeZone: "Europe/London",
+      timeZone: timezoneIana,
       hour: "numeric",
       minute: "numeric",
       second: "numeric",
@@ -28,7 +30,7 @@ const AnalogClock = () => {
     return timeObj;
   };
 
-  const { hour: hours, minute: minutes, second: seconds } = getLondonTime();
+  const { hour: hours, minute: minutes, second: seconds } = getLocalTime();
 
   const hourDegrees = ((hours % 12) + minutes / 60) * 30;
   const minuteDegrees = (minutes + seconds / 60) * 6;

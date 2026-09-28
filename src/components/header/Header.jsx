@@ -1,23 +1,27 @@
 import React from 'react';
 import './Header.scss';
-import profileIcon from '../../assets/images/icon.jpeg';
 
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 
 import ThemeToggle from '../theme-toggle/ThemeToggle';
+import { useSettings, useUiText } from '../../utils/contentContext';
+import { imageUrl } from '../../lib/sanity';
 
 const Header = ({ onRandomizeClick }) => {
+  const settings = useSettings();
+  const { header } = useUiText();
+
   return (
     <div className="header">
       <div className="profile-name-title">
-        <img src={profileIcon} alt="Profile Icon" />
+        <img src={imageUrl(settings.profileIcon, 160)} alt={header.profileIconAlt} />
         <div className="name-title">
           <div>
-            <span className="name">Daniel Favour Olanrewaju Oshidero</span>
+            <span className="name">{settings.fullName}</span>
           </div>
           <div>
-            <span className="title">Designer & Programmer // DFVRO</span>
+            <span className="title">{settings.tagline}</span>
           </div>
         </div>
       </div>
@@ -25,12 +29,12 @@ const Header = ({ onRandomizeClick }) => {
       <div className="right-container">
         <ThemeToggle />
         <button onClick={onRandomizeClick} className="shuffle-layout-button">
-          <span className="button-text">Shuffle Cards</span>
+          <span className="button-text">{header.shuffleButtonLabel}</span>
           <AutorenewIcon fontSize="inherit" className="button-icon" />
         </button>
 
-        <a href="mailto:dfoshidero@outlook.com" className="contact-button">
-          <span className="button-text">Contact</span>
+        <a href={`mailto:${settings.contactEmail}`} className="contact-button">
+          <span className="button-text">{header.contactButtonLabel}</span>
           <ArrowOutwardIcon fontSize="inherit" className="button-icon" />
         </a>
       </div>

@@ -19,6 +19,8 @@ import SeeMore from "../components/seemore-button/SeeMore";
 import Reload from "../components/reload-button/Reload";
 import InquireButton from "../content/portfolio/InquireButton";
 
+import { useCardTitle, useSettings, useUiText } from "../utils/contentContext";
+
 // Define the possible sizes for each card type
 const cardTypes = {
   EXPERIENCE: [
@@ -295,24 +297,24 @@ const getTitleAction = (cardType) => {
 	}
 };
 
-const getExtraContent = (cardType) => {
+const getExtraContent = (cardType, settings, labels) => {
 	switch (cardType) {
 		case "TIMEZONE":
-			return "London, UK";
+			return settings.timezoneLabel;
 		case "STATUS":
 			return <StatusIndicator />;
 		case "RECOMMENDATIONS":
 			return (
 				<SeeMore
-					url="https://www.linkedin.com/in/favourdo/details/recommendations/?detailScreenTabIndex=0"
-					text="READ MORE"
+					url={settings.recommendationsMoreUrl}
+					text={labels.recommendationsMoreLabel}
 				/>
 			);
 		case "PROJECTS":
 			return (
 				<SeeMore
-					url="https://github.com/dfoshidero?tab=repositories"
-					text="VIEW REPOSITORIES"
+					url={settings.projectsMoreUrl}
+					text={labels.projectsMoreLabel}
 				/>
 			);
 		case "MY WORK(S)":
@@ -351,6 +353,9 @@ const renderCardContent = (cardType) => {
 
 export function LayoutCard({ config, animationDelay = 0, animateEntrance = true }) {
 	const { cardType, size } = config;
+	const settings = useSettings();
+	const cardExtras = useUiText().cardExtras;
+	const cardTitle = useCardTitle(cardType);
 	const cardClasses = [
 		"card",
 		`${size.columns}-columns`,
@@ -368,9 +373,9 @@ export function LayoutCard({ config, animationDelay = 0, animateEntrance = true 
 
 	const card = (
 		<Card
-			title={cardType.toUpperCase()}
+			title={cardTitle}
 			titleAction={getTitleAction(cardType)}
-			extra={getExtraContent(cardType)}
+			extra={getExtraContent(cardType, settings, cardExtras)}
 			className={cardClasses}
 			style={cardStyle}
 		>

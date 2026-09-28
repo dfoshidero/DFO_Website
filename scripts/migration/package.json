@@ -1,0 +1,21 @@
+{
+  "name": "dfvro-migration",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "One-off seeding of Sanity from the site's former hardcoded arrays. Not part of the site build.",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "migrate": "node migrate-to-sanity.mjs",
+    "dry-run": "node migrate-to-sanity.mjs --dry-run"
+  },
+  "dependencies": {
+    "@portabletext/block-tools": "^6.0.2",
+    "@sanity/client": "^8.8.0",
+    "@sanity/schema": "^6.16.0",
+    "jsdom": "^30.1.1",
+    "lexorank": "^1.0.5"
+  }
+}

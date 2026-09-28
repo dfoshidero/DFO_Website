@@ -1,0 +1,22 @@
+{
+  "fullName": "Daniel Favour Olanrewaju Oshidero",
+  "tagline": "Designer & Programmer // DFVRO",
+  "profileIcon": "src/assets/images/icon.jpeg",
+  "contactEmail": "dfoshidero@outlook.com",
+  "linkedinUrl": "https://www.linkedin.com/in/favourdo/",
+  "githubUrl": "https://github.com/dfoshidero",
+  "cvFile": "public/Oshidero_Daniel Favour_CV.pdf",
+  "cvDownloadName": "Oshidero_Daniel Favour_CV.pdf",
+  "timezoneLabel": "London, UK",
+  "timezoneIana": "Europe/London",
+  "recommendationsMoreUrl": "https://www.linkedin.com/in/favourdo/details/recommendations/?detailScreenTabIndex=0",
+  "projectsMoreUrl": "https://github.com/dfoshidero?tab=repositories",
+  "copyrightName": "Daniel Favour Oshidero",
+  "status": {
+    "indicatorSeverity": "busy",
+    "lines": [
+      { "message": "Full-Stack SWE at Intropic.io", "severity": "available" },
+      { "message": "Pursuing MSc in Applied Data Science.", "severity": "available" }
+    ]
+  }
+}

@@ -12,6 +12,9 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.1",
     "@mui/material": "^5.15.1",
+    "@portabletext/react": "^6.2.0",
+    "@sanity/client": "^8.8.0",
+    "@sanity/image-url": "^2.1.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -29,11 +32,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "prestart": "node scripts/generate-build-info.js",
+    "prestart": "node scripts/generate-build-info.js && node scripts/fetch-content-snapshot.js",
     "start": "react-scripts start",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "prebuild": "node scripts/generate-build-info.js",
+    "prebuild": "node scripts/generate-build-info.js && node scripts/fetch-content-snapshot.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -59,8 +60,13 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "gh-pages": "^6.1.0",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!(@portabletext|@sanity)/)",
+      "^.+\\.module\\.(css|sass|scss)$"
+    ]
   }
 }

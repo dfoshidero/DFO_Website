@@ -1,0 +1,279 @@
+{
+  "upload": [
+    {
+      "path": "public/Oshidero_Daniel Favour_CV.pdf",
+      "filename": "Oshidero_Daniel Favour_CV.pdf",
+      "mimeType": "application/pdf",
+      "bytes": 347965,
+      "assetType": "file",
+      "transformable": false,
+      "references": [
+        {
+          "seed": "siteSettings.json",
+          "field": "cvFile"
+        }
+      ]
+    },
+    {
+      "path": "src/assets/images/icon.jpeg",
+      "filename": "icon.jpeg",
+      "mimeType": "image/jpeg",
+      "bytes": 72603,
+      "assetType": "image",
+      "transformable": true,
+      "references": [
+        {
+          "seed": "siteSettings.json",
+          "field": "profileIcon"
+        }
+      ]
+    },
+    {
+      "path": "src/assets/images/logos/ahmm.png",
+      "filename": "ahmm.png",
+      "mimeType": "image/png",
+      "bytes": 38164,
+      "assetType": "image",
+      "transformable": true,
+      "references": [
+        {
+          "seed": "experiences.json",
+          "id": 8,
+          "field": "logo"
+        }
+      ]
+    },
+    {
+      "path": "src/assets/images/logos/datern.png",
+      "filename": "datern.png",
+      "mimeType": "image/png",
+      "bytes": 5820,
+      "assetType": "image",
+      "transformable": true,
+      "references": [
+        {
+          "seed": "experiences.json",
+          "id": 3,
+          "field": "logo"
+        }
+      ]
+    },
+    {
+      "path": "src/assets/images/logos/etas.png",
+      "filename": "etas.png",
+      "mimeType": "image/png",
+      "bytes": 14594,
+      "assetType": "image",
+      "transformable": true,
+      "references": [
+        {
+          "seed": "experiences.json",
+          "id": 1,
+          "field": "logo"
+        }
+      ]
+    },
+    {
+      "path": "src/assets/images/logos/f_p.png",
+      "filename": "f_p.png",
+      "mimeType": "image/png",
+      "bytes": 7341,
+      "assetType": "image",
+      "transformable": true,
+      "references": [
+        {
+          "seed": "experiences.json",
+          "id": 6,
+          "field": "logo"
+        }
+      ]
+    },
+    {
+      "path": "src/assets/images/logos/intropic.webp",
+      "filename": "intropic.webp",
+      "mimeType": "image/webp",
+      "bytes": 9178,
+      "assetType": "image",
+      "transformable": true,
+      "references": [
+        {
+          "seed": "experiences.json",
+          "id": 0,
+          "field": "logo"
+        }
+      ]
+    },
+    {
+      "path": "src/assets/images/logos/ktc.png",
+      "filename": "ktc.png",
+      "mimeType": "image/png",
+      "bytes": 73080,
+      "assetType": "image",
+      "transformable": true,
+      "references": [
+        {
+          "seed": "experiences.json",
+          "id": 2,
+          "field": "logo"
+        }
+      ]
+    },
+    {
+      "path": "src/assets/images/logos/rs_architects_logo.png",
+      "filename": "rs_architects_logo.png",
+      "mimeType": "image/png",
+      "bytes": 12048,
+      "assetType": "image",
+      "transformable": true,
+      "references": [
+        {
+          "seed": "experiences.json",
+          "id": 7,
+          "field": "logo"
+        }
+      ]
+    },
+    {
+      "path": "src/assets/images/logos/university_of_bath_acs.png",
+      "filename": "university_of_bath_acs.png",
+      "mimeType": "image/png",
+      "bytes": 63585,
+      "assetType": "image",
+      "transformable": true,
+      "references": [
+        {
+          "seed": "experiences.json",
+          "id": 5,
+          "field": "logo"
+        }
+      ]
+    },
+    {
+      "path": "src/assets/images/logos/university_of_bath.png",
+      "filename": "university_of_bath.png",
+      "mimeType": "image/png",
+      "bytes": 86677,
+      "assetType": "image",
+      "transformable": true,
+      "references": [
+        {
+          "seed": "experiences.json",
+          "id": 4,
+          "field": "logo"
+        }
+      ]
+    },
+    {
+      "path": "src/assets/images/project-icons/bloom.png",
+      "filename": "bloom.png",
+      "mimeType": "image/png",
+      "bytes": 329926,
+      "assetType": "image",
+      "transformable": true,
+      "references": [
+        {
+          "seed": "projects.json",
+          "id": 3,
+          "field": "imageUrl"
+        }
+      ]
+    },
+    {
+      "path": "src/assets/images/project-icons/chip-8.svg",
+      "filename": "chip-8.svg",
+      "mimeType": "image/svg+xml",
+      "bytes": 3040,
+      "assetType": "image",
+      "transformable": false,
+      "references": [
+        {
+          "seed": "projects.json",
+          "id": 2,
+          "field": "imageUrl"
+        }
+      ]
+    },
+    {
+      "path": "src/assets/images/project-icons/deep-rl.svg",
+      "filename": "deep-rl.svg",
+      "mimeType": "image/svg+xml",
+      "bytes": 3563,
+      "assetType": "image",
+      "transformable": false,
+      "references": [
+        {
+          "seed": "projects.json",
+          "id": 5,
+          "field": "imageUrl"
+        }
+      ]
+    },
+    {
+      "path": "src/assets/images/project-icons/eco.png",
+      "filename": "eco.png",
+      "mimeType": "image/png",
+      "bytes": 292143,
+      "assetType": "image",
+      "transformable": true,
+      "references": [
+        {
+          "seed": "projects.json",
+          "id": 4,
+          "field": "imageUrl"
+        }
+      ]
+    },
+    {
+      "path": "src/assets/images/project-icons/papertalk.png",
+      "filename": "papertalk.png",
+      "mimeType": "image/png",
+      "bytes": 201645,
+      "assetType": "image",
+      "transformable": true,
+      "references": [
+        {
+          "seed": "projects.json",
+          "id": 6,
+          "field": "imageUrl"
+        }
+      ]
+    },
+    {
+      "path": "src/assets/images/project-icons/personal-website.png",
+      "filename": "personal-website.png",
+      "mimeType": "image/png",
+      "bytes": 137316,
+      "assetType": "image",
+      "transformable": true,
+      "references": [
+        {
+          "seed": "projects.json",
+          "id": 1000,
+          "field": "imageUrl"
+        }
+      ]
+    }
+  ],
+  "unused": [
+    {
+      "path": "src/assets/images/profile.png",
+      "bytes": 554506
+    },
+    {
+      "path": "src/assets/images/project-icons/chip-8.png",
+      "bytes": 104311
+    },
+    {
+      "path": "src/assets/images/project-icons/eco.svg",
+      "bytes": 102110
+    },
+    {
+      "path": "src/assets/images/project-icons/pool.png",
+      "bytes": 235486
+    },
+    {
+      "path": "src/assets/images/project-icons/size_guide.png",
+      "bytes": 183389
+    }
+  ]
+}
