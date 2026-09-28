@@ -14,8 +14,13 @@ export const sanityClient = isSanityConfigured
       projectId: SANITY_PROJECT_ID,
       dataset: SANITY_DATASET,
       apiVersion: API_VERSION,
-      // Serve from the CDN. The dataset is public and read-only here; no token.
-      useCdn: true,
+      // Straight to the API, not apicdn. The CDN caches each response for 60s
+      // per edge location (`s-maxage=60`), which a browser hard-refresh cannot
+      // clear — so a freshly published edit could sit invisible for a minute.
+      // This trades that for slightly more metered API requests and the loss of
+      // the CDN's `stale-if-error` grace period; the bundled snapshot in
+      // src/content/snapshot.json is still the fallback if Sanity is down.
+      useCdn: false,
       perspective: 'published',
     })
   : null;
