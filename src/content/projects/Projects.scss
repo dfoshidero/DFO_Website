@@ -50,7 +50,9 @@
             filter: drop-shadow(0 4px 3px var(--icon-shadow))
                     drop-shadow(0 1px 1px var(--icon-shadow-strong));
             transition: filter 0.25s ease, transform 0.25s ease;
-            will-change: transform, filter;
+            // No will-change here: it applied to every project icon for the
+            // life of the page, holding a compositing layer each for a hover
+            // effect that only ever runs on one icon at a time.
         }
 
         &:hover .project-image {

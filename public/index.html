@@ -35,10 +35,14 @@
   </script>
 
   <style>
+    /* This used to hold the page invisible for 1s and then fade for another 1s,
+       to hide the latency of fetching content. Content now ships in the bundle
+       and is there on first paint, so the wait is dead time. The short delay
+       that remains just covers script parse and the font swap. */
     body {
       opacity: 0;
-      animation: fadeInAnimation ease 1s;
-      animation-delay: 1s;
+      animation: fadeInAnimation ease 0.4s;
+      animation-delay: 0.2s;
       animation-iteration-count: 1;
       animation-fill-mode: forwards;
     }
