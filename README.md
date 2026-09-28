@@ -58,6 +58,14 @@ Sanity and no previous snapshot exists, rather than shipping an empty site.
 Pushing to `main` deploys both Render services. Render's build filters keep them
 apart: the website ignores `studio/**`, and the Studio builds only on `studio/**`.
 
+### Painting inquiry form
+
+Render has no native form handling, so the form posts to
+[Formspree](https://render.com/docs/formspree), Render's documented addon for
+static sites. Set `REACT_APP_FORMSPREE_ENDPOINT` locally and in the Render site
+service. Without it the form does not pretend to submit — it asks visitors to
+email instead.
+
 ### Repository layout
 
 | Path | What |

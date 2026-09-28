@@ -1,9 +1,16 @@
 import React, { useState, useMemo } from 'react';
 import { usePortfolioImages, getPaintingLabel } from './usePortfolioImages';
-import { useSettings } from '../../utils/contentContext';
+import { useSettings, useUiText } from '../../utils/contentContext';
 import './InquireForm.scss';
 
+// Formspree endpoint, e.g. https://formspree.io/f/xxxxxxxx — Render has no
+// native form handling, and Formspree is its documented addon for static sites.
+// Unset means the form is not wired up yet; it then points people at the email
+// address rather than pretending to submit.
+const FORMSPREE_ENDPOINT = process.env.REACT_APP_FORMSPREE_ENDPOINT;
+
 const INITIAL_VALUES = {
+  botField: '',
   name: '',
   email: '',
   phone: '',
@@ -15,13 +22,13 @@ const INITIAL_VALUES = {
 function InquireForm({ initialImageId = '' }) {
   const { images, loading, error } = usePortfolioImages();
   const { contactEmail } = useSettings();
+  const copy = useUiText().inquiryForm;
   const [values, setValues] = useState({
     ...INITIAL_VALUES,
     painting: initialImageId || '',
   });
   const [status, setStatus] = useState('idle');
   const [submitError, setSubmitError] = useState(null);
-  const [mailtoHref, setMailtoHref] = useState(null);
 
   const selectedImage = useMemo(
     () => images.find((img) => String(img.id) === String(values.painting)),
@@ -33,8 +40,19 @@ function InquireForm({ initialImageId = '' }) {
     setValues((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!FORMSPREE_ENDPOINT) {
+      setStatus('error');
+      setSubmitError(
+        `The form is not connected yet. Please email ${contactEmail} directly.`
+      );
+      return;
+    }
+
+    setStatus('submitting');
+    setSubmitError(null);
 
     const paintingIndex = images.findIndex(
       (img) => String(img.id) === String(values.painting)
@@ -44,57 +62,66 @@ function InquireForm({ initialImageId = '' }) {
         ? getPaintingLabel(selectedImage, paintingIndex)
         : 'General inquiry';
 
-    // This used to POST to "/" for Netlify Forms. On Render that returns the
-    // page with a 200, so the form reported success while nothing was sent.
-    // Handing off to the visitor's mail client actually delivers the inquiry.
-    const body = [
-      `Name: ${values.name}`,
-      `Email: ${values.email}`,
-      values.phone && `Phone: ${values.phone}`,
-      `Painting: ${paintingLabel}`,
-      values.budget && `Budget: ${values.budget}`,
-      '',
-      values.message,
-    ]
-      .filter((line) => line !== false && line !== '' && line !== undefined)
-      .join('\r\n');
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          // Without this Formspree redirects instead of returning JSON.
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: values.name,
+          email: values.email,
+          phone: values.phone,
+          painting: paintingLabel,
+          budget: values.budget,
+          message: values.message,
+          // Formspree's own honeypot field name.
+          _gotcha: values.botField,
+          _subject: `Painting inquiry - ${paintingLabel}`,
+        }),
+      });
 
-    const href =
-      `mailto:${contactEmail}` +
-      `?subject=${encodeURIComponent(`Painting inquiry - ${paintingLabel}`)}` +
-      `&body=${encodeURIComponent(body)}`;
+      if (!response.ok) {
+        // Surface Formspree's own validation message when it sends one, rather
+        // than a generic failure.
+        const detail = await response.json().catch(() => null);
+        const message =
+          detail?.errors?.map((e) => e.message).join(' ') ||
+          copy.submitFailedText;
+        throw new Error(message);
+      }
 
-    setMailtoHref(href);
-    window.location.href = href;
-    setStatus('success');
+      setStatus('success');
+    } catch (err) {
+      setStatus('error');
+      setSubmitError(
+        err?.message === 'Failed to fetch'
+          ? `Could not reach the server. Please email ${contactEmail} directly.`
+          : err?.message || copy.genericErrorText
+      );
+    }
   };
 
   const handleReset = () => {
     setValues({ ...INITIAL_VALUES, painting: initialImageId || '' });
     setStatus('idle');
     setSubmitError(null);
-    setMailtoHref(null);
   };
 
   if (status === 'success') {
     return (
       <div className="inquire-form portfolio-modal-content">
         <div className="inquire-form__success">
-          <p className="inquire-form__success-title">Almost there</p>
-          <p className="inquire-form__success-text">
-            Your email app should have opened with this inquiry ready to send.
-            If it did not,{' '}
-            <a href={mailtoHref || `mailto:${contactEmail}`}>
-              open it here
-            </a>{' '}
-            or email {contactEmail} directly.
-          </p>
+          <p className="inquire-form__success-title">{copy.successTitle}</p>
+          <p className="inquire-form__success-text">{copy.successText}</p>
           <button
             type="button"
             className="inquire-form__submit"
             onClick={handleReset}
           >
-            Send another inquiry
+            {copy.successButtonLabel}
           </button>
         </div>
       </div>
@@ -110,7 +137,13 @@ function InquireForm({ initialImageId = '' }) {
       <p className="inquire-form__honeypot" aria-hidden="true">
         <label>
           Don&apos;t fill this out:
-          <input name="bot-field" tabIndex={-1} autoComplete="off" />
+          <input
+            name="botField"
+            value={values.botField}
+            onChange={handleChange}
+            tabIndex={-1}
+            autoComplete="off"
+          />
         </label>
       </p>
 
@@ -237,7 +270,7 @@ function InquireForm({ initialImageId = '' }) {
         className="inquire-form__submit"
         disabled={status === 'submitting'}
       >
-        {status === 'submitting' ? 'Sending...' : 'Send inquiry'}
+        {status === 'submitting' ? copy.submittingLabel : copy.submitLabel}
       </button>
     </form>
   );
