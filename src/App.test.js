@@ -29,3 +29,12 @@ test('renders the page from content', () => {
     screen.getByText(new RegExp(snapshot.settings.copyrightName))
   ).toBeInTheDocument();
 });
+
+test('applies page metadata from content at runtime', () => {
+  render(<App />);
+
+  expect(document.title).toBe(snapshot.ui.meta.pageTitle);
+  expect(
+    document.head.querySelector('meta[name="description"]').getAttribute('content')
+  ).toBe(snapshot.ui.meta.metaDescription);
+});

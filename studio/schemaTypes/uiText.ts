@@ -202,7 +202,7 @@ export const uiText = defineType({
       type: 'object',
       group: 'meta',
       description:
-        'Read at build time only. index.html is a static file served before React starts, so changing these needs a redeploy to take effect.',
+        'Applied when the page loads, so edits here need no deploy. index.html also ships static copies for crawlers and link previews, which do not run JavaScript — those only change on a redeploy.',
       fields: [
         text('pageTitle', 'Browser tab title'),
         defineField({
