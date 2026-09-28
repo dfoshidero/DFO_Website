@@ -14,22 +14,15 @@
     "@mui/material": "^5.15.1",
     "@portabletext/react": "^6.2.0",
     "@sanity/client": "^8.8.0",
-    "@sanity/image-url": "^2.1.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@tsparticles/react": "^3.0.0",
-    "@tsparticles/slim": "^3.0.2",
-    "axios": "^1.6.3",
     "babel-plugin-macros": "^3.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-particles": "^2.12.2",
     "react-responsive": "^9.0.2",
-    "react-router-dom": "^6.21.1",
+    "react-router-dom": "^7.18.4",
     "react-scripts": "5.0.1",
-    "sass": "^1.69.5",
-    "web-vitals": "^2.1.4"
+    "sass": "^1.69.5"
   },
   "scripts": {
     "prestart": "node scripts/generate-build-info.js && node scripts/fetch-content-snapshot.js",
@@ -67,6 +60,22 @@
     "transformIgnorePatterns": [
       "node_modules/(?!(@portabletext|@sanity)/)",
       "^.+\\.module\\.(css|sass|scss)$"
-    ]
+    ],
+    "moduleNameMapper": {
+      "^react-router/dom$": "<rootDir>/node_modules/react-router/dist/development/dom-export.js"
+    }
+  },
+  "overrides": {
+    "nth-check": "^2.1.1",
+    "css-select": "^5.2.2",
+    "postcss": "^8.5.28",
+    "serialize-javascript": "^7.1.2",
+    "underscore": "^1.13.8",
+    "@tootallnate/once": "^2.0.1",
+    "jsonpath": {
+      "underscore": "^1.13.8"
+    },
+    "uuid": "^9.0.1",
+    "svgo": "^3.3.2"
   }
 }
