@@ -8,6 +8,19 @@
   <link rel="icon" href="./favicon.png">
   <title>DFO</title>
 
+  <!-- Static defaults for crawlers and link previews, which do not run
+       JavaScript. DocumentMeta in App.jsx keeps these in step with the CMS
+       for everything else. -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dfvro.com/">
+  <meta property="og:title" content="Daniel Favour Oshidero">
+  <meta property="og:description" content="Personal site of Daniel Favour Oshidero — software engineer and computer scientist. Projects, experience, and ways to get in touch.">
+  <meta property="og:image" content="https://dfvro.com/favicon.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Daniel Favour Oshidero">
+  <meta name="twitter:description" content="Personal site of Daniel Favour Oshidero — software engineer and computer scientist. Projects, experience, and ways to get in touch.">
+  <meta name="twitter:image" content="https://dfvro.com/favicon.png">
+
   <!-- Theme bootstrap: keep in sync with getInitialTheme() in src/utils/theme.js -->
   <script>
     (function () {
@@ -48,14 +61,6 @@
   </style>
 </head>
 <body>
-  <form name="painting-inquiry" netlify netlify-honeypot="bot-field" hidden>
-    <input type="text" name="name" />
-    <input type="email" name="email" />
-    <input type="tel" name="phone" />
-    <input type="text" name="painting" />
-    <input type="text" name="budget" />
-    <textarea name="message"></textarea>
-  </form>
   <noscript>You need JavaScript to run this page.</noscript>
   <div id="root"></div>
 </body>

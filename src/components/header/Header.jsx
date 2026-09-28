@@ -14,6 +14,12 @@ const Header = ({ onRandomizeClick }) => {
 
   return (
     <div className="header">
+      {/* The visible name is a styled span whose `width: 10%` only applies to an
+          inline box, so it cannot become the h1 without shifting the layout.
+          This gives the page the top-level heading it otherwise lacks. */}
+      <h1 className="visually-hidden">
+        {settings.fullName} — {settings.tagline}
+      </h1>
       <div className="profile-name-title">
         <img src={imageUrl(settings.profileIcon, 160)} alt={header.profileIconAlt} />
         <div className="name-title">

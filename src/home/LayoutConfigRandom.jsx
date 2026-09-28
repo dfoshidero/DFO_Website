@@ -37,15 +37,18 @@ const cardTypes = {
     { columns: 2, rows: 2 },
   ],
   "EDUCATION & CERTIFICATIONS": [
-    { columns: 2, rows: 1 },
+    // 2x1 showed roughly two of ten entries; 2x2 is the floor.
     { columns: 2, rows: 2 },
   ],
   RECOMMENDATIONS: [{ columns: 2, rows: 1 }],
+  // 2x1 is only offered when there is more than one status line; see
+  // isSizeExcluded. A single line in a 2x1 is mostly empty space.
   STATUS: [
     { columns: 2, rows: 1 },
     { columns: 1, rows: 1 },
   ],
   SKILLS: [
+    { columns: 1, rows: 3 },
     { columns: 1, rows: 2 },
     { columns: 1, rows: 1 },
   ],
@@ -79,13 +82,13 @@ const findNextEmptyCell = (grid) => {
   return null;
 };
 
-const isSizeExcluded = (cardType, size, gridRows) => {
+const isSizeExcluded = (cardType, size, gridRows, statusLineCount) => {
+  // A wide status card is mostly empty unless there is more than one line.
   if (
-    gridRows === MOBILE_GRID_ROWS &&
-    ((cardType === "EDUCATION & CERTIFICATIONS" &&
-      size.columns === 2 &&
-      size.rows === 2) ||
-      (cardType === "STATUS" && size.columns === 2 && size.rows === 1))
+    cardType === "STATUS" &&
+    size.columns === 2 &&
+    size.rows === 1 &&
+    (statusLineCount <= 1 || gridRows === MOBILE_GRID_ROWS)
   ) {
     return true;
   }
@@ -146,7 +149,8 @@ const getAvailableCardTypesAndSizes = (
   placedSet,
   gridColumns,
   gridRows,
-  specialInTopRows
+  specialInTopRows,
+  statusLineCount
 ) => {
   const position = { columnStart: col, rowStart: row };
   const options = [];
@@ -178,7 +182,7 @@ const getAvailableCardTypesAndSizes = (
     }
 
     for (const size of cardTypes[cardType]) {
-      if (isSizeExcluded(cardType, size, gridRows)) {
+      if (isSizeExcluded(cardType, size, gridRows, statusLineCount)) {
         continue;
       }
 
@@ -197,7 +201,8 @@ const placeBacktrack = (
   placedSet,
   gridColumns,
   gridRows,
-  specialInTopRows
+  specialInTopRows,
+  statusLineCount
 ) => {
   if (placedSet.size === CARD_TYPE_KEYS.length) {
     const nextCell = findNextEmptyCell(grid);
@@ -224,7 +229,8 @@ const placeBacktrack = (
       placedSet,
       gridColumns,
       gridRows,
-      specialInTopRows
+      specialInTopRows,
+      statusLineCount
     )
   );
 
@@ -247,7 +253,8 @@ const placeBacktrack = (
         placedSet,
         gridColumns,
         gridRows,
-        nextSpecialInTopRows
+        nextSpecialInTopRows,
+        statusLineCount
       )
     ) {
       return true;
@@ -261,7 +268,7 @@ const placeBacktrack = (
   return false;
 };
 
-const generateRandomLayout = (gridColumns, gridRows) => {
+const generateRandomLayout = (gridColumns, gridRows, statusLineCount) => {
   const grid = createEmptyGrid(gridRows, gridColumns);
   const layout = [];
   const placedSet = new Set();
@@ -272,21 +279,22 @@ const generateRandomLayout = (gridColumns, gridRows) => {
     placedSet,
     gridColumns,
     gridRows,
-    false
+    false,
+    statusLineCount
   );
 
   if (!solved) {
     console.warn(
       "[LayoutConfigRandom] Failed to generate a valid layout; retrying."
     );
-    return generateRandomLayout(gridColumns, gridRows);
+    return generateRandomLayout(gridColumns, gridRows, statusLineCount);
   }
 
   return layout;
 };
 
-export const generateLayout = (gridColumns, gridRows) =>
-	generateRandomLayout(gridColumns, gridRows);
+export const generateLayout = (gridColumns, gridRows, statusLineCount = 1) =>
+	generateRandomLayout(gridColumns, gridRows, statusLineCount);
 
 const getTitleAction = (cardType) => {
 	switch (cardType) {

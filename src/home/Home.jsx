@@ -5,6 +5,7 @@ import './Home.scss';
 import { useMediaQuery } from 'react-responsive';
 import ScrollIndicator from '../components/scrollIndicator/scrollIndicator';
 import Footer from '../components/footer/Footer';
+import { useSettings } from '../utils/contentContext';
 
 const MIN_CARD_WIDTH = 200;
 const MIN_SCALE = 0.85;
@@ -12,6 +13,9 @@ const MIN_SCALE = 0.85;
 let sessionInitialLayout = null;
 
 function Home() {
+  // A single status line gets a 1x1 card; more than one may widen to 2x1.
+  const statusLineCount = useSettings().status?.lines?.length ?? 1;
+
   const containerRef = useRef(null);
   const pageFramerRef = useRef(null);
   const pageCenteringRef = useRef(null);
@@ -41,7 +45,7 @@ function Home() {
 
   const [layout, setLayout] = useState(() => {
     if (!sessionInitialLayout) {
-      sessionInitialLayout = generateLayout(gridColumns, gridRows);
+      sessionInitialLayout = generateLayout(gridColumns, gridRows, statusLineCount);
     }
     return sessionInitialLayout;
   });
@@ -57,14 +61,14 @@ function Home() {
 
     prevGridRef.current = { gridColumns, gridRows };
     setAnimateEntrance(false);
-    setLayout(generateLayout(gridColumns, gridRows));
-  }, [gridColumns, gridRows]);
+    setLayout(generateLayout(gridColumns, gridRows, statusLineCount));
+  }, [gridColumns, gridRows, statusLineCount]);
 
   const handleRandomize = useCallback(() => {
     setAnimateEntrance(true);
     setShuffleEpoch((epoch) => epoch + 1);
-    setLayout(generateLayout(gridColumns, gridRows));
-  }, [gridColumns, gridRows]);
+    setLayout(generateLayout(gridColumns, gridRows, statusLineCount));
+  }, [gridColumns, gridRows, statusLineCount]);
 
   const updatePageScale = useCallback((remeasure = false) => {
     const framer = pageFramerRef.current;

@@ -16,24 +16,33 @@ import Home from "./home/Home";
  * not run JavaScript still get sensible values. This updates them once the live
  * content arrives, which means editing them needs no deploy.
  */
+function setMeta(attr, key, content) {
+  let tag = document.head.querySelector(`meta[${attr}="${key}"]`);
+  if (!tag) {
+    tag = document.createElement("meta");
+    tag.setAttribute(attr, key);
+    document.head.appendChild(tag);
+  }
+  tag.setAttribute("content", content);
+}
+
 function DocumentMeta() {
   const ui = useUiText();
   const pageTitle = ui?.meta?.pageTitle;
   const metaDescription = ui?.meta?.metaDescription;
 
   useEffect(() => {
-    if (pageTitle) document.title = pageTitle;
+    if (!pageTitle) return;
+    document.title = pageTitle;
+    setMeta("property", "og:title", pageTitle);
+    setMeta("name", "twitter:title", pageTitle);
   }, [pageTitle]);
 
   useEffect(() => {
     if (!metaDescription) return;
-    let tag = document.head.querySelector('meta[name="description"]');
-    if (!tag) {
-      tag = document.createElement("meta");
-      tag.setAttribute("name", "description");
-      document.head.appendChild(tag);
-    }
-    tag.setAttribute("content", metaDescription);
+    setMeta("name", "description", metaDescription);
+    setMeta("property", "og:description", metaDescription);
+    setMeta("name", "twitter:description", metaDescription);
   }, [metaDescription]);
 
   return null;
