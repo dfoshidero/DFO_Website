@@ -18,9 +18,19 @@ Two paths, and which one you need depends on what is changing:
 | Wording, projects, experience, education, skills, recommendations, status, links, profile picture, CV | [admin.dfvro.com](https://admin.dfvro.com) — edit and publish | Seconds, no deploy |
 | Design, layout, components, behaviour | A PR to `main` | One Render deploy |
 
-Content is fetched from Sanity on page load. A copy is also baked into the bundle
-at build time (`src/content/snapshot.json`, gitignored), so if Sanity is
-unreachable the site still renders the last known content instead of going blank.
+Content is fetched from Sanity on page load, so publishing in the Studio is live
+on the next refresh. No deploy, and no Sanity webhook, is needed for content.
+
+A copy is also baked into the bundle at build time (`src/content/snapshot.json`,
+gitignored) purely as a fallback: if Sanity is unreachable the site renders the
+last known content instead of going blank. The only reason to add a Sanity
+webhook pointing at a Render deploy hook is to keep that fallback fresh — it is
+optional, and nothing on the page depends on it.
+
+Two things do still come from the build rather than the CMS: the footer's "last
+updated" date, which is the git commit date, and the static `<title>` and
+description in `public/index.html`, which exist for crawlers and link previews
+that do not run JavaScript. The live values override those on load.
 
 ## Key Dependencies
 
