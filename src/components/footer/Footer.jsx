@@ -9,7 +9,7 @@ const formattedLastUpdated = new Date(buildInfo.lastUpdated).toLocaleDateString(
   day: 'numeric',
 });
 
-const Footer = ({ onRandomizeClick }) => {
+const Footer = () => {
     const currentYear = new Date().getFullYear();
     const { copyrightName } = useSettings();
     const { footer } = useUiText();

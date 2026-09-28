@@ -34,17 +34,6 @@ export const CONTENT_QUERY = `{
   }
 }`;
 
-/** Every key the app expects. Used to reject a half-empty response. */
-export const CONTENT_KEYS = [
-  'settings',
-  'ui',
-  'projects',
-  'experiences',
-  'educations',
-  'skills',
-  'recommendations',
-];
-
 export function isUsableContent(content) {
   if (!content) return false;
   if (!content.settings || !content.ui) return false;

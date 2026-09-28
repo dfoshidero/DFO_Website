@@ -27,7 +27,7 @@ function readStoredTheme() {
   return null;
 }
 
-export function getSystemTheme() {
+function getSystemTheme() {
   if (typeof window === "undefined") return DEFAULT_THEME;
   return window.matchMedia("(prefers-color-scheme: dark)").matches
     ? THEMES.DARK

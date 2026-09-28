@@ -1,7 +1,7 @@
 import { createClient } from '@sanity/client';
 
-export const SANITY_PROJECT_ID = process.env.REACT_APP_SANITY_PROJECT_ID;
-export const SANITY_DATASET = process.env.REACT_APP_SANITY_DATASET || 'production';
+const SANITY_PROJECT_ID = process.env.REACT_APP_SANITY_PROJECT_ID;
+const SANITY_DATASET = process.env.REACT_APP_SANITY_DATASET || 'production';
 
 // Pinned so a Sanity API change cannot alter what the site renders without a
 // code change. Must match the version the Studio and migration script use.
